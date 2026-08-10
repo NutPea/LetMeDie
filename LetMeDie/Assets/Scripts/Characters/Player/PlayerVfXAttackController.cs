@@ -8,6 +8,8 @@ public class PlayerVfXAttackController : MonoBehaviour
     private SwordData swordData;
 
     [SerializeField] private GameObject hitBox;
+    [SerializeField] private VisualEffect leftSwordVisuellEffect;
+    [SerializeField] private VisualEffect rightSwordVisuellEffect;
 
     public void SetWeaponData(WeaponData weaponData)
     {
@@ -44,10 +46,10 @@ public class PlayerVfXAttackController : MonoBehaviour
 
     public void ShowTrail()
     {
-        weaponTrailHandler.ShowTrail();
+        //weaponTrailHandler.ShowTrail();
     }
 
     public void HideTrail() {
-        weaponTrailHandler.HideTrail();
+       // weaponTrailHandler.HideTrail();
     }
 }

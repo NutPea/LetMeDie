@@ -27,7 +27,6 @@ public class AnimationEquiper : MonoBehaviour
         if (data is SwordData swordData)
         {
             weaponParts[0].SetActive(true);
-            vfxController.SetSwordWeapon(weaponParts[0].GetComponent<WeaponHandler>(), swordData);
         }
         else if(data is BowData bowData)
         {
