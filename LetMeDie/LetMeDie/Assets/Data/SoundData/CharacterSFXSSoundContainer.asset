@@ -1,0 +1,316 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ede5aa3ffc2ffa4c85d64e22ffd49c8, type: 3}
+  m_Name: CharacterSFXSSoundContainer
+  m_EditorClassIdentifier: 
+  defaultMixerGroup: {fileID: -2314058466957818536, guid: a937738862024e74da661bb9b391ab92, type: 2}
+  sounds:
+  - name: Walking_Default
+    soundClips: []
+    playFirstClip: 0
+    stopFirstClip: 0
+    inCouroutine: 0
+    canRepeatItself: 0
+    repeatTimer: 0.1
+    usedAudioSources: []
+    audioSetting:
+      output: {fileID: 0}
+      bypassEffects: 0
+      bypassListenerEffects: 0
+      bypassReverbZones: 0
+      playOnAwake: 0
+      loop: 0
+      priority: 128
+      volume: 1
+      pitch: 1
+      stereoPan: 0
+      spatialBlend: 0
+      reverbZoneMix: 1
+      spread: 0
+      dopplerLevel: 1
+      volumeRolloff: 0
+      minDistance: 0
+      maxDistance: 500
+      RolloffCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpartialBlendCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpreadCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ReverbZoneMixCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - name: Jump
+    soundClips: []
+    playFirstClip: 0
+    stopFirstClip: 0
+    inCouroutine: 0
+    canRepeatItself: 0
+    repeatTimer: 0.1
+    usedAudioSources: []
+    audioSetting:
+      output: {fileID: 0}
+      bypassEffects: 0
+      bypassListenerEffects: 0
+      bypassReverbZones: 0
+      playOnAwake: 0
+      loop: 0
+      priority: 128
+      volume: 1
+      pitch: 1
+      stereoPan: 0
+      spatialBlend: 0
+      reverbZoneMix: 1
+      spread: 0
+      dopplerLevel: 1
+      volumeRolloff: 0
+      minDistance: 0
+      maxDistance: 500
+      RolloffCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpartialBlendCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpreadCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ReverbZoneMixCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - name: Land
+    soundClips: []
+    playFirstClip: 0
+    stopFirstClip: 0
+    inCouroutine: 0
+    canRepeatItself: 0
+    repeatTimer: 0.1
+    usedAudioSources: []
+    audioSetting:
+      output: {fileID: 0}
+      bypassEffects: 0
+      bypassListenerEffects: 0
+      bypassReverbZones: 0
+      playOnAwake: 0
+      loop: 0
+      priority: 128
+      volume: 1
+      pitch: 1
+      stereoPan: 0
+      spatialBlend: 0
+      reverbZoneMix: 1
+      spread: 0
+      dopplerLevel: 1
+      volumeRolloff: 0
+      minDistance: 0
+      maxDistance: 500
+      RolloffCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpartialBlendCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpreadCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ReverbZoneMixCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - name: Sword_Swing_Default
+    soundClips: []
+    playFirstClip: 0
+    stopFirstClip: 0
+    inCouroutine: 0
+    canRepeatItself: 0
+    repeatTimer: 0.1
+    usedAudioSources: []
+    audioSetting:
+      output: {fileID: 0}
+      bypassEffects: 0
+      bypassListenerEffects: 0
+      bypassReverbZones: 0
+      playOnAwake: 0
+      loop: 0
+      priority: 128
+      volume: 1
+      pitch: 1
+      stereoPan: 0
+      spatialBlend: 0
+      reverbZoneMix: 1
+      spread: 0
+      dopplerLevel: 1
+      volumeRolloff: 0
+      minDistance: 0
+      maxDistance: 500
+      RolloffCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpartialBlendCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpreadCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ReverbZoneMixCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - name: Sword_Hit_Enemy
+    soundClips: []
+    playFirstClip: 0
+    stopFirstClip: 0
+    inCouroutine: 0
+    canRepeatItself: 0
+    repeatTimer: 0.1
+    usedAudioSources: []
+    audioSetting:
+      output: {fileID: 0}
+      bypassEffects: 0
+      bypassListenerEffects: 0
+      bypassReverbZones: 0
+      playOnAwake: 0
+      loop: 0
+      priority: 128
+      volume: 1
+      pitch: 1
+      stereoPan: 0
+      spatialBlend: 0
+      reverbZoneMix: 1
+      spread: 0
+      dopplerLevel: 1
+      volumeRolloff: 0
+      minDistance: 0
+      maxDistance: 500
+      RolloffCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpartialBlendCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpreadCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ReverbZoneMixCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - name: Sword_Hit_Ground
+    soundClips: []
+    playFirstClip: 0
+    stopFirstClip: 0
+    inCouroutine: 0
+    canRepeatItself: 0
+    repeatTimer: 0.1
+    usedAudioSources: []
+    audioSetting:
+      output: {fileID: 0}
+      bypassEffects: 0
+      bypassListenerEffects: 0
+      bypassReverbZones: 0
+      playOnAwake: 0
+      loop: 0
+      priority: 128
+      volume: 1
+      pitch: 1
+      stereoPan: 0
+      spatialBlend: 0
+      reverbZoneMix: 1
+      spread: 0
+      dopplerLevel: 1
+      volumeRolloff: 0
+      minDistance: 0
+      maxDistance: 500
+      RolloffCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpartialBlendCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      SpreadCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      ReverbZoneMixCustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4

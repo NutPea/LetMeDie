@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071921167a4e6db4689b7a72151528a6, type: 3}
+  m_Name: SmallBaseEnemy
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: 70141d51621e24facbca9196bbde84b4, type: 3}
+  characterName: Base Enemy
+  baseHealth: 25
+  team: 2
+  movementSpeed: 2
+  accelerationSpeed: 1
+  damage: 5
+  attackStopDistance: 2.5
+  attackDistance: 0.5
+  attackCooldown: 1
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 128
+  staggerPercentage: 1
+  mass: 3
+  staggerTime: 1
+  knockbackPossibility: 0.5
+  knockBackResetTime: 0.3
+  initialEnemyAttackDatas:
+  - {fileID: 11400000, guid: c4fe46ea98cbc9f478c5cfa6c0651126, type: 2}

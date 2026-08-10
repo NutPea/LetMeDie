@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5122531601473866095
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.865
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.0623484
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15.623
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9992629
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.03838783
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -4.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307933710306766077, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832233234132874823, guid: 76788a838401994478e8c8536638834c, type: 3}
+      propertyPath: m_Name
+      value: SmallRose (2) Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 76788a838401994478e8c8536638834c, type: 3}

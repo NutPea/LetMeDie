@@ -1,0 +1,86 @@
+using System;
+using Unity.VisualScripting;
+using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
+
+public class BaseEnemyCombat : MonoBehaviour
+{
+    [SerializeField] private EnemyAnmationEventHelper enemyAnmationHelper;
+    private HealthManager healthManager;
+    private BaseEnemyController baseEnemyController;
+    public BaseEnemyController BaseEnemyController => baseEnemyController;
+    private BaseEnemyMovement baseEnemyMovement;
+    public BaseEnemyMovement BaseEnemyMovement => baseEnemyMovement;
+
+
+    private Transform player;
+    private EnemyData enemyData;
+    private bool isDead;
+    private bool canAttack;
+
+    private EnemyAttackData currentEnemyAttackData;
+
+    private void Start()
+    {
+        baseEnemyController = GetComponent<BaseEnemyController>();
+        baseEnemyController.OnAggro.AddListener(PickAttack);
+        baseEnemyMovement = GetComponent<BaseEnemyMovement>();
+        enemyData = baseEnemyController.EnemyData;
+
+        healthManager = GetComponent<HealthManager>();
+        healthManager.OnDeath.AddListener(StopEverything);
+
+        enemyAnmationHelper.OnAnimationAttack.AddListener(Attack);
+        enemyAnmationHelper.OnAntizipationAttack.AddListener(AttackAntizipation);
+
+        player = SGameManager.Instance.PlayerBody.transform;
+    }
+
+
+    private void PickAttack()
+    {
+        if (currentEnemyAttackData != null) {
+            currentEnemyAttackData.AttackFinished(this);
+        }
+        currentEnemyAttackData = enemyData.GetAttack();
+        currentEnemyAttackData.Select(this, player);
+        canAttack = true;
+    }
+
+    private void StopEverything(GameObject diedObject)
+    {
+        
+        BaseEnemyController.Animator.SetBool("Death",true);
+        BaseEnemyController.Animator.SetTrigger("DeathTrigger");
+        isDead = true;
+    }
+
+    private void Update()
+    {
+        if (isDead || !BaseEnemyController.IsAggro || !canAttack)
+        {
+            return;
+        }
+        currentEnemyAttackData.AttackUpdate(this,player);
+    }
+
+    public void Attack()
+    {
+        if (currentEnemyAttackData != null) {
+            currentEnemyAttackData.Attack(this);
+            canAttack = false;
+            Invoke(nameof(PickAttack),currentEnemyAttackData.AttackWaitTime);
+        }
+    }
+
+    private void AttackAntizipation()
+    {
+        if (currentEnemyAttackData != null)
+        {
+            currentEnemyAttackData.AntizipationAttack(this);
+        }
+    }
+
+
+
+}
