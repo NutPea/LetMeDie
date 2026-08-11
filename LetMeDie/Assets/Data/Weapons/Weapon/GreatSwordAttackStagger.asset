@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bfe7b0608f03a84990767a7702831b4, type: 3}
-  m_Name: GreatSwordKnockback
+  m_Script: {fileID: 11500000, guid: 05805e782fe97c745b52377826b1c854, type: 3}
+  m_Name: GreatSwordAttackStagger
   m_EditorClassIdentifier: 
   Offender: {fileID: 0}
-  minKnockBackStrength: 3
+  minStaggerStrength: 0.25
+  maxStaggerStrength: 1
+  staggerTime: 0.5
+  minKnockBackStrength: 2
   maxKnockBackStrength: 5
-  knockBackLength: 0.2
+  knockBackLength: 0.5

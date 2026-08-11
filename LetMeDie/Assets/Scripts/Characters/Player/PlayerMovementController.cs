@@ -17,6 +17,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public float currentMovementSpeed;
     private Rigidbody rb;
+    
     public enum MovementState { Walking , Sprinting, Air, Crouching,Sliding}
     public MovementState currentMovementState = MovementState.Walking;
 
@@ -339,6 +340,7 @@ public class PlayerMovementController : MonoBehaviour
                         rb.useGravity = false;
                     }
                 }
+                
                 rb.AddForce(horPlayerMovement + vertPlayerMovement, ForceMode.Force);
             }
         }

@@ -6,8 +6,12 @@ using UnityEngine.SocialPlatforms;
 [CreateAssetMenu(fileName = "Data", menuName = "Weapons/Sword", order = 1)]
 public class SwordData : WeaponData
 {
-    [SerializeField] private PlayerKnockBackCombatEffect playerKnockBackCombat;
-    private PlayerKnockBackCombatEffect instatiatedPlayerKnockBackCombatEffect;
+    [SerializeField] private PlayerStaggerCombatEffect normalAttackStaggerEffect;
+    private PlayerStaggerCombatEffect instatiatedNormalAttackStaggerEffect;
+
+
+    [SerializeField] private PlayerStaggerCombatEffect blockAttackStaggerEffect;
+    private PlayerStaggerCombatEffect instatiatedBlockAttackStaggerEffect;
 
     [Header("Hitbox")]
     [SerializeField] private float range = 2f;
@@ -37,15 +41,18 @@ public class SwordData : WeaponData
     public override void Equip(PlayerWeaponController playerWeaponController)
     {
         base.Equip(playerWeaponController);
-        instatiatedPlayerKnockBackCombatEffect = Instantiate(playerKnockBackCombat);
-        instatiatedPlayerKnockBackCombatEffect.Init(playerWeaponController.transform);
-        CombatEffects.Add(instatiatedPlayerKnockBackCombatEffect);
+        instatiatedNormalAttackStaggerEffect = Instantiate(normalAttackStaggerEffect);
+        instatiatedNormalAttackStaggerEffect.Init(playerWeaponController.transform);
+        CombatEffects.Add(instatiatedNormalAttackStaggerEffect);
+
+        instatiatedBlockAttackStaggerEffect = Instantiate(blockAttackStaggerEffect);
+        instatiatedBlockAttackStaggerEffect.Init(playerWeaponController.transform);
     }
 
     public override void Attack(Transform camera, float chargeAmount)
     {
         base.Attack(camera, chargeAmount);
-        instatiatedPlayerKnockBackCombatEffect.KnockBackPercentageStrength = chargeAmount;
+        instatiatedNormalAttackStaggerEffect.KnockBackPercentageStrength = chargeAmount;
         lastChargeAmount = chargeAmount;
         hitPositions.Clear();
         RaycastHit hit;
@@ -56,7 +63,15 @@ public class SwordData : WeaponData
             Vector3 hitPosition = hit.point - camera.forward * 0.2f;
             if (hit.transform.TryGetComponent<HealthManager>(out HealthManager healthManager))
             {
-                healthManager.InflictDamage(CalculateDamage(chargeAmount,playerData.Strength),CombatEffects, TeamFlag.Player, camera);
+                if (playerWeaponController.PlayerCombatController.IsBlocking)
+                {
+                    healthManager.InflictDamage(0, new() { instatiatedBlockAttackStaggerEffect }, TeamFlag.Player, camera);
+                }
+                else
+                {
+                    healthManager.InflictDamage(CalculateDamage(chargeAmount,playerData.Strength),CombatEffects, TeamFlag.Player, camera);
+                }
+
                 isEnemyHit = true;
             }
             hitPositions.Add(hitPosition, isEnemyHit);
@@ -86,7 +101,12 @@ public class SwordData : WeaponData
             Vector3 hitPosition = otherhit.point - camera.forward * 0.2f;
             if (otherhit.transform.TryGetComponent<HealthManager>(out HealthManager healthManager))
             {
-                healthManager.InflictDamage(CalculateDamage(chargeAmount, playerData.Strength), CombatEffects, TeamFlag.Player, camera);
+                if (playerWeaponController.PlayerCombatController.IsBlocking){
+                    healthManager.InflictDamage(0, new() { instatiatedBlockAttackStaggerEffect }, TeamFlag.Player, camera);
+                }
+                else{
+                    healthManager.InflictDamage(CalculateDamage(chargeAmount, playerData.Strength), CombatEffects, TeamFlag.Player, camera);
+                }
                 isEnemyHit = true;
             }
             if (!hitPositions.ContainsKey(hitPosition))

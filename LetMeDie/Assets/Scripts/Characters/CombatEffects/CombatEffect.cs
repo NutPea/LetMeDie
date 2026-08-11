@@ -24,4 +24,10 @@ public class CombatEffect : ScriptableObject
         }
         return knockBack;
     }
+
+    protected bool CalculateStagger(float staggerStrength, float victimMass) {
+
+        float staggerChance = staggerStrength / victimMass*3;
+        return staggerChance > UnityEngine.Random.Range(0.0f, 1.0f);
+    }
 }

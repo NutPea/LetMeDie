@@ -37,16 +37,10 @@ MonoBehaviour:
   speed: 10
   luck: 1
   ForceUpdateStats: 0
-  currentEquipedWeapon: {fileID: 11400000, guid: 3092074b29ff43943a966799cbbc3178, type: 2}
+  currentEquipedWeapon: {fileID: 11400000, guid: 7fde9af1c120a1b43a4992da366b8def, type: 2}
   currentMagicSpell_1: {fileID: 0}
   currentMagicSpell_2: {fileID: 0}
-  weaponInventory:
-  - {fileID: 11400000, guid: 9620ac3b9a319424ba69e46757b4ecf9, type: 2}
-  - {fileID: 11400000, guid: 1b136d31f610e734ab2f195049b74102, type: 2}
-  - {fileID: 11400000, guid: 3092074b29ff43943a966799cbbc3178, type: 2}
-  - {fileID: 11400000, guid: 4679a48013e04964e925cf7c9d2224c6, type: 2}
-  - {fileID: 11400000, guid: a5359419766b11d429f1318c23c799af, type: 2}
-  - {fileID: 11400000, guid: 73877edc9fb199946a146449eb248496, type: 2}
+  weaponInventory: []
   consumableInventory:
   - {fileID: 11400000, guid: 4e4581bac950b4f479c2fae0762b86d3, type: 2}
   - {fileID: 11400000, guid: dfb76ea165e1d544b9bf710542157666, type: 2}

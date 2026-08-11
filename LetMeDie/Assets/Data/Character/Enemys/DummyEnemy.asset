@@ -25,4 +25,5 @@ MonoBehaviour:
   attackMask:
     serializedVersion: 2
     m_Bits: 128
+  mass: 3
   initialEnemyAttackDatas: []

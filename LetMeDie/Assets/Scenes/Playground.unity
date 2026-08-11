@@ -6874,6 +6874,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 284380747593522603, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
+      propertyPath: useTestWeapon
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 416751142302863304, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -47,6 +47,17 @@ public class BaseEnemyCombat : MonoBehaviour
         canAttack = true;
     }
 
+    public virtual void Stagger(float time)
+    {
+        BaseEnemyController.Animator.SetTrigger("Hit");
+        if(currentEnemyAttackData != null)
+        {
+            currentEnemyAttackData.AttackFinished(this);
+            Invoke(nameof(PickAttack), time);
+        }
+    }
+
+
     private void StopEverything(GameObject diedObject)
     {
         
