@@ -29,6 +29,10 @@ public class EnemyData : HealthData
     [SerializeField] private LayerMask attackMask;
     public LayerMask AttackMask => attackMask;
 
+    [SerializeField] private float mass = 1;
+    public float Mass => mass;  
+
+
 
     [SerializeField] private List<EnemyAttackData> initialEnemyAttackDatas = new();
     private List<EnemyAttackData> enemyAttackDatas = new();

@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8660564697423011255}
+  - component: {fileID: 6541235980139891223}
+  - component: {fileID: 6243422645812654632}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -32,6 +34,46 @@ Transform:
   - {fileID: 7949028405041968431}
   m_Father: {fileID: 8336637633549908635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6541235980139891223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997728570041349385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092c2fc4538e8024fa858c0f988bef0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnAntizipationAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAnimationAttack:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!95 &6243422645812654632
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997728570041349385}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 7a718af2f81b7064caee2b98599010af, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2312970076108722672
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +176,7 @@ GameObject:
   - component: {fileID: 4637735442505561858}
   - component: {fileID: 8988070022385784401}
   - component: {fileID: 5055854035177224684}
+  - component: {fileID: 2883480203658708997}
   m_Layer: 6
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -174,6 +217,9 @@ MonoBehaviour:
   OnHeal:
     m_PersistentCalls:
       m_Calls: []
+  OnCombatEffect:
+    m_PersistentCalls:
+      m_Calls: []
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -194,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 0f2ec0f7037563e42a60587524770c40, type: 2}
+  animator: {fileID: 6243422645812654632}
   OnAggro:
     m_PersistentCalls:
       m_Calls: []
@@ -294,5 +341,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14aa6ffecf7eb934badca0cc93465da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAnmationHelper: {fileID: 6541235980139891223}
+--- !u!114 &2883480203658708997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4391572459125369179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c9a5be72806f7428f9ff16f0f42db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

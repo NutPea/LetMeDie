@@ -37,6 +37,7 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private Vector2 shakeTime;
 
     private bool isBlocking;
+    public bool IsBlocking => isBlocking;
     private bool CanUseCombat => !SGameManager.IsPaused;
 
     private bool attackCooldownTrigger;
@@ -136,6 +137,7 @@ public class PlayerCombatController : MonoBehaviour
         }
         if (isBlocking)
         {
+            OnEndCharge.Invoke(0);
             return;
         }
         SetCharging();

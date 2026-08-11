@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponData : ItemData
@@ -16,12 +18,22 @@ public class WeaponData : ItemData
 
     [SerializeField] private float attackCooldown = 0.5f;
     public float AttackCooldown => attackCooldown;
+    [SerializeField] private List<CombatEffect> combatEffect;
 
+    private List<CombatEffect> instanciatedCombatEffects;
+
+    public List<CombatEffect> CombatEffects => instanciatedCombatEffects;
 
     public virtual void Equip(PlayerWeaponController playerWeaponController)
     {
         attackLayer = ~LayerMask.GetMask("Player");
         playerData = playerWeaponController.PlayerData;
+        instanciatedCombatEffects.Clear();
+        foreach (CombatEffect combatEffect in combatEffect) {
+            CombatEffect effect = Instantiate(combatEffect);
+            effect.Init(playerWeaponController.transform);
+            instanciatedCombatEffects.Add(effect);
+        }
         this.playerWeaponController = playerWeaponController;
     }
 

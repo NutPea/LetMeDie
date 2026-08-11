@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -34,8 +35,16 @@ public class BaseEnemyController : MonoBehaviour
     private void Start()
     {
         healthManager.OnDamaged.AddListener(GotHit);
+        healthManager.OnCombatEffect.AddListener(ResolveCombatEffects);
     }
 
+    private void ResolveCombatEffects(List<CombatEffect> combatEffects)
+    {
+       foreach(CombatEffect combatEffect in combatEffects)
+       {
+            combatEffect.ResolveCombatEffect(transform);
+       }
+    }
 
     private void GotHit(bool died, int damageAmount, Transform arg2)
     {

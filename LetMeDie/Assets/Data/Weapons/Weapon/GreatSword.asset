@@ -22,6 +22,8 @@ MonoBehaviour:
   canBlock: 1
   fullChargeTime: 0.5
   attackCooldown: 0.5
+  combatEffect: []
+  playerKnockBackCombat: {fileID: 11400000, guid: 44ba17f04c7a1d845bf47d7631e168d3, type: 2}
   range: 1
   attackWidth: 0.1
   minStopTime: 0.05

@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerWeaponController : MonoBehaviour
 {
     private PlayerCombatController playerCombatController;
+    public PlayerCombatController PlayerCombatController => playerCombatController;
     private WeaponData weaponData;
     [SerializeField]private Transform cameraTransform;
     private PlayerStatHandler playerStatHandler;

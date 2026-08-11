@@ -19,6 +19,7 @@ public class HealthManager : MonoBehaviour
 
     public CalculateDamageEvent OnDamaged;
     [HideInInspector] public UnityEvent OnHeal = new UnityEvent();
+    [HideInInspector] public UnityEvent<List<CombatEffect>> OnCombatEffect = new();
     [HideInInspector]public UnityEvent<GameObject> OnDeath = new();
     [HideInInspector] public UnityEvent OnHealthUpdate = new UnityEvent();
 
@@ -44,6 +45,13 @@ public class HealthManager : MonoBehaviour
         OnDamaged.RemoveAllListeners();
     }
 
+
+    public void InflictDamage(int damage,List<CombatEffect> combatEffects ,TeamFlag team, Transform hitSource)
+    {
+        InflictDamage(damage,team,hitSource);
+        OnCombatEffect.Invoke(combatEffects);
+
+    }
 
     public void InflictDamage(int damage,TeamFlag team,Transform hitSource)
     {

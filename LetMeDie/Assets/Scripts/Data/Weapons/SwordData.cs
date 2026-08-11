@@ -6,6 +6,8 @@ using UnityEngine.SocialPlatforms;
 [CreateAssetMenu(fileName = "Data", menuName = "Weapons/Sword", order = 1)]
 public class SwordData : WeaponData
 {
+    [SerializeField] private PlayerKnockBackCombatEffect playerKnockBackCombat;
+    private PlayerKnockBackCombatEffect instatiatedPlayerKnockBackCombatEffect;
 
     [Header("Hitbox")]
     [SerializeField] private float range = 2f;
@@ -32,21 +34,29 @@ public class SwordData : WeaponData
     [SerializeField] private bool showAttackHitbox;
     public bool ShowAttackHitbox => showAttackHitbox;
 
-
+    public override void Equip(PlayerWeaponController playerWeaponController)
+    {
+        base.Equip(playerWeaponController);
+        instatiatedPlayerKnockBackCombatEffect = Instantiate(playerKnockBackCombat);
+        instatiatedPlayerKnockBackCombatEffect.Init(playerWeaponController.transform);
+        CombatEffects.Add(instatiatedPlayerKnockBackCombatEffect);
+    }
 
     public override void Attack(Transform camera, float chargeAmount)
     {
         base.Attack(camera, chargeAmount);
+        instatiatedPlayerKnockBackCombatEffect.KnockBackPercentageStrength = chargeAmount;
         lastChargeAmount = chargeAmount;
         hitPositions.Clear();
         RaycastHit hit;
+        hasHit = false;
         if (Physics.Raycast(camera.position, camera.forward, out hit, range, attackLayer)) {
             hasHit = true;
             bool isEnemyHit = false;
             Vector3 hitPosition = hit.point - camera.forward * 0.2f;
             if (hit.transform.TryGetComponent<HealthManager>(out HealthManager healthManager))
             {
-                healthManager.InflictDamage(CalculateDamage(chargeAmount,playerData.Strength), TeamFlag.Player, camera);
+                healthManager.InflictDamage(CalculateDamage(chargeAmount,playerData.Strength),CombatEffects, TeamFlag.Player, camera);
                 isEnemyHit = true;
             }
             hitPositions.Add(hitPosition, isEnemyHit);
@@ -76,7 +86,7 @@ public class SwordData : WeaponData
             Vector3 hitPosition = otherhit.point - camera.forward * 0.2f;
             if (otherhit.transform.TryGetComponent<HealthManager>(out HealthManager healthManager))
             {
-                healthManager.InflictDamage(CalculateDamage(chargeAmount, playerData.Strength), TeamFlag.Player, camera);
+                healthManager.InflictDamage(CalculateDamage(chargeAmount, playerData.Strength), CombatEffects, TeamFlag.Player, camera);
                 isEnemyHit = true;
             }
             if (!hitPositions.ContainsKey(hitPosition))

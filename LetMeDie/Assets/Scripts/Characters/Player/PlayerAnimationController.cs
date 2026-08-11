@@ -32,9 +32,9 @@ public class PlayerAnimationController : MonoBehaviour
     private PlayerWeaponEquiper playerWeaponEquiper;
 
     private const string ATTACK_1 = "Attack_1";
-
     private const string ATTACK_2 = "Attack_2";
 
+    private const string BLOCK_ATTACK = "BlockAttack";
     private const string EQUIP = "Equip";
     private const string UNEQUIP = "Unequip";
 
@@ -128,6 +128,12 @@ public class PlayerAnimationController : MonoBehaviour
     {
         if (!playerWeaponController.CanAttack)
         {
+            return;
+        }
+
+        if (playerWeaponController.PlayerCombatController.IsBlocking)
+        {
+            currentWeaponAnimator.SetTrigger(BLOCK_ATTACK);
             return;
         }
 
