@@ -262,6 +262,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""577c64e7-4f60-4740-bf14-5aab508394ad"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -517,6 +526,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Spell_2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df93fb98-cf4d-424e-bd36-7842408ce21c"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -544,6 +564,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Keyboard_Stats = m_Keyboard.FindAction("Stats", throwIfNotFound: true);
         m_Keyboard_Spell_1 = m_Keyboard.FindAction("Spell_1", throwIfNotFound: true);
         m_Keyboard_Spell_2 = m_Keyboard.FindAction("Spell_2", throwIfNotFound: true);
+        m_Keyboard_Dash = m_Keyboard.FindAction("Dash", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -643,6 +664,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Keyboard_Stats;
     private readonly InputAction m_Keyboard_Spell_1;
     private readonly InputAction m_Keyboard_Spell_2;
+    private readonly InputAction m_Keyboard_Dash;
     /// <summary>
     /// Provides access to input actions defined in input action map "Keyboard".
     /// </summary>
@@ -731,6 +753,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Spell_2 => m_Wrapper.m_Keyboard_Spell_2;
         /// <summary>
+        /// Provides access to the underlying input action "Keyboard/Dash".
+        /// </summary>
+        public InputAction @Dash => m_Wrapper.m_Keyboard_Dash;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
@@ -813,6 +839,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Spell_2.started += instance.OnSpell_2;
             @Spell_2.performed += instance.OnSpell_2;
             @Spell_2.canceled += instance.OnSpell_2;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         /// <summary>
@@ -881,6 +910,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Spell_2.started -= instance.OnSpell_2;
             @Spell_2.performed -= instance.OnSpell_2;
             @Spell_2.canceled -= instance.OnSpell_2;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         /// <summary>
@@ -1054,5 +1086,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSpell_2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDash(InputAction.CallbackContext context);
     }
 }

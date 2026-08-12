@@ -5,18 +5,15 @@ using UnityEngine;
 
 public class PlayerSoundHandler : MonoBehaviour
 {
-    PlayerMovementController playerMovementController;
+    PlayerCharacterControllerMovementController playerCharacterControllerMovement;
     PlayerStatHandler playerStatHandler;
     PlayerResourceHandler playerResourceHandler;
 
     void Start()
     {
-        playerMovementController = GetComponent<PlayerMovementController>();
-        playerMovementController.OnStartJump.AddListener(PlayStartJumpSound);
-        playerMovementController.OnLandAfterJump.AddListener(PlayLandAfterJumpSound);
-
-        playerMovementController.OnIsSliding.AddListener(PlaySlideSound);
-        playerMovementController.OnIsCrouching.AddListener(PlayCrouchSound);
+        playerCharacterControllerMovement = GetComponent<PlayerCharacterControllerMovementController>();
+        playerCharacterControllerMovement.OnStartJump.AddListener(PlayStartJumpSound);
+        playerCharacterControllerMovement.OnLandAfterJump.AddListener(PlayLandAfterJumpSound);
 
         playerStatHandler = GetComponent<PlayerStatHandler>();
         playerStatHandler.PlayerData.OnLevelUp.AddListener(PlayLevelUpSound);

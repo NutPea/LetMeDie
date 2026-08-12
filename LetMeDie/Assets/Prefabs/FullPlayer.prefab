@@ -104,6 +104,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponTrailHandler: {fileID: 1530915037473224055}
   hitBox: {fileID: 0}
+  leftSwordVisuellEffect: {fileID: 0}
+  rightSwordVisuellEffect: {fileID: 0}
 --- !u!1 &1260109913068519445
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,6 +900,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4679046539025316875, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679046539025316875, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
+      propertyPath: baseMovementSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679046539025316875, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
+      propertyPath: currentMovementSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679046539025316875, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
       propertyPath: walkingMovementSpeed
       value: 70
       objectReference: {fileID: 0}
@@ -972,6 +986,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7623685571930469060, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
     - {fileID: 3075280067480562614, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
+    - {fileID: 7115114646606255534, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
+    - {fileID: 2061093364139975485, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
+    - {fileID: 6985970979030776930, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5595117278991307268, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
     m_AddedGameObjects:
@@ -997,6 +1014,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6014629404565032331, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5019415103621712293}
+    - targetCorrespondingSourceObject: {fileID: 6014629404565032331, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9170171306893804770}
+    - targetCorrespondingSourceObject: {fileID: 6014629404565032331, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6995140842759711601}
   m_SourcePrefab: {fileID: 100100000, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
 --- !u!114 &65072344517574614 stripped
 MonoBehaviour:
@@ -1034,6 +1057,9 @@ MonoBehaviour:
   healthData: {fileID: 11400000, guid: 1b378cd32830d534d8bc322cffc11784, type: 2}
   currentHealth: 0
   OnHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCombatEffect:
     m_PersistentCalls:
       m_Calls: []
   OnDeath:
@@ -1183,6 +1209,93 @@ MonoBehaviour:
     onDialogueSystemUnpause:
       m_PersistentCalls:
         m_Calls: []
+--- !u!143 &9170171306893804770
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168891505164762857}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6995140842759711601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168891505164762857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e97422100cc13f46950c29fe7cced3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnIsFalling:
+    m_PersistentCalls:
+      m_Calls: []
+  OnIsGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartJump:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLandAfterJump:
+    m_PersistentCalls:
+      m_Calls: []
+  movementSpeed: 5
+  airControl: 0.8
+  jumpForce: 5
+  coyoteTime: 0.15
+  jumpBufferTime: 0.15
+  jumpCutMultiplier: 0.5
+  gravity: 9.81
+  extraGravity: 18
+  gravityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  gravityRampDuration: 1
+  maxFallSpeed: 30
+  dashSpeed: 7
+  dashDuration: 0.2
+  dashCooldown: 1
+  knockbackDuration: 0.2
 --- !u!1001 &6371513782561234475
 PrefabInstance:
   m_ObjectHideFlags: 0

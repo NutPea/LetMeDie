@@ -25,7 +25,7 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private float xMoveAmount = 1;
     [SerializeField] private float zMoveAmount = 1;
 
-    private PlayerMovementController playerMovementController;
+    private PlayerCharacterControllerMovementController playerCharacterControllerMovement;
     private PlayerInteractionHandler playerInteraction;
     private PlayerCombatController playerCombatController;
     private PlayerWeaponController playerWeaponController;
@@ -64,12 +64,12 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Awake()
     {
-        
-        playerMovementController = GetComponent<PlayerMovementController>();
 
-        playerMovementController.OnIsFalling.AddListener(OnFalling);
-        playerMovementController.OnIsGrounded.AddListener(OnIsGrounded);
-        playerMovementController.OnStartJump.AddListener(OnJump);
+        playerCharacterControllerMovement = GetComponent<PlayerCharacterControllerMovementController>();
+
+        playerCharacterControllerMovement.OnIsFalling.AddListener(OnFalling);
+        playerCharacterControllerMovement.OnIsGrounded.AddListener(OnIsGrounded);
+        playerCharacterControllerMovement.OnStartJump.AddListener(OnJump);
 
         playerInteraction = GetComponent<PlayerInteractionHandler>();
         playerInteraction.OnCanBeInteracted.AddListener(() => HandleInteract(true));

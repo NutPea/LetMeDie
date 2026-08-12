@@ -297,17 +297,20 @@ public class PlayerData : HealthData
 
     public static float CalculateMovementSpeed(float baseMovementSpeed, float speedStat)
     {
-        return (baseMovementSpeed + 2 * Mathf.Pow(speedStat, 0.8f));
+        //  return (baseMovementSpeed + 2 * Mathf.Pow(speedStat, 0.8f));
+        return baseMovementSpeed;
     }
 
     public static float CalculateJumpForce(float baseJumpHeight, float dexterityStat)
     {
-        return (baseJumpHeight + 0.1f * Mathf.Pow(dexterityStat, 0.8f));
+      //  return (baseJumpHeight + 0.1f * Mathf.Pow(dexterityStat, 0.8f));
+        return baseJumpHeight;
     }
 
     public static float CalculateAirMovementSpeed(float baseAirMovementSpeed, int dexterityStat)
     {
-        return (baseAirMovementSpeed + dexterityStat / 10);
+        //return (baseAirMovementSpeed + dexterityStat / 10);
+        return baseAirMovementSpeed;
     }
 
     public static float CalculateMelleDamage(int strength)

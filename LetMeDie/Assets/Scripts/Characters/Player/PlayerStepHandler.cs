@@ -12,16 +12,14 @@ public class PlayerStepHandler : MonoBehaviour
         HollowIron = 3
     }
 
-    PlayerMovementController playerMovementController;
+    PlayerCharacterControllerMovementController playerCharacterControllerMovement;
     public StepUnderground currentUnderground;
 
 
 
     void Start()
     {
-        playerMovementController = GetComponent<PlayerMovementController>();
-        playerMovementController.OnIsWalking.AddListener(PlayWalkSound);
-        playerMovementController.OnIsSprinting.AddListener(PlaySprintSound);
+
     }
 
     private void PlaySprintSound()
