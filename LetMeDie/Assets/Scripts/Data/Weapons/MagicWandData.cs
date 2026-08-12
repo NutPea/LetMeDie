@@ -19,11 +19,6 @@ public class MagicWandData : SwordData
     public override void Update()
     {
         base.Update();
-
-        if (playerResourceHandler.ManaIsFull)
-        {
-            return;
-        }
         if(currentRecoveryTime < 0)
         {
             Recovery();
@@ -34,8 +29,8 @@ public class MagicWandData : SwordData
 
     private void Recovery()
     {
-        int toRecoverMana = Mathf.RoundToInt((float)playerData.Mana * percentageManaRecovery);
-        playerResourceHandler.RegMana(toRecoverMana);
+      //  int toRecoverMana = Mathf.RoundToInt((float)playerData.Mana * percentageManaRecovery);
+      //  playerResourceHandler.RegStamina(toRecoverMana);
     }
 
 

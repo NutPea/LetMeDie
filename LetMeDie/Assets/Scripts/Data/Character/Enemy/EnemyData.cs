@@ -17,8 +17,6 @@ public class EnemyData : HealthData
     [SerializeField] private int damage;
     public int Damage => damage;
 
-    [SerializeField] private float attackStopDistance = 2.2f;
-    public float AttackStopDistance => attackStopDistance;
 
     [SerializeField] private float attackDistance = 1f;
     public float AttackDistance => attackDistance;

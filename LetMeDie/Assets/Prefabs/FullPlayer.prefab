@@ -99,11 +99,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 800040273975638099}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ff68217a718a042aee23ca7eaea13e, type: 3}
+  m_Script: {fileID: 11500000, guid: abd0796e4e8fc5b47b40c7a27c69ec90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponTrailHandler: {fileID: 1530915037473224055}
-  hitBox: {fileID: 0}
+  playerWeaponController: {fileID: 6411706899267407381}
+  hitBox: {fileID: 7749223981625488441, guid: 6f85be6e209b0cc47bfea184ff7c6d91, type: 3}
   leftSwordVisuellEffect: {fileID: 0}
   rightSwordVisuellEffect: {fileID: 0}
 --- !u!1 &1260109913068519445
@@ -1010,9 +1010,6 @@ PrefabInstance:
       addedObject: {fileID: 5920066935527446850}
     - targetCorrespondingSourceObject: {fileID: 6014629404565032331, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2096414163978982750}
-    - targetCorrespondingSourceObject: {fileID: 6014629404565032331, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5019415103621712293}
     - targetCorrespondingSourceObject: {fileID: 6014629404565032331, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
       insertIndex: -1
@@ -1037,6 +1034,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7376442126242859783, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
   m_PrefabInstance: {fileID: 2460647754775065442}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6411706899267407381 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8853812352361676151, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
+  m_PrefabInstance: {fileID: 2460647754775065442}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168891505164762857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c113fd74f1d94c14b999374522e52180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8168891505164762857 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6014629404565032331, guid: 7ad347bb7bd0796419a4a657a90a1592, type: 3}
@@ -1068,9 +1076,13 @@ MonoBehaviour:
   OnHealthUpdate:
     m_PersistentCalls:
       m_Calls: []
-  isBlocked: 0
-  CurrentMana: 0
-  OnManaChanged:
+  CanBlock: 1
+  IsBlocked: 0
+  OnDamageBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentStamina: 0
+  OnStaminaChanged:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &9182109492668047894
@@ -1103,31 +1115,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackAmount: 5
---- !u!114 &2096414163978982750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8168891505164762857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da72113e1b60dd4e96c9a0a3bca4145, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionDistance: 1
-  OnCanBePickedUp:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCanNotBePickedUpAnymore:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPickUp:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDrop:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &5019415103621712293
 MonoBehaviour:
   m_ObjectHideFlags: 0

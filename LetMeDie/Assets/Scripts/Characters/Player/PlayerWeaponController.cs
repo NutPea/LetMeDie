@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerWeaponController : MonoBehaviour
@@ -16,6 +17,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     private float currentAttackCooldown = 0f;
    public bool CanAttack;
+    private float currentChargeAmount;
 
     void Awake()
     {
@@ -53,9 +55,14 @@ public class PlayerWeaponController : MonoBehaviour
         if (weaponData == null || !CanAttack) {
             return;
         }
-        weaponData.Attack(cameraTransform, chargeAmount);
+        currentChargeAmount = chargeAmount;
         currentAttackCooldown = weaponData.AttackCooldown;
         CanAttack = false;
+    }
+
+    public void AnimationAttack()
+    {
+        weaponData.Attack(cameraTransform, currentChargeAmount);
     }
 
     internal void EquipWeapon(WeaponData weaponData)

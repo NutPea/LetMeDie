@@ -7,7 +7,7 @@ public class AnimationEquiper : MonoBehaviour
     [SerializeField] private List<WeaponAnimationHelper> weaponAnimationHelper = new();
     private Dictionary<string,List<GameObject>> animationDictonary = new Dictionary<string,List<GameObject>>();
     [SerializeField] private PlayerWeaponEquiper weaponEquiper;
-    [SerializeField] private PlayerVfXAttackController vfxController;
+    [SerializeField] private PlayerAnimationAttackController vfxController;
 
     private void Awake()
     {

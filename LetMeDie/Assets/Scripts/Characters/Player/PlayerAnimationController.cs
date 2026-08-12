@@ -30,6 +30,7 @@ public class PlayerAnimationController : MonoBehaviour
     private PlayerCombatController playerCombatController;
     private PlayerWeaponController playerWeaponController;
     private PlayerWeaponEquiper playerWeaponEquiper;
+    private PlayerResourceHandler playerResourceHandler;
 
     private const string ATTACK_1 = "Attack_1";
     private const string ATTACK_2 = "Attack_2";
@@ -88,6 +89,8 @@ public class PlayerAnimationController : MonoBehaviour
 
         playerWeaponController = GetComponent<PlayerWeaponController>();
 
+        playerResourceHandler = GetComponent<PlayerResourceHandler>();
+
     }
 
     public void UnEquip()
@@ -133,7 +136,10 @@ public class PlayerAnimationController : MonoBehaviour
 
         if (playerWeaponController.PlayerCombatController.IsBlocking)
         {
-            currentWeaponAnimator.SetTrigger(BLOCK_ATTACK);
+            if (!playerResourceHandler.StaminaIsEmpty)
+            {
+                currentWeaponAnimator.SetTrigger(BLOCK_ATTACK);
+            }
             return;
         }
 

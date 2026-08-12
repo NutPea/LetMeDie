@@ -237,13 +237,13 @@ public class LevelUpUIState : UIStateComponent
         float beforeMeleeDamage = PlayerData.CalculateMelleDamage(beforePlayerData.Strength);
 
         healthText.color = currentPlayerData.Health > beforePlayerData.Health ? increaseColor : Color.white;
-        manaText.color = currentPlayerData.Mana > beforePlayerData.Mana ? increaseColor : Color.white;
+       // manaText.color = currentPlayerData.Mana > beforePlayerData.Mana ? increaseColor : Color.white;
         movementSpeedText.color = currentMovementSpeed > beforeMovementSpeed ? increaseColor : Color.white;
         jumpHeightText.color = currentJumpHeight > beforeJumpHeight ? increaseColor : Color.white;
         meeleDamageText.color = currentMeleeDamage > beforeMeleeDamage ? increaseColor : Color.white;
 
         healthText.text = "Health " + currentPlayerData.Health.ToString();
-        manaText.text ="Mana "+ currentPlayerData.Mana.ToString();
+      //  manaText.text ="Mana "+ currentPlayerData.Mana.ToString();
         movementSpeedText.text = "Movement Speed " +PlayerData.CalculateMovementSpeed(playerMovementController.baseMovementSpeed,currentPlayerData.Speed).ToString("F1");
         jumpHeightText.text = "Jump Height " + PlayerData.CalculateMovementSpeed(playerMovementController.baseJumpForce, currentPlayerData.Dexterity).ToString("F1");
         meeleDamageText.text = "Base Melee Damage " +  PlayerData.CalculateMelleDamage(currentPlayerData.Strength).ToString("F1");

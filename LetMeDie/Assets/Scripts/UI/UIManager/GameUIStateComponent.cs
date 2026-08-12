@@ -12,7 +12,6 @@ public class GameUIStateComponent : UIStateComponent
     private PlayerStatHandler playerStatHandler;
     private PlayerAnimationController playerAnimationController;
     private PlayerInteractionHandler playerInteractionHandler;
-    private PlayerPickUpHandler playerPickUpHandler;
 
     private PlayerData PlayerData => playerStatHandler.PlayerData;
 
@@ -36,7 +35,8 @@ public class GameUIStateComponent : UIStateComponent
 
     [Header("Bar")]
     [SerializeField] private BarUIHandler healthBarHandler;
-    [SerializeField] private BarUIHandler manaBarHandler;
+    [SerializeField] private GameObject staminaBar;
+    [SerializeField] private BarUIHandler staminaBarHandler;
    // [SerializeField] private BarUIHandler expBarHandler;
 
     [Header("Borders")]
@@ -63,28 +63,26 @@ public class GameUIStateComponent : UIStateComponent
 
         playerCombatController = player.GetComponent<PlayerCombatController>();
         playerCombatController.OnCharge.AddListener(SetChargeValue);
+        playerCombatController.OnStartBlock.AddListener(ShowStamina);
+        playerCombatController.OnEndBlock.AddListener(HideStamina);
+
         playerStatHandler = player.GetComponent<PlayerStatHandler>();
         playerAnimationController = player.GetComponent<PlayerAnimationController>();
 
         playerInteractionHandler = player.GetComponent<PlayerInteractionHandler>();
-        playerPickUpHandler = player.GetComponent<PlayerPickUpHandler>();
 
         playerCombatController.OnEndCharge.AddListener(EndChargeValue);
 
         healthBarHandler.SetValue(playerResourceHandler.currentHealth, playerResourceHandler.healthData.Health);
-        manaBarHandler.SetValue(playerResourceHandler.CurrentMana, playerStatHandler.PlayerData.Mana);
+        staminaBarHandler.SetValue(playerResourceHandler.CurrentStamina, playerStatHandler.PlayerData.Stamina);
        // expBarHandler.SetValue(playerStatHandler.PlayerData.CurrentExperience, playerStatHandler.PlayerData.NextLevelUpExperience);
 
         playerResourceHandler.OnHeal.AddListener(ShowHealth);
-        playerResourceHandler.OnManaChanged.AddListener(ShowMana);
+        playerResourceHandler.OnStaminaChanged.AddListener(UpdateStamina);
         playerStatHandler.PlayerData.OnExpChanged.AddListener(ShowExp);
 
         playerInteractionHandler.OnCanBeInteracted.AddListener(() => crossAirUI.ChangeToInteractionSprite());
         playerInteractionHandler.OnCanNotBeInteractedAnymore.AddListener(() => crossAirUI.ReturnToPreviouseSprite());
-
-        playerPickUpHandler.OnCanBePickedUp.AddListener(() => crossAirUI.ChangeToPickUpSprite());
-        playerPickUpHandler.OnCanNotBePickedUpAnymore.AddListener(() => crossAirUI.ReturnToPreviouseSprite());
-        playerPickUpHandler.OnDrop.AddListener(() => crossAirUI.ReturnToPreviouseSprite());
 
         SInputManager.Instance.inputActions.Keyboard.Pause.performed += ChangeToPause;
         SInputManager.Instance.inputActions.Keyboard.Inventory.performed += ChangeToInventory;
@@ -97,8 +95,19 @@ public class GameUIStateComponent : UIStateComponent
         HideHeal();
         HideDamage();
         HideLevelUp();
+        HideStamina();
     }
 
+    private void ShowStamina()
+    {
+        staminaBar.SetActive(true);
+        UpdateStamina(0);
+    }
+
+    private void HideStamina()
+    {
+        staminaBar.SetActive(false);
+    }
 
     private void OnItemAccuired(ItemData item)
     {
@@ -172,6 +181,8 @@ public class GameUIStateComponent : UIStateComponent
 
         spellHandler_1.Init(PlayerData.CurrentMagicSpell_1);
         spellHandler_2.Init(PlayerData.CurrentMagicSpell_2);
+
+        UpdateStamina(0);
     }
 
     public override void OnExitUIState()
@@ -292,8 +303,8 @@ public class GameUIStateComponent : UIStateComponent
     }
 
 
-    private void ShowMana(float arg0)
+    private void UpdateStamina(int stamina)
     {
-        manaBarHandler.SetValue(playerResourceHandler.CurrentMana, playerStatHandler.PlayerData.Mana);
+        staminaBarHandler.SetValue(playerResourceHandler.CurrentStamina, playerStatHandler.PlayerData.Stamina);
     }
 }

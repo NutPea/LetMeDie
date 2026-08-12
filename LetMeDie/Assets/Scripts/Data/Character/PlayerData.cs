@@ -6,16 +6,21 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "Data", menuName = "Character/PlayerData", order = 1)]
 public class PlayerData : HealthData
 {
+
+    [SerializeField] private int baseStamina = 3;
+    public int Stamina => baseStamina + CalculateStamine();
+
+    public float baseStaminaReginaration = 1f;
+    public float StaminaRegeneration => baseStaminaReginaration;
+
+
+
     public override int Health => baseHealth + CalculateHealth();
 
     // Events
     public UnityEvent<int> OnLevelUp = new();
     public UnityEvent<float> OnExpChanged = new();
     public UnityEvent<ItemData> OnItemAdded = new();
-
-    [SerializeField] private int baseMana = 10;
-
-    public int Mana { get { return baseMana + CalculateMana(); }}
 
 
     [SerializeField] private int characterLevel = 1;
@@ -285,9 +290,10 @@ public class PlayerData : HealthData
         return null;
     }
 
-    private int CalculateMana()
+
+    private int CalculateStamine()
     {
-        return Mathf.RoundToInt( 3 * intelligence );
+        return 0;
     }
 
     private int CalculateHealth()

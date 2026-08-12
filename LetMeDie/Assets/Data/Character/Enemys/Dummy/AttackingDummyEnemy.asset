@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 071921167a4e6db4689b7a72151528a6, type: 3}
-  m_Name: BaseEnemy
+  m_Name: AttackingDummyEnemy
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 70141d51621e24facbca9196bbde84b4, type: 3}
   characterName: Base Enemy
-  baseHealth: 40
+  baseHealth: 10000
   team: 2
-  movementSpeed: 5
+  movementSpeed: 0
   accelerationSpeed: 1
   damage: 5
-  attackStopDistance: 3
+  attackStopDistance: 2.2
   attackDistance: 1
   attackCooldown: 1
   attackMask:
     serializedVersion: 2
     m_Bits: 128
-  mass: 1
+  mass: 3
   initialEnemyAttackDatas:
   - {fileID: 11400000, guid: 84fd612f90b93c140b9c013eb9fad5ab, type: 2}

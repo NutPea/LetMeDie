@@ -11,6 +11,7 @@ public class EnemyCloseCombatAttackData : EnemyAttackData
     [SerializeField] private float attackDistance = 1f;
     [SerializeField] private float attackMoveAmount = 1f;
     [SerializeField] private float lookAtPlayerSpeed = 180f;
+    [SerializeField] private float attackStopDistance = 2.2f;
 
     private Rigidbody rb;
     private bool hasAttacked;
@@ -45,9 +46,9 @@ public class EnemyCloseCombatAttackData : EnemyAttackData
 
 
         float playerDistance = Vector3.Distance(Player.transform.position, baseEnemyCombat.transform.position);
-        if (playerDistance < currentEnemyData.AttackStopDistance)
-        {
 
+        if (playerDistance < attackStopDistance)
+        {
             baseEnemyCombat.BaseEnemyMovement.StopMovement();
             PlayAttackAnimation();
             hasAttacked = true;

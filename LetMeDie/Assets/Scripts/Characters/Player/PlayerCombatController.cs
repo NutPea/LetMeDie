@@ -62,18 +62,13 @@ public class PlayerCombatController : MonoBehaviour
 
     private void EndBlock(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        if (!CanUseCombat)
-        {
+        if (!isBlocking) {
             return;
         }
 
-        if (!playerWeaponController.CanBlock || isCharging)
-        {
-            return;
-        }
-        OnEndBlock.Invoke();
-        healthManager.isBlocked = false;
         isBlocking = false;
+        healthManager.IsBlocked = false;
+        OnEndBlock.Invoke();
     }
 
     private void StartBlock(UnityEngine.InputSystem.InputAction.CallbackContext context)
@@ -88,7 +83,7 @@ public class PlayerCombatController : MonoBehaviour
             return;
         }
         OnStartBlock.Invoke();
-        healthManager.isBlocked = true;
+        healthManager.IsBlocked = true;
         isCharging = false;
         currentChargeAmount = 0f;
         isBlocking = true;

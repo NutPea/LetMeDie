@@ -18,12 +18,13 @@ public class MagicSpell : WeaponData
     public override void Attack(Transform camera, float chargeAmount)
     {
         base.Attack(camera, chargeAmount);
+        /*
         if (playerResourceHandler.CurrentMana >= SpellManaCost) {
             Cast(camera);
             playerResourceHandler.UseMana(SpellManaCost);
             OnSpellCast.Invoke(this);
         }
-        
+        */
     }
 
     public virtual void Cast(Transform camera)

@@ -58,7 +58,6 @@ public class StatsUIStateComponent : UIStateComponent
         luckText.text = PlayerData.Luck.ToString();
 
         healthText.text = PlayerData.Health.ToString();
-        manaText.text = PlayerData.Mana.ToString();
 
         gold.text = PlayerData.GoldItem.GoldAmount.ToString();
 

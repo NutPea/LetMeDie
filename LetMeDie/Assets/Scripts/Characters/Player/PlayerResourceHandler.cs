@@ -5,13 +5,41 @@ public class PlayerResourceHandler : HealthManager
 {
 
     private PlayerData data;
-    public int CurrentMana;
+    public int CurrentStamina = 0;
 
-    public bool HasEnoughMana => CurrentMana > 0;
-    public bool ManaIsFull => CurrentMana == data.Mana;
-    public UnityEvent<float> OnManaChanged = new UnityEvent<float>();
-    private float ManaPercentage => (float)CurrentMana / (float) data.Mana;
+    public bool HasEnoughStamina => CurrentStamina > 0;
+    public bool StaminaIsFull => CurrentStamina == data.Stamina;
 
+    public bool StaminaIsEmpty => CurrentStamina <= 0;
+
+    public UnityEvent<int> OnStaminaChanged = new UnityEvent<int>();
+
+    private float currentRegenerationTime = 0;
+
+
+    private void Start()
+    {
+        currentRegenerationTime = data.StaminaRegeneration;
+        OnDamageBlocked.AddListener(UseStamina);
+        CurrentStamina = data.Stamina;
+    }
+
+    private void Update()
+    {
+
+        if (!StaminaIsFull)
+        {
+            if (currentRegenerationTime < 0)
+            {
+                RegStamina(1);
+                currentRegenerationTime = data.StaminaRegeneration;
+            }
+            else
+            {
+                currentRegenerationTime -= Time.deltaTime;
+            }
+        }
+    }
 
     public void SetData(PlayerData playerData)
     {
@@ -19,32 +47,37 @@ public class PlayerResourceHandler : HealthManager
         data = playerData;
         currentHealth = healthData.Health;
         OnHealthUpdate.Invoke();
-        RegMana(playerData.Mana);
     }
 
-    public void UseMana(int amount)
+    public void UseStamina(int amount)
     {
-        CurrentMana -= amount;
-        if(CurrentMana< 0)
+        CurrentStamina -= amount;
+        if(CurrentStamina <= 0)
         {
-           CurrentMana = 0;
+            CurrentStamina = 0;
+            CanBlock = false;
         }
-        OnManaChanged.Invoke(ManaPercentage);
+        OnStaminaChanged.Invoke(CurrentStamina);
     }
 
-    public void RegMana(int mana)
+    public void RegStamina(int amount)
     {
-        CurrentMana += mana;
-        if (CurrentMana > data.Mana)
+        CurrentStamina += amount;
+
+        if (CurrentStamina > data.Stamina)
         {
-            CurrentMana = data.Mana;
+            CurrentStamina = data.Stamina;
         }
-        OnManaChanged.Invoke(ManaPercentage);
+        if(CurrentStamina > 0)
+        {
+            CanBlock = true;
+        }
+        OnStaminaChanged.Invoke(CurrentStamina);
     }
 
     public void FullManaReg()
     {
-        CurrentMana = data.Mana;
+        CurrentStamina = data.Stamina;
     }
 
     public override void Recover()

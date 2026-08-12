@@ -6,6 +6,7 @@ using UnityEngine.SocialPlatforms;
 [CreateAssetMenu(fileName = "Data", menuName = "Weapons/Sword", order = 1)]
 public class SwordData : WeaponData
 {
+
     [SerializeField] private PlayerStaggerCombatEffect normalAttackStaggerEffect;
     private PlayerStaggerCombatEffect instatiatedNormalAttackStaggerEffect;
 
@@ -38,9 +39,12 @@ public class SwordData : WeaponData
     [SerializeField] private bool showAttackHitbox;
     public bool ShowAttackHitbox => showAttackHitbox;
 
+    private PlayerResourceHandler _resourceHandler;
+
     public override void Equip(PlayerWeaponController playerWeaponController)
     {
         base.Equip(playerWeaponController);
+        _resourceHandler = playerWeaponController.GetComponent<PlayerResourceHandler>();    
         instatiatedNormalAttackStaggerEffect = Instantiate(normalAttackStaggerEffect);
         instatiatedNormalAttackStaggerEffect.Init(playerWeaponController.transform);
         CombatEffects.Add(instatiatedNormalAttackStaggerEffect);
@@ -57,6 +61,19 @@ public class SwordData : WeaponData
         hitPositions.Clear();
         RaycastHit hit;
         hasHit = false;
+
+        if (playerWeaponController.PlayerCombatController.IsBlocking)
+        {
+            if (!_resourceHandler.StaminaIsEmpty)
+            {
+                _resourceHandler.UseStamina(1);
+            }
+            else
+            {
+                return;
+            }
+        }
+
         if (Physics.Raycast(camera.position, camera.forward, out hit, range, attackLayer)) {
             hasHit = true;
             bool isEnemyHit = false;

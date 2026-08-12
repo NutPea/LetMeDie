@@ -16,6 +16,8 @@ MonoBehaviour:
   characterName: Player
   baseHealth: 100
   team: 1
+  baseStamina: 3
+  baseStaminaReginaration: 5
   OnLevelUp:
     m_PersistentCalls:
       m_Calls: []
@@ -25,7 +27,6 @@ MonoBehaviour:
   OnItemAdded:
     m_PersistentCalls:
       m_Calls: []
-  baseMana: 10
   characterLevel: 1
   currentLevel: 1
   currentExperience: 0

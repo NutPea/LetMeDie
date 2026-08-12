@@ -24,9 +24,11 @@ public class HealthManager : MonoBehaviour
     [HideInInspector] public UnityEvent OnHealthUpdate = new UnityEvent();
 
     public bool IsFullHealth => currentHealth >= healthData.Health;
-    [HideInInspector] public bool isBlocked;
     public float CurrentPercentageHealth => (float) currentHealth / (float) healthData.Health;
 
+    [HideInInspector] public bool CanBlock = true;
+    [HideInInspector] public bool IsBlocked = false;
+    [HideInInspector] public UnityEvent<int> OnDamageBlocked = new();
 
     private void Awake()
     {
@@ -57,9 +59,13 @@ public class HealthManager : MonoBehaviour
     {
         int appliedDamage = damage;
         bool isDead = false;
-        if (isBlocked)
+        if (IsBlocked)
         {
-            appliedDamage = damage/2;
+            if (CanBlock)
+            {
+                OnDamageBlocked.Invoke(1);
+                return;
+            }
         }
 
         if(team != healthData.team)

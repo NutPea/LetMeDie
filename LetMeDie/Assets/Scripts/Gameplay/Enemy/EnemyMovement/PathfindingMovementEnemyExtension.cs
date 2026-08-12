@@ -41,11 +41,23 @@ public class PathfindingMovementEnemyExtension : BaseEnemyMovement
 
     public override void StartMovement()
     {
-        if (isDead){
+            if (isDead){
             return;
         }
         agent.enabled = true;
         agent.isStopped = false;
+    }
+
+    public override void Knockback(Vector3 knockBackVector, float knockBackLegth)
+    {
+        base.Knockback(knockBackVector, knockBackLegth);
+        StopMovement();
+    }
+
+    public override void ResetAfterKnockBack()
+    {
+        base.ResetAfterKnockBack();
+        StartMovement();
     }
 
     private void Update()

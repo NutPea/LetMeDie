@@ -16,7 +16,7 @@ MonoBehaviour:
   characterName: Base Enemy
   baseHealth: 10000
   team: 2
-  movementSpeed: 5
+  movementSpeed: 0
   accelerationSpeed: 1
   damage: 5
   attackStopDistance: 2.2

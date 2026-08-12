@@ -1,9 +1,9 @@
  using UnityEngine;
 using UnityEngine.VFX;
 
-public class PlayerVfXAttackController : MonoBehaviour
+public class PlayerAnimationAttackController : MonoBehaviour
 {
-    [SerializeField] private WeaponTrailHandler weaponTrailHandler;
+    [SerializeField] private PlayerWeaponController playerWeaponController;
     private WeaponData weaponData;
     private SwordData swordData;
 
@@ -32,12 +32,11 @@ public class PlayerVfXAttackController : MonoBehaviour
         }
     }
 
-    public void SetSwordWeapon(WeaponHandler weaponHandler,SwordData data)
+    public void Attack()
     {
-        weaponTrailHandler.Tip = weaponHandler.Tip;
-        weaponTrailHandler.Base = weaponHandler.Base;
-        weaponTrailHandler.SetColor(data.TrailColor);
+        playerWeaponController.AnimationAttack();
     }
+
 
     public void PlaySwordWoosh()
     {
