@@ -23,7 +23,7 @@ public class PathfindingMovementEnemyExtension : BaseEnemyMovement
         rb.constraints = RigidbodyConstraints.FreezeAll;
         
     }
-    protected override void OnAggro()
+    public override void OnAggro()
     {
         base.OnAggro();
         lookOnPlayer = true;

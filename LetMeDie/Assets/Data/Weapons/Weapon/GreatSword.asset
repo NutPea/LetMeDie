@@ -26,7 +26,8 @@ MonoBehaviour:
   normalAttackStaggerEffect: {fileID: 11400000, guid: 653107a239643a34b842cd2a7a642d35, type: 2}
   blockAttackStaggerEffect: {fileID: 11400000, guid: 7d11e64dd0848de42a1eef420853edb2, type: 2}
   range: 2
-  attackWidth: 2
+  attackWidth: 3
+  attackHeight: 0.4
   minStopTime: 0.05
   maxStopTime: 0.1
   minTimeScale: 0.2

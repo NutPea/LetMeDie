@@ -34,8 +34,9 @@ public class EnemyData : HealthData
 
     [SerializeField] private List<EnemyAttackData> initialEnemyAttackDatas = new();
     private List<EnemyAttackData> enemyAttackDatas = new();
+    public List<EnemyAttackData> EnemyAttackDatas => enemyAttackDatas;
 
-    
+
     public void Init(BaseEnemyController enemy)
     {
         enemyAttackDatas = new();

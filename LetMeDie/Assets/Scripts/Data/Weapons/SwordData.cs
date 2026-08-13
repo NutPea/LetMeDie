@@ -20,6 +20,8 @@ public class SwordData : WeaponData
     [SerializeField] private float attackWidth = 2f;
     public float AttackWidth => attackWidth;
 
+    [SerializeField] private float attackHeight = 0.4f;
+
     private Dictionary<Vector3, bool> hitPositions = new();
     private bool hasHit;
 
@@ -176,7 +178,7 @@ public class SwordData : WeaponData
 
     public Vector3 GetHalfBoxExtend(Transform camera)
     {
-        return new Vector3(attackWidth / 2, 0.1f, range/2);
+        return new Vector3(attackWidth / 2, attackHeight, range/2);
     }
 
     protected int CalculateDamage(float chargeAmount,int strength)

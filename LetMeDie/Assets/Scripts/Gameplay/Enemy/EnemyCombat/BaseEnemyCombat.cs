@@ -34,6 +34,7 @@ public class BaseEnemyCombat : MonoBehaviour
         enemyAnmationHelper.OnAntizipationAttack.AddListener(AttackAntizipation);
 
         player = SGameManager.Instance.PlayerBody.transform;
+        PickAttack(); 
     }
 
 
@@ -41,6 +42,9 @@ public class BaseEnemyCombat : MonoBehaviour
     {
         if (currentEnemyAttackData != null) {
             currentEnemyAttackData.AttackFinished(this);
+        }
+        if (enemyData.EnemyAttackDatas.Count <= 0) {
+            return;
         }
         currentEnemyAttackData = enemyData.GetAttack();
         currentEnemyAttackData.Select(this, player);

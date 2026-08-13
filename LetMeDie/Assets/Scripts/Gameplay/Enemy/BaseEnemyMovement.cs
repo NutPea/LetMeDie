@@ -41,7 +41,7 @@ public class BaseEnemyMovement : MonoBehaviour
         player = SGameManager.Instance.PlayerBody.transform;
     }
 
-    protected virtual void OnAggro()
+    public virtual void OnAggro()
     {
 
     } 

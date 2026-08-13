@@ -14,6 +14,7 @@ public class EnemyCloseCombatAttackData : EnemyAttackData
     [SerializeField] private float attackStopDistance = 2.2f;
 
     private Rigidbody rb;
+    private Collider collider;
     private bool hasAttacked;
     private bool lookAtPlayer;
 
@@ -21,6 +22,7 @@ public class EnemyCloseCombatAttackData : EnemyAttackData
     {
         base.Init(enemy, enemyData);
         rb = enemy.GetComponent<Rigidbody>();
+        collider = rb.GetComponent<Collider>();
     }
 
 
@@ -29,6 +31,7 @@ public class EnemyCloseCombatAttackData : EnemyAttackData
         base.Select(baseEnemyCombat, Player);
         hasAttacked = false;
         lookAtPlayer = false;
+        collider.isTrigger = true;
     }
 
     public override void AttackUpdate(BaseEnemyCombat baseEnemyCombat, Transform Player)
@@ -95,6 +98,7 @@ public class EnemyCloseCombatAttackData : EnemyAttackData
     {
         baseEnemyCombat.BaseEnemyMovement.StartMovement();
         lookAtPlayer = false;
+        collider.isTrigger = false; 
     }
 
 
