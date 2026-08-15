@@ -178,6 +178,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Spell_3",
+                    "type": "Button",
+                    "id": "0270c5d8-ef25-428b-89bf-1014bbfaf9cb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "577c64e7-4f60-4740-bf14-5aab508394ad",
@@ -433,7 +442,7 @@
                 {
                     "name": "",
                     "id": "43bccb73-beea-4223-b713-854f8475f2c5",
-                    "path": "<Keyboard>/r",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -449,6 +458,45 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0612c27a-65d8-4b6d-8399-9aecf4ecd959",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spell_3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Cheats",
+            "id": "8e4ac5c7-ef2f-4fa3-bfbb-65e6eaecd224",
+            "actions": [
+                {
+                    "name": "LevelUp",
+                    "type": "Button",
+                    "id": "a3f2d694-6ce4-4f21-ab99-2285b77716ea",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3dbcabea-327c-4e29-93dc-e9f241777a6f",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LevelUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

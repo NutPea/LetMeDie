@@ -12,18 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faead80f7107ef9428bd6ddaf76e1426, type: 3}
   m_Name: BattleLootTable
   m_EditorClassIdentifier: 
-  commonLoots:
-  - {fileID: 11400000, guid: aa63f1ca25e27e64cb389edc048e842c, type: 2}
-  - {fileID: 11400000, guid: e0f9928e434189e41a6443c336b21c9a, type: 2}
-  - {fileID: 11400000, guid: 078a997ec603d234e9506514e77b04e6, type: 2}
-  - {fileID: 11400000, guid: 3aaa9eccb80b0324cb77b5efa20b3351, type: 2}
-  uncommonLoots:
-  - {fileID: 11400000, guid: da1a5d97a179b7c46879ca8d38dfafc5, type: 2}
-  - {fileID: 11400000, guid: bfee7fc2c6ec58e44af94f662e447660, type: 2}
-  - {fileID: 11400000, guid: 0f475fb8c8249fa4fb1fdd1a5121e210, type: 2}
-  rareLoots:
-  - {fileID: 11400000, guid: 3860163f3e6e4f446a5431b4975fa757, type: 2}
-  - {fileID: 11400000, guid: f2ab2756a0e3b2e4eae40c19e4863c58, type: 2}
-  - {fileID: 11400000, guid: 2407729a22434a541a5499e854e5ad2a, type: 2}
-  epicLoots: []
-  legendaryLoots: []
+  battleLoots:
+  - {fileID: 11400000, guid: 1623b726282a5ae4c8aabbdf2681ffa6, type: 2}
+  - {fileID: 11400000, guid: 6d8ccd89c8f30ee4ea5f60764f56472b, type: 2}
+  - {fileID: 11400000, guid: a27e11af401672b438bac3202899429b, type: 2}
+  availableLoots: []

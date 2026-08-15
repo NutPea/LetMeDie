@@ -28,6 +28,7 @@ public class BattleLootButton : MonoBehaviour
 
     public void SetBattleLoot(BattleLoot battleLoot)
     {
+        
         switch (battleLoot.lootRarity)
         {
             case BattleLoot.LootRarity.Common: rarityColor.color = commonColor; break;
@@ -36,12 +37,12 @@ public class BattleLootButton : MonoBehaviour
             case BattleLoot.LootRarity.Epic: rarityColor.color = rareColor; break;
             case BattleLoot.LootRarity.Legendary: rarityColor.color = legendaryColor; break;
         }
-
+        
         head.text = battleLoot.Name;
         iconImage.sprite = battleLoot.Icon;
         description.text = battleLoot.Description;
         currentBattleLoot = battleLoot;
-
-
     }
+
+
 }

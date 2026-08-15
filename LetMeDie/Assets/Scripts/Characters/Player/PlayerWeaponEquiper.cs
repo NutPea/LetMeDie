@@ -64,4 +64,11 @@ public class PlayerWeaponEquiper : MonoBehaviour
         playerWeaponController.EquipMagicSpell(magicSpell);
     }
 
+    public void EquipSpell3(MagicSpell magicSpell)
+    {
+        playerStatHandler.PlayerData.CurrentMagicSpell_2 = magicSpell;
+        OnEquipSpell_2.Invoke(magicSpell);
+        playerWeaponController.EquipMagicSpell(magicSpell);
+    }
+
 }

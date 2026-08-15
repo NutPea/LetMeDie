@@ -23,9 +23,6 @@ public class PlayerData : HealthData
     public UnityEvent<ItemData> OnItemAdded = new();
 
 
-    [SerializeField] private int characterLevel = 1;
-    public int CharacterLevel {  get { return characterLevel; } set { characterLevel = value; } }
-
     [SerializeField] private int currentLevel = 1;
 
     public int CurrentLevel { get { return currentLevel; } set { currentLevel = value; } }
@@ -52,11 +49,11 @@ public class PlayerData : HealthData
     public void AddExperience(int experience)
     {
         currentExperience += experience;
-        int levelUpAmount = currentLevel >= LevelUpTable.Length-1 ? LevelUpTable[LevelUpTable.Length-1] : LevelUpTable[characterLevel];
+        int levelUpAmount = currentLevel >= LevelUpTable.Length-1 ? LevelUpTable[LevelUpTable.Length-1] : LevelUpTable[currentLevel];
         if (currentExperience >= nextLevelUpExperience)
         {
             currentLevel++;
-            nextLevelUpExperience = currentLevel >= LevelUpTable.Length - 1 ? LevelUpTable[LevelUpTable.Length - 1] : LevelUpTable[characterLevel];
+            nextLevelUpExperience = currentLevel >= LevelUpTable.Length - 1 ? LevelUpTable[LevelUpTable.Length - 1] : LevelUpTable[currentLevel];
             int experienceDifference = currentExperience - nextLevelUpExperience;
             if (experienceDifference <= 0) {
                 currentExperience = 0;
@@ -122,6 +119,13 @@ public class PlayerData : HealthData
     {
         get => currentMagicSpell_2;
         set => currentMagicSpell_2 = value;
+    }
+
+    [SerializeField] private MagicSpell currentMagicSpell_3;
+    public MagicSpell CurrentMagicSpell_3
+    {
+        get => currentMagicSpell_3;
+        set => currentMagicSpell_3 = value;
     }
 
     [SerializeField] private List<WeaponData> weaponInventory = new();
@@ -202,9 +206,9 @@ public class PlayerData : HealthData
         _goldItem = Instantiate(_goldItem);
     }
 
-    public void LevelUp()
+    public void ForceLevelUp()
     {
-        characterLevel = currentLevel;
+        AddExperience(nextLevelUpExperience);
     }
 
     public void ReadPlayerDataStats(PlayerData playerData)

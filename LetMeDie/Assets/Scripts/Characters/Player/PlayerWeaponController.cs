@@ -30,7 +30,18 @@ public class PlayerWeaponController : MonoBehaviour
     {
         SInputManager.Instance.inputActions.Keyboard.Spell_1.performed += SpellCast_1;
         SInputManager.Instance.inputActions.Keyboard.Spell_2.performed += SpellCast_2;
+        SInputManager.Instance.inputActions.Keyboard.Spell_3.performed += SpellCast_3;
         playerCombatController.OnEndCharge.AddListener(Attack);
+    }
+
+
+    private void SpellCast_3(InputAction.CallbackContext context)
+    {
+        MagicSpell spell = playerStatHandler.PlayerData.CurrentMagicSpell_3;
+        if (spell != null)
+        {
+            spell.Attack(cameraTransform, 1);
+        }
     }
 
     private void SpellCast_2(InputAction.CallbackContext context)

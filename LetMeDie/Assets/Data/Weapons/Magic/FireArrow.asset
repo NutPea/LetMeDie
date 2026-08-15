@@ -21,9 +21,14 @@ MonoBehaviour:
   maxDamageAmount: 0
   canBlock: 0
   fullChargeTime: 0.5
+  attackCooldown: 0.5
+  combatEffect: []
   spellManaCost: 4
   OnSpellCast:
     m_PersistentCalls:
       m_Calls: []
-  damage: 5
+  spellInfluences:
+  - {fileID: 11400000, guid: db2ec32a240d80b43828291fb213b247, type: 2}
+  baseDamage: 5
+  ExtraDamage: 0
   projectile: {fileID: 9008709210943110470, guid: 14ebfa3753935b14a9e3ffb3b7ae1917, type: 3}

@@ -1,27 +1,31 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 [CreateAssetMenu(fileName = "BattleLootTable", menuName = "BattleLoot/BattleLootTable", order = 1)]
 public class BattleLootTable : ScriptableObject
 {
+    [SerializeField] private List<BattleLoot> battleLoots = new();
 
-    public List<BattleLoot> commonLoots = new();
-    public List<BattleLoot> uncommonLoots = new();
-    public List<BattleLoot> rareLoots = new();
-    public List<BattleLoot> epicLoots = new();
-    public List<BattleLoot> legendaryLoots = new();
+    public List<BattleLoot> AvailableLoots = new();
 
-
-    public BattleLoot GetRandomLoot(BattleLoot.LootRarity lootRarity)
+    public void Init()
     {
-        switch (lootRarity)
-        {
-            case BattleLoot.LootRarity.Common: return commonLoots[Random.Range(0, commonLoots.Count - 1)];
-            case BattleLoot.LootRarity.Uncommen: return uncommonLoots[Random.Range(0, uncommonLoots.Count - 1)];
-            case BattleLoot.LootRarity.Rare: return rareLoots[Random.Range(0, rareLoots.Count - 1)];
-            case BattleLoot.LootRarity.Epic: return epicLoots[Random.Range(0, epicLoots.Count - 1)];
-            case BattleLoot.LootRarity.Legendary: return legendaryLoots[Random.Range(0, legendaryLoots.Count - 1)];
+        AvailableLoots.Clear();
+        foreach (BattleLoot battleLoot in battleLoots) {
+            BattleLoot copiedLoot = Instantiate(battleLoot);
+            AvailableLoots.Add(copiedLoot);
         }
-        return commonLoots[Random.Range(0, commonLoots.Count - 1)];
     }
 
+    public BattleLoot ChooseBattleLoot(BattleLoot battleLoot)
+    {
+        AvailableLoots.Remove(battleLoot);
+        return battleLoot;
+    }
+
+    internal BattleLoot GetBattleLoot()
+    {
+        return AvailableLoots[Random.Range(0,AvailableLoots.Count-1)];
+    }
 }

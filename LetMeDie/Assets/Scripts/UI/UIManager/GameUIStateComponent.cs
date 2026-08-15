@@ -30,6 +30,8 @@ public class GameUIStateComponent : UIStateComponent
 
     [SerializeField] private ItemUIHandler spellHandler_2;
 
+    [SerializeField] private ItemUIHandler spellHandler_3;
+
     [SerializeField] private TextMeshProUGUI itemAccuiredText;
     [SerializeField] private float accuiredTextShowTime = 1.5f; 
 
@@ -181,6 +183,7 @@ public class GameUIStateComponent : UIStateComponent
 
         spellHandler_1.Init(PlayerData.CurrentMagicSpell_1);
         spellHandler_2.Init(PlayerData.CurrentMagicSpell_2);
+        spellHandler_3.Init(PlayerData.CurrentMagicSpell_3);
 
         UpdateStamina(0);
     }

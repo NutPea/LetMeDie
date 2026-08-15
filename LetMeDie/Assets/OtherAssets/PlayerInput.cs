@@ -264,6 +264,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Spell_3"",
+                    ""type"": ""Button"",
+                    ""id"": ""0270c5d8-ef25-428b-89bf-1014bbfaf9cb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""577c64e7-4f60-4740-bf14-5aab508394ad"",
@@ -519,7 +528,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""43bccb73-beea-4223-b713-854f8475f2c5"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -535,6 +544,45 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0612c27a-65d8-4b6d-8399-9aecf4ecd959"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Spell_3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Cheats"",
+            ""id"": ""8e4ac5c7-ef2f-4fa3-bfbb-65e6eaecd224"",
+            ""actions"": [
+                {
+                    ""name"": ""LevelUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""a3f2d694-6ce4-4f21-ab99-2285b77716ea"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3dbcabea-327c-4e29-93dc-e9f241777a6f"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LevelUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -564,12 +612,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Keyboard_Stats = m_Keyboard.FindAction("Stats", throwIfNotFound: true);
         m_Keyboard_Spell_1 = m_Keyboard.FindAction("Spell_1", throwIfNotFound: true);
         m_Keyboard_Spell_2 = m_Keyboard.FindAction("Spell_2", throwIfNotFound: true);
+        m_Keyboard_Spell_3 = m_Keyboard.FindAction("Spell_3", throwIfNotFound: true);
         m_Keyboard_Dash = m_Keyboard.FindAction("Dash", throwIfNotFound: true);
+        // Cheats
+        m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
+        m_Cheats_LevelUp = m_Cheats.FindAction("LevelUp", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
     {
         UnityEngine.Debug.Assert(!m_Keyboard.enabled, "This will cause a leak and performance issues, PlayerInput.Keyboard.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Cheats.enabled, "This will cause a leak and performance issues, PlayerInput.Cheats.Disable() has not been called.");
     }
 
     /// <summary>
@@ -664,6 +717,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Keyboard_Stats;
     private readonly InputAction m_Keyboard_Spell_1;
     private readonly InputAction m_Keyboard_Spell_2;
+    private readonly InputAction m_Keyboard_Spell_3;
     private readonly InputAction m_Keyboard_Dash;
     /// <summary>
     /// Provides access to input actions defined in input action map "Keyboard".
@@ -753,6 +807,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Spell_2 => m_Wrapper.m_Keyboard_Spell_2;
         /// <summary>
+        /// Provides access to the underlying input action "Keyboard/Spell_3".
+        /// </summary>
+        public InputAction @Spell_3 => m_Wrapper.m_Keyboard_Spell_3;
+        /// <summary>
         /// Provides access to the underlying input action "Keyboard/Dash".
         /// </summary>
         public InputAction @Dash => m_Wrapper.m_Keyboard_Dash;
@@ -839,6 +897,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Spell_2.started += instance.OnSpell_2;
             @Spell_2.performed += instance.OnSpell_2;
             @Spell_2.canceled += instance.OnSpell_2;
+            @Spell_3.started += instance.OnSpell_3;
+            @Spell_3.performed += instance.OnSpell_3;
+            @Spell_3.canceled += instance.OnSpell_3;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -910,6 +971,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Spell_2.started -= instance.OnSpell_2;
             @Spell_2.performed -= instance.OnSpell_2;
             @Spell_2.canceled -= instance.OnSpell_2;
+            @Spell_3.started -= instance.OnSpell_3;
+            @Spell_3.performed -= instance.OnSpell_3;
+            @Spell_3.canceled -= instance.OnSpell_3;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -946,6 +1010,102 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="KeyboardActions" /> instance referencing this action map.
     /// </summary>
     public KeyboardActions @Keyboard => new KeyboardActions(this);
+
+    // Cheats
+    private readonly InputActionMap m_Cheats;
+    private List<ICheatsActions> m_CheatsActionsCallbackInterfaces = new List<ICheatsActions>();
+    private readonly InputAction m_Cheats_LevelUp;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Cheats".
+    /// </summary>
+    public struct CheatsActions
+    {
+        private @PlayerInput m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public CheatsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Cheats/LevelUp".
+        /// </summary>
+        public InputAction @LevelUp => m_Wrapper.m_Cheats_LevelUp;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Cheats; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="CheatsActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(CheatsActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="CheatsActions" />
+        public void AddCallbacks(ICheatsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CheatsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CheatsActionsCallbackInterfaces.Add(instance);
+            @LevelUp.started += instance.OnLevelUp;
+            @LevelUp.performed += instance.OnLevelUp;
+            @LevelUp.canceled += instance.OnLevelUp;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="CheatsActions" />
+        private void UnregisterCallbacks(ICheatsActions instance)
+        {
+            @LevelUp.started -= instance.OnLevelUp;
+            @LevelUp.performed -= instance.OnLevelUp;
+            @LevelUp.canceled -= instance.OnLevelUp;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="CheatsActions.UnregisterCallbacks(ICheatsActions)" />.
+        /// </summary>
+        /// <seealso cref="CheatsActions.UnregisterCallbacks(ICheatsActions)" />
+        public void RemoveCallbacks(ICheatsActions instance)
+        {
+            if (m_Wrapper.m_CheatsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="CheatsActions.AddCallbacks(ICheatsActions)" />
+        /// <seealso cref="CheatsActions.RemoveCallbacks(ICheatsActions)" />
+        /// <seealso cref="CheatsActions.UnregisterCallbacks(ICheatsActions)" />
+        public void SetCallbacks(ICheatsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CheatsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CheatsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="CheatsActions" /> instance referencing this action map.
+    /// </summary>
+    public CheatsActions @Cheats => new CheatsActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Keyboard" which allows adding and removing callbacks.
     /// </summary>
@@ -1087,11 +1247,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSpell_2(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "Spell_3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpell_3(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDash(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Cheats" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="CheatsActions.AddCallbacks(ICheatsActions)" />
+    /// <seealso cref="CheatsActions.RemoveCallbacks(ICheatsActions)" />
+    public interface ICheatsActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "LevelUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLevelUp(InputAction.CallbackContext context);
     }
 }

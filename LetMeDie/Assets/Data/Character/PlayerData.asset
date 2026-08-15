@@ -27,7 +27,6 @@ MonoBehaviour:
   OnItemAdded:
     m_PersistentCalls:
       m_Calls: []
-  characterLevel: 1
   currentLevel: 1
   currentExperience: 0
   ExperiencePercent: 0
@@ -41,14 +40,10 @@ MonoBehaviour:
   currentEquipedWeapon: {fileID: 11400000, guid: 7fde9af1c120a1b43a4992da366b8def, type: 2}
   currentMagicSpell_1: {fileID: 0}
   currentMagicSpell_2: {fileID: 0}
+  currentMagicSpell_3: {fileID: 0}
   weaponInventory: []
-  consumableInventory:
-  - {fileID: 11400000, guid: 4e4581bac950b4f479c2fae0762b86d3, type: 2}
-  - {fileID: 11400000, guid: dfb76ea165e1d544b9bf710542157666, type: 2}
-  - {fileID: 11400000, guid: b7716854a7af1c8488737f42d6d47f60, type: 2}
-  magicSpellInventory:
-  - {fileID: 11400000, guid: 1ddf2413c66ed3d42ab867e425afa688, type: 2}
-  - {fileID: 11400000, guid: 898cae1aacee0444cad12ae6cae19557, type: 2}
+  consumableInventory: []
+  magicSpellInventory: []
   consumable_1: {fileID: 0}
   consumable_2: {fileID: 0}
   consumable_3: {fileID: 0}

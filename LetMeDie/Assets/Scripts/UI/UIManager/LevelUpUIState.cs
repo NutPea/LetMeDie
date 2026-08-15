@@ -178,7 +178,7 @@ public class LevelUpUIState : UIStateComponent
         {
             return;
         }
-        currentPlayerData.LevelUp();
+       // currentPlayerData.LevelUp();
         if (changeToGameAfterApply)
         {
             SUIManager.Instance.ChangeToUIState(SUIManager.CHECKPOINT_UI_STATENAME);
@@ -208,7 +208,7 @@ public class LevelUpUIState : UIStateComponent
 
         beforePlayerData = Instantiate(statHandler.PlayerData);
         currentPlayerData = statHandler.PlayerData;
-        availableSkillPoints = statHandler.PlayerData.CurrentLevel - statHandler.PlayerData.CharacterLevel;
+        availableSkillPoints = statHandler.PlayerData.CurrentLevel;
         currentSkillPoints = availableSkillPoints;
 
         levelText.text = "Level " + statHandler.PlayerData.CurrentLevel;
