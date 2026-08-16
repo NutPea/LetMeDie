@@ -18,6 +18,10 @@ public class SGameManager : MonoBehaviour
     [SerializeField] private GameObject sphere;
     public GameObject Sphere => sphere;
 
+    [SerializeField] private bool shouldShowDamageDumber;
+    public bool ShouldShowDamageDumber => shouldShowDamageDumber;
+    [SerializeField] private GameObject dmgNumber;
+
 
     private void Awake()
     {
@@ -44,6 +48,21 @@ public class SGameManager : MonoBehaviour
         Cursor.lockState = cursorLockMode;
     }
 
+    public void ShowDamageNumber(Transform healthManagerTransform , int damage)
+    {
+        GameObject damageNumber = Instantiate(dmgNumber);
+        Vector3 damageNumberPosition = healthManagerTransform.position;
+        damageNumberPosition.y = PlayerBody.transform.position.y;
 
+        Vector3 lookAtDir = damageNumber.transform.position- PlayerBody.transform.position ;
+        lookAtDir = lookAtDir.normalized;
+
+        damageNumber.transform.position = damageNumberPosition + Vector3.up * Random.Range(0.0f,1.0f) + lookAtDir * Random.Range(0.5f, 1.0f);
+        if(damageNumber.TryGetComponent<DmgCount>(out DmgCount dmgCount))
+        {
+            dmgCount.ShowDamage(PlayerBody.transform,damage);
+        }
+
+    }
 
 }

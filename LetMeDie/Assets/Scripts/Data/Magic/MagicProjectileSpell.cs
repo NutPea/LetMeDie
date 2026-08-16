@@ -7,7 +7,9 @@ public class MagicProjectileSpell : MagicSpell
     public int BaseDamage => baseDamage;
 
     [HideInInspector]public int ExtraDamage = 0;
-    public int Damage => baseDamage + ExtraDamage;
+
+    private int CombineDamage => baseDamage + ExtraDamage;
+    public int Damage => CombineDamage + Mathf.CeilToInt((float)CombineDamage * playerData.SpellBaseDamagePercentage);
 
 
     [SerializeField] private GameObject projectile;
@@ -17,7 +19,6 @@ public class MagicProjectileSpell : MagicSpell
         base.Cast(camera);
 
         GameObject projectileSpell = Instantiate(projectile, camera.transform.position + camera.transform.forward, Quaternion.identity);
-        Debug.Log("Cast");
         ProjectileHandler projectileHandler = projectileSpell.GetComponent<ProjectileHandler>();
         projectileHandler.Init(Damage, 1, camera.transform.forward, TeamFlag.Player);
     }

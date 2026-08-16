@@ -572,6 +572,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GetItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""07c1a3da-3ffd-4844-b5de-33ec494cd2f4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -583,6 +592,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LevelUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a63f733-ed3b-430e-8220-825c1455a018"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GetItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -617,6 +637,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Cheats
         m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
         m_Cheats_LevelUp = m_Cheats.FindAction("LevelUp", throwIfNotFound: true);
+        m_Cheats_GetItem = m_Cheats.FindAction("GetItem", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -1015,6 +1036,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Cheats;
     private List<ICheatsActions> m_CheatsActionsCallbackInterfaces = new List<ICheatsActions>();
     private readonly InputAction m_Cheats_LevelUp;
+    private readonly InputAction m_Cheats_GetItem;
     /// <summary>
     /// Provides access to input actions defined in input action map "Cheats".
     /// </summary>
@@ -1030,6 +1052,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Cheats/LevelUp".
         /// </summary>
         public InputAction @LevelUp => m_Wrapper.m_Cheats_LevelUp;
+        /// <summary>
+        /// Provides access to the underlying input action "Cheats/GetItem".
+        /// </summary>
+        public InputAction @GetItem => m_Wrapper.m_Cheats_GetItem;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1059,6 +1085,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @LevelUp.started += instance.OnLevelUp;
             @LevelUp.performed += instance.OnLevelUp;
             @LevelUp.canceled += instance.OnLevelUp;
+            @GetItem.started += instance.OnGetItem;
+            @GetItem.performed += instance.OnGetItem;
+            @GetItem.canceled += instance.OnGetItem;
         }
 
         /// <summary>
@@ -1073,6 +1102,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @LevelUp.started -= instance.OnLevelUp;
             @LevelUp.performed -= instance.OnLevelUp;
             @LevelUp.canceled -= instance.OnLevelUp;
+            @GetItem.started -= instance.OnGetItem;
+            @GetItem.performed -= instance.OnGetItem;
+            @GetItem.canceled -= instance.OnGetItem;
         }
 
         /// <summary>
@@ -1275,5 +1307,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLevelUp(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "GetItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGetItem(InputAction.CallbackContext context);
     }
 }

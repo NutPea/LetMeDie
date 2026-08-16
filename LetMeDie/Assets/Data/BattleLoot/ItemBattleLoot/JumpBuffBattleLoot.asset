@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85d8212042f19c44a58a9c37f20d14e, type: 3}
-  m_Name: BaseDamage
+  m_Script: {fileID: 11500000, guid: dd885d95b1972cb4bbb47a7899c81544, type: 3}
+  m_Name: JumpBuffBattleLoot
   m_EditorClassIdentifier: 
-  description: Damage
-  commonUpgradePercentage: 0.2
-  uncommonUpgradePercentage: 0.3
-  rareUpgradePercentage: 0.5
-  epicUpgradePercentage: 1
-  legendaryUpgradePercentage: 2
+  name: Jump Shoes
+  description: 'Adds Jump Height :'
+  icon: {fileID: 0}
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  lootRarity: 0
+  jumpPercentage: 0.15

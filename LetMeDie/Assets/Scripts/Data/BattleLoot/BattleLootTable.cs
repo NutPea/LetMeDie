@@ -24,8 +24,4 @@ public class BattleLootTable : ScriptableObject
         return battleLoot;
     }
 
-    internal BattleLoot GetBattleLoot()
-    {
-        return AvailableLoots[Random.Range(0,AvailableLoots.Count-1)];
-    }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faead80f7107ef9428bd6ddaf76e1426, type: 3}
+  m_Name: ItemBattleLoot
+  m_EditorClassIdentifier: 
+  battleLoots:
+  - {fileID: 11400000, guid: 0e2d269b2683e6c48b94c07a4528f124, type: 2}
+  - {fileID: 11400000, guid: 086f25a75d8e70a44a1edf1c7fee045f, type: 2}
+  - {fileID: 11400000, guid: 8baa5360ae4fa7d489a541d37455084f, type: 2}
+  - {fileID: 11400000, guid: d3da3bcfcd9345e4e97669c8d211b1e3, type: 2}
+  AvailableLoots: []

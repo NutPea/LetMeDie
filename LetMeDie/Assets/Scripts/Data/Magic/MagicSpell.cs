@@ -9,15 +9,20 @@ public class MagicSpell : WeaponData
     public int SpellManaCost => spellManaCost;
     protected PlayerResourceHandler playerResourceHandler;
     public UnityEvent<MagicSpell> OnSpellCast = new();
-    public List<InfluenceData> SpellInfluences = new();
+    [SerializeField] private List<InfluenceData> spellInfluences = new();
+    public List<InfluenceData> SpellInfluences => copiedSpellInfluences;
+    private List<InfluenceData> copiedSpellInfluences = new();
 
     public override void Equip(PlayerWeaponController playerWeaponController)
     {
         base.Equip(playerWeaponController);
         playerResourceHandler = playerWeaponController.GetComponent<PlayerResourceHandler>();
-        foreach(InfluenceData influenceData in SpellInfluences)
+        copiedSpellInfluences.Clear();
+        foreach (InfluenceData influenceData in spellInfluences)
         {
-            influenceData.Init(playerWeaponController, this);
+            InfluenceData data = Instantiate(influenceData);
+            data.Init(playerWeaponController, this);
+            copiedSpellInfluences.Add(data);
         }
     }
 

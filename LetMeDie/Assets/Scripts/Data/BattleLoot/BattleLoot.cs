@@ -6,7 +6,7 @@ public class BattleLoot : ScriptableObject
     [SerializeField] private string name;
     public virtual string Name => name;
 
-    [SerializeField] private string description;
+    [SerializeField] protected string description;
     public virtual string Description => description;
 
     [SerializeField] private Sprite icon;
@@ -25,4 +25,5 @@ public class BattleLoot : ScriptableObject
     }
 
     public LootRarity lootRarity;
+
 }

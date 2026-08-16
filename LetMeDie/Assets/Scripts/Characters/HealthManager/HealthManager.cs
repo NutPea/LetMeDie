@@ -72,6 +72,14 @@ public class HealthManager : MonoBehaviour
         {
             if (currentHealth <= 0) return;
             currentHealth -= appliedDamage;
+            if (SGameManager.Instance.ShouldShowDamageDumber)
+            {
+                if(healthData.team != TeamFlag.Player)
+                {
+                    SGameManager.Instance.ShowDamageNumber(transform, damage);
+                }
+            }
+
             if(currentHealth <= 0)
             {
                 currentHealth = 0;

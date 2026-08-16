@@ -13,7 +13,7 @@ public class SpellInflluenceBattleLoot : BattleLoot
             string influenceDescription = "";
             foreach(InfluenceData influenceData in spellInfluences)
             {
-                influenceDescription += influenceData.Description;
+                influenceDescription += influenceData.UpgradeText();
             }       
             return influenceDescription;
         }
@@ -21,33 +21,43 @@ public class SpellInflluenceBattleLoot : BattleLoot
     public override Sprite Icon => spell.Sprite;
     public override Color Tint => spell.Tint;
 
-    private List<InfluenceData> spellInfluences;
+    private List<InfluenceData> spellInfluences = new();
+  
 
 
     public void SetSpell(MagicSpell magicSpell,LootRarity lootRarity)
     {
         this.lootRarity = lootRarity;
-
+        spell = magicSpell;
         float commonPercentage = 0.0f;
         float uncommonPercentage = 0.0f;
         float rarePercentage = 0.0f;
         float epicPercentage = 0.0f;
         float legendaryPercentage = 0.0f;
-        (commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage) = BattleLootUIState.GetDropPercentage(lootRarity);
+        (commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage) = LevelUpUIState.GetDropPercentage(lootRarity);
 
         int amountOfUpgrades = AmountOfUpgrades(lootRarity);
         if (amountOfUpgrades > magicSpell.SpellInfluences.Count) {
-            spellInfluences = magicSpell.SpellInfluences;
+            magicSpell.SpellInfluences.ForEach((data) => spellInfluences.Add(data));
         }
         else
         {
-            List<InfluenceData> availableDatas = magicSpell.SpellInfluences;
+            List<InfluenceData> availableDatas = new(); 
+            magicSpell.SpellInfluences.ForEach((data) => availableDatas.Add(data));
             for (int i = 0; i < amountOfUpgrades; i++) {
                 InfluenceData data = availableDatas[UnityEngine.Random.Range(0, availableDatas.Count)];
                 spellInfluences.Add(data);
-                data.CalculateSpellUpgrade(magicSpell, BattleLootUIState.GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
+                data.CalculateSpellUpgrade(magicSpell, LevelUpUIState.GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
                 availableDatas.Remove(data);
             }
+        }
+    }
+
+    public void UpgradeSpell()
+    {
+        foreach(InfluenceData data in spellInfluences)
+        {
+            data.UpgradeSpell(spell);
         }
     }
 

@@ -50,6 +50,7 @@ public class StatsUIStateComponent : UIStateComponent
 
     private void UpdateStats()
     {
+        /*
         strengthText.text = PlayerData.Strength.ToString();
         dexterityText.text = PlayerData.Dexterity.ToString();
         inteligenceText.text = PlayerData.Intelligence.ToString();
@@ -65,7 +66,7 @@ public class StatsUIStateComponent : UIStateComponent
         float ExperiencePercent = PlayerData.ExperiencePercent * 100;
         experience.text = ExperiencePercent.ToString("F0") + " %";
 
-
+        */
     }
 
 

@@ -106,9 +106,11 @@ public class PlayerMovementController : MonoBehaviour
 
     private void RecalculateMovementStats(PlayerData playerStats)
     {
+        /*
         calculatedMovementSpeed = PlayerData.CalculateMovementSpeed(baseMovementSpeed, playerStats.Speed);
         calculatedJumpForce = PlayerData.CalculateJumpForce(baseJumpForce, playerStats.Dexterity);
         calculatedAirMovementSpeed = PlayerData.CalculateAirMovementSpeed(baseAirMovementSpeed, playerStats.Dexterity);
+        */
     }
 
     private void Start()

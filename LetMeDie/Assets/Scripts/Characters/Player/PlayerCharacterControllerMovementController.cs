@@ -9,6 +9,7 @@ public class PlayerCharacterControllerMovementController : MonoBehaviour
     private PlayerInput inputActions;
     private Transform mainCameraTransform;
     private CharacterController characterController;
+    private PlayerStatHandler playerStatHandler;
 
     private Vector2 playerInputVector;
 
@@ -135,6 +136,16 @@ public class PlayerCharacterControllerMovementController : MonoBehaviour
         inputActions.Keyboard.Dash.performed += Dash;
 
         wasGrounded = characterController.isGrounded;
+
+        playerStatHandler = GetComponent<PlayerStatHandler>();
+        playerStatHandler.PlayerData.OnStatUpdate.AddListener(UpdateStats);
+        UpdateStats();
+    }
+
+    private void UpdateStats()
+    {
+        movementSpeed = playerStatHandler.PlayerData.MovementSpeed;
+        jumpForce = playerStatHandler.PlayerData.JumpForce;
     }
 
     private void Dash(InputAction.CallbackContext context)

@@ -10,6 +10,7 @@ public class PlayerWeaponEquiper : MonoBehaviour
     [HideInInspector] public UnityEvent<WeaponData> OnEquipWeapon = new();
     [HideInInspector] public UnityEvent<WeaponData> OnEquipSpell_1 = new();
     [HideInInspector] public UnityEvent<WeaponData> OnEquipSpell_2 = new();
+    [HideInInspector] public UnityEvent<WeaponData> OnEquipSpell_3 = new();
 
     [Header("Test")]
     [SerializeField] private bool useTestWeapon;
@@ -66,8 +67,8 @@ public class PlayerWeaponEquiper : MonoBehaviour
 
     public void EquipSpell3(MagicSpell magicSpell)
     {
-        playerStatHandler.PlayerData.CurrentMagicSpell_2 = magicSpell;
-        OnEquipSpell_2.Invoke(magicSpell);
+        playerStatHandler.PlayerData.CurrentMagicSpell_3 = magicSpell;
+        OnEquipSpell_3.Invoke(magicSpell);
         playerWeaponController.EquipMagicSpell(magicSpell);
     }
 

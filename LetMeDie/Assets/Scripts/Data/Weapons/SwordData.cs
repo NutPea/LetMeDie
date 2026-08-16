@@ -64,6 +64,9 @@ public class SwordData : WeaponData
         RaycastHit hit;
         hasHit = false;
 
+        int calculatedDamage = PlayerData.CalculateChargeDamage(minDamageAmount, maxDamageAmount, chargeAmount);
+        calculatedDamage += Mathf.CeilToInt((float)calculatedDamage * playerData.WeaponBaseDamagePercentage);
+
         if (playerWeaponController.PlayerCombatController.IsBlocking)
         {
             if (!_resourceHandler.StaminaIsEmpty)
@@ -88,7 +91,7 @@ public class SwordData : WeaponData
                 }
                 else
                 {
-                    healthManager.InflictDamage(CalculateDamage(chargeAmount,playerData.Strength),CombatEffects, TeamFlag.Player, camera);
+                    healthManager.InflictDamage(calculatedDamage, CombatEffects, TeamFlag.Player, camera);
                 }
 
                 isEnemyHit = true;
@@ -118,13 +121,16 @@ public class SwordData : WeaponData
             }
             bool isEnemyHit = false;
             Vector3 hitPosition = otherhit.point - camera.forward * 0.2f;
+
+           
             if (otherhit.transform.TryGetComponent<HealthManager>(out HealthManager healthManager))
             {
                 if (playerWeaponController.PlayerCombatController.IsBlocking){
                     healthManager.InflictDamage(0, new() { instatiatedBlockAttackStaggerEffect }, TeamFlag.Player, camera);
                 }
                 else{
-                    healthManager.InflictDamage(CalculateDamage(chargeAmount, playerData.Strength), CombatEffects, TeamFlag.Player, camera);
+                    
+                    healthManager.InflictDamage(calculatedDamage, CombatEffects, TeamFlag.Player, camera);
                 }
                 isEnemyHit = true;
             }

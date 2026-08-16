@@ -1,27 +1,67 @@
 using System;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Events;
+using static PixelCrushers.AnimatorSaver;
 
 [CreateAssetMenu(fileName = "Data", menuName = "Character/PlayerData", order = 1)]
 public class PlayerData : HealthData
 {
 
+
+
+    [Header("Movement")]
+
+    [SerializeField] private float baseMovementSpeed = 5f;
+    private float extraMovementSpeedPercent = 0.0f;
+    public float ExtraMovementSpeedPercent { get { return extraMovementSpeedPercent; } set { extraMovementSpeedPercent = value; } }
+    public float MovementSpeed => baseMovementSpeed + baseMovementSpeed * extraMovementSpeedPercent;
+
+    [SerializeField] private float baseJumpForce = 5f;
+
+    private float extraJumpSpeedPercent = 0.0f;
+    public float ExtraJumpSpeedPercent { get { return extraJumpSpeedPercent; } set { extraJumpSpeedPercent = value; } }
+    public float JumpForce => baseJumpForce + baseJumpForce * extraJumpSpeedPercent;
+
+    [Header("Combat")]
+
     [SerializeField] private int baseStamina = 3;
-    public int Stamina => baseStamina + CalculateStamine();
+    public int Stamina => baseStamina;
 
     public float baseStaminaReginaration = 1f;
     public float StaminaRegeneration => baseStaminaReginaration;
 
 
+    public override int Health => baseHealth + extraHealth;
 
-    public override int Health => baseHealth + CalculateHealth();
+    private int extraHealth;
+    public int ExtraHealth {  get { return extraHealth; } set { extraHealth = value; } }
 
-    // Events
-    public UnityEvent<int> OnLevelUp = new();
-    public UnityEvent<float> OnExpChanged = new();
-    public UnityEvent<ItemData> OnItemAdded = new();
+    private int healthRegAmount = 0;
+    public int HealthRegAmount { get { return healthRegAmount; } set { healthRegAmount = value; } }
 
+    private float healthRegRate = 0;
+    public float HealthRegRate { get { return healthRegRate; } set { healthRegRate = value; } }
+
+    private float weaponBaseDamagePercentage = 0.0f;
+    public float WeaponBaseDamagePercentage { get { return weaponBaseDamagePercentage; } set { weaponBaseDamagePercentage = value; } }
+
+    private float spellBaseDamagePercentage = 0.0f;
+    public float SpellBaseDamagePercentage { get { return spellBaseDamagePercentage; } set { spellBaseDamagePercentage = value; } }
+
+    [Header("Other")]
+
+    private float expGainPercentage = 0.0f;
+    public float ExpGainPercentage { get { return expGainPercentage; } set { expGainPercentage = value; } }
+
+    private float goldPercentage = 0.0f;
+    public float GoldPercentage { get { return goldPercentage; } set { goldPercentage = value; } }
+
+
+    private int goldAmount;
+
+    public int GoldAmount { get { return goldAmount; } set { goldAmount = value; } }
 
     [SerializeField] private int currentLevel = 1;
 
@@ -37,18 +77,30 @@ public class PlayerData : HealthData
 
     public float ExperiencePercent;
 
-
-
     private int[] LevelUpTable = {
         300,900,1200,2000
     
     };
 
+    // Events
+    public UnityEvent<int> OnLevelUp = new();
+    public UnityEvent<float> OnExpChanged = new();
+    public UnityEvent<ItemData> OnItemAdded = new();
+    public UnityEvent OnStatUpdate = new();
+
     private enum CharacterClass { None, Warrior,Thief,Mage}
+
+    private List<BuffBattleLoot> buffBattleLoots = new List<BuffBattleLoot>();
+    public List<BuffBattleLoot> BuffBattleLoots => buffBattleLoots;
+
+    public void AddGold(int amount)
+    {
+        goldAmount += amount + Mathf.CeilToInt((float)amount * goldPercentage);
+    }
 
     public void AddExperience(int experience)
     {
-        currentExperience += experience;
+        currentExperience += experience + Mathf.CeilToInt((float)experience * expGainPercentage);
         int levelUpAmount = currentLevel >= LevelUpTable.Length-1 ? LevelUpTable[LevelUpTable.Length-1] : LevelUpTable[currentLevel];
         if (currentExperience >= nextLevelUpExperience)
         {
@@ -68,35 +120,16 @@ public class PlayerData : HealthData
     }
 
 
-    [SerializeField] private int strength;
 
-    // Melee Damage and Health 
-    public int Strength {
-        get { return strength; } set { strength = value; }
+    public void AddBuffBattleLoot(BuffBattleLoot buff)
+    {
+        BuffBattleLoot copiedBuff = Instantiate(buff);
+        BuffBattleLoots.Add(buff);
+        buff.BuffBattleLootAdded(currentPlayer, this);
+        OnStatUpdate.Invoke();
     }
-    [SerializeField] private int dexterity;
 
-    //JumpHeight & Aircontroll  
-    public int Dexterity { get { return dexterity; } set { dexterity = value; } }
 
-    [SerializeField] private int intelligence;
-
-    //Max Mana 
-    public int Intelligence { get => intelligence; set => intelligence = value; }
-    [SerializeField] private int resilience;
-
-    // Health and Status Resistance
-    public int Resilience { get => resilience; set => resilience = value; }
-    [SerializeField] private int speed;
-
-    // RunningSpeed
-    public int Speed { get => speed; set => speed = value; }
-
-    // Increases Chance for rare loot and gold. Have a chance to avoid damage all together and hit a critical strike
-
-    [SerializeField] private int luck;
-    
-    public int Luck { get => luck; set => luck = value; }
 
     public bool ForceUpdateStats = false;
 
@@ -159,10 +192,6 @@ public class PlayerData : HealthData
         set { consumable_3 = value; }
     }
 
-    [SerializeField] private GoldItem _goldItem;
-
-    public GoldItem GoldItem => _goldItem;
-
     private GameObject currentPlayer;
 
     public void Init(GameObject player)
@@ -203,7 +232,6 @@ public class PlayerData : HealthData
         {
             consumable_3 = Instantiate(consumable_3);
         }
-        _goldItem = Instantiate(_goldItem);
     }
 
     public void ForceLevelUp()
@@ -213,12 +241,7 @@ public class PlayerData : HealthData
 
     public void ReadPlayerDataStats(PlayerData playerData)
     {
-        strength = playerData.strength;
-        dexterity = playerData.dexterity;
-        intelligence = playerData.intelligence;
-        speed = playerData.speed;
-        resilience = playerData.resilience;
-        luck = playerData.luck;
+   
     }
 
     public void UseItem1()
@@ -273,7 +296,7 @@ public class PlayerData : HealthData
             weaponInventory.Add(weaponData);
         }
         else if (itemData is GoldItem goldItem) {
-            _goldItem.AddGold(goldItem.GoldAmount);
+            AddGold(goldItem.GoldAmount);
         }
         else if(itemData is MagicSpell magicSpell)
         {
@@ -294,39 +317,6 @@ public class PlayerData : HealthData
         return null;
     }
 
-
-    private int CalculateStamine()
-    {
-        return 0;
-    }
-
-    private int CalculateHealth()
-    {
-       return Mathf.RoundToInt(Mathf.Pow(strength, 1.5f) + 3 * resilience);
-    }
-
-    public static float CalculateMovementSpeed(float baseMovementSpeed, float speedStat)
-    {
-        //  return (baseMovementSpeed + 2 * Mathf.Pow(speedStat, 0.8f));
-        return baseMovementSpeed;
-    }
-
-    public static float CalculateJumpForce(float baseJumpHeight, float dexterityStat)
-    {
-      //  return (baseJumpHeight + 0.1f * Mathf.Pow(dexterityStat, 0.8f));
-        return baseJumpHeight;
-    }
-
-    public static float CalculateAirMovementSpeed(float baseAirMovementSpeed, int dexterityStat)
-    {
-        //return (baseAirMovementSpeed + dexterityStat / 10);
-        return baseAirMovementSpeed;
-    }
-
-    public static float CalculateMelleDamage(int strength)
-    {
-        return Mathf.Pow(strength, 0.8f);
-    }
 
     public static int CalculateMeleeChargeDamage(float minDamage,float maxDamage,float chargeAmount,int strengthStat)
     {       

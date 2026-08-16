@@ -1,253 +1,218 @@
 using Essentials;
+using NUnit.Framework;
 using System;
-using TMPro;
-using Unity.VisualScripting;
+using System.Collections;
+using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
-using UnityEngine.UI;
-using static PixelCrushers.AnimatorSaver;
 
 public class LevelUpUIState : UIStateComponent
 {
+    [SerializeField] private BattleLootTable battleLootTable;
 
-    private PlayerStatHandler statHandler;
-    private PlayerMovementController playerMovementController;
-    [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private TextMeshProUGUI skillPointsAmountText;
-    [SerializeField] private TextMeshProUGUI description;
+    private PlayerStatHandler playerStatHandler;
+    private PlayerWeaponEquiper playerWeaponEquiper;
+    private PlayerData playerData;
 
-    [Header("Stats")]
-    [SerializeField] private TextMeshProUGUI healthText;
-    [SerializeField] private TextMeshProUGUI manaText;
-    [SerializeField] private TextMeshProUGUI meeleDamageText;
-    [SerializeField] private TextMeshProUGUI jumpHeightText;
-    [SerializeField] private TextMeshProUGUI movementSpeedText;
+    [SerializeField] private BattleLootButton battleLootButton1;
+    [SerializeField] private BattleLootButton battleLootButton2;
+    [SerializeField] private BattleLootButton battleLootButton3;
 
-    [Header("Selection")]
-
-    [SerializeField] private LevelUpSelection strengthSelection;
-    [SerializeField] private LevelUpSelection dexteritySelection;
-    [SerializeField] private LevelUpSelection intelligenceSelection;
-    [SerializeField] private LevelUpSelection resilienceSelection;
-    [SerializeField] private LevelUpSelection luckSelection;
-    [SerializeField] private LevelUpSelection speedSelection;
+    [Header("WaveRaritys")]
+    [SerializeField] private int uncommonLevelAmount = 5;
+    [SerializeField] private int rareLevelAmount = 10;
+    [SerializeField] private int epicLevelAmount = 15;
+    [SerializeField] private int legendaryLevelAmount = 20;
 
 
-    [SerializeField] private bool hasEnough;
-
-    [SerializeField] private Button apply;
-    [SerializeField] private Button back;
-
-    private PlayerData beforePlayerData;
-    private PlayerData currentPlayerData;
-
-    private int availableSkillPoints;
-    private int currentSkillPoints;
-
-    private Color increaseColor;
-
-    [SerializeField] private bool changeToGameAfterApply;
 
     public override void OnInitUIState()
     {
         base.OnInitUIState();
-        statHandler = SGameManager.Instance.PlayerBody.GetComponent<PlayerStatHandler>();
-        playerMovementController = statHandler.GetComponent<PlayerMovementController>();
-        increaseColor = SGameManager.Instance.IncreaseColor;
-
-        strengthSelection.GetComponent<LevelUpDescriptionSelection>().OnDescriptionChange.AddListener(ChangeDescription);
-        dexteritySelection.GetComponent<LevelUpDescriptionSelection>().OnDescriptionChange.AddListener(ChangeDescription);
-        intelligenceSelection.GetComponent<LevelUpDescriptionSelection>().OnDescriptionChange.AddListener(ChangeDescription);
-        resilienceSelection.GetComponent<LevelUpDescriptionSelection>().OnDescriptionChange.AddListener(ChangeDescription);
-        luckSelection.GetComponent<LevelUpDescriptionSelection>().OnDescriptionChange.AddListener(ChangeDescription);
-        speedSelection.GetComponent<LevelUpDescriptionSelection>().OnDescriptionChange.AddListener(ChangeDescription);
-
-        strengthSelection.Init(HasEnoughSkillPoints);
-        dexteritySelection.Init(HasEnoughSkillPoints);
-        intelligenceSelection.Init(HasEnoughSkillPoints);
-        resilienceSelection.Init(HasEnoughSkillPoints);
-        luckSelection.Init(HasEnoughSkillPoints);
-        speedSelection.Init(HasEnoughSkillPoints);
-
-
-        back.onClick.AddListener(Back);
-        apply.onClick.AddListener(Apply);
-
-        strengthSelection.OnValueIncrease.AddListener(ChangeStrength);
-        strengthSelection.OnValueDecrease.AddListener(ChangeStrength);
-        strengthSelection.OnValueIncrease.AddListener(ReduceSkillPoint);
-        strengthSelection.OnValueDecrease.AddListener(IncreaseSkillPoint);
-
-        dexteritySelection.OnValueIncrease.AddListener(ChangeDexterity);
-        dexteritySelection.OnValueDecrease.AddListener(ChangeDexterity);
-        dexteritySelection.OnValueIncrease.AddListener(ReduceSkillPoint);
-        dexteritySelection.OnValueDecrease.AddListener(IncreaseSkillPoint);
-
-
-        intelligenceSelection.OnValueIncrease.AddListener(ChangeIntelligence);
-        intelligenceSelection.OnValueDecrease.AddListener(ChangeIntelligence);
-        intelligenceSelection.OnValueIncrease.AddListener(ReduceSkillPoint);
-        intelligenceSelection.OnValueDecrease.AddListener(IncreaseSkillPoint);
-
-
-        resilienceSelection.OnValueIncrease.AddListener(ChangeResilience);
-        resilienceSelection.OnValueDecrease.AddListener(ChangeResilience);
-        resilienceSelection.OnValueIncrease.AddListener(ReduceSkillPoint);
-        resilienceSelection.OnValueDecrease.AddListener(IncreaseSkillPoint);
-
-
-        luckSelection.OnValueIncrease.AddListener(ChangeLuck);
-        luckSelection.OnValueDecrease.AddListener(ChangeLuck);
-        luckSelection.OnValueIncrease.AddListener(ReduceSkillPoint);
-        luckSelection.OnValueDecrease.AddListener(IncreaseSkillPoint);
-
-        speedSelection.OnValueIncrease.AddListener(ChangeSpeed);
-        speedSelection.OnValueDecrease.AddListener(ChangeSpeed);
-        speedSelection.OnValueIncrease.AddListener(ReduceSkillPoint);
-        speedSelection.OnValueDecrease.AddListener(IncreaseSkillPoint);
-
-        ChangeDescription(strengthSelection.GetComponent<LevelUpDescriptionSelection>().Description);
-
-    }
-
-    public void ChangeDescription(string descriptionText)
-    {
-        description.text = descriptionText;
-    }
-
-    private void ChangeStrength(int value)
-    {
-        currentPlayerData.Strength = value;
-        UpdateStatText();
-    }
-
-
-    private void ChangeDexterity(int value)
-    {
-        currentPlayerData.Dexterity = value;
-        UpdateStatText();
-    }
-    private void ChangeIntelligence(int value)
-    {
-        currentPlayerData.Intelligence = value;
-        UpdateStatText();
-    }
-
-    private void ChangeResilience(int value)
-    {
-        currentPlayerData.Resilience = value;
-        UpdateStatText();
-    }
-
-    private void ChangeLuck(int value)
-    {
-        currentPlayerData.Luck = value;
-        UpdateStatText();
-    }
-
-    private void ChangeSpeed(int value)
-    {
-        currentPlayerData.Speed = value;
-        UpdateStatText();
-    }
-
-
-
-    private void IncreaseSkillPoint(int value)
-    {
-        currentSkillPoints++;
-        if (currentSkillPoints > availableSkillPoints)
-        {
-            currentSkillPoints = availableSkillPoints;
-        }
-        skillPointsAmountText.text = currentSkillPoints.ToString();
-    }
-
-    private void ReduceSkillPoint(int value)
-    {
-        currentSkillPoints--;
-        if(currentSkillPoints < 0)
-        {
-            currentSkillPoints = 0;
-        }
-        skillPointsAmountText.text = currentSkillPoints.ToString();
-    }
-
-    private void Apply()
-    {
-        if(currentSkillPoints > 0)
-        {
-            return;
-        }
-       // currentPlayerData.LevelUp();
-        if (changeToGameAfterApply)
-        {
-            SUIManager.Instance.ChangeToUIState(SUIManager.CHECKPOINT_UI_STATENAME);
-        }
-        else
-        {
-            Time.timeScale = 1;
-            SUIManager.Instance.ChangeToUIState(SUIManager.GAME_UI_STATENAME);
-        }
-    }
-
-    private void Back()
-    {
-        currentPlayerData.ReadPlayerDataStats(beforePlayerData);
-        SUIManager.Instance.ChangeToUIState(SUIManager.CHECKPOINT_UI_STATENAME);
+        battleLootButton1.OnChooseBattle.AddListener(SetLoot);
+        battleLootButton2.OnChooseBattle.AddListener(SetLoot);
+        battleLootButton3.OnChooseBattle.AddListener(SetLoot);
+        playerStatHandler = SGameManager.Instance.PlayerBody.GetComponent<PlayerStatHandler>();
+        playerStatHandler.PlayerData.OnLevelUp.AddListener(OnLevelUp);
+        playerWeaponEquiper = playerStatHandler.GetComponent<PlayerWeaponEquiper>();
+        playerData = playerStatHandler.PlayerData;
+        battleLootTable.Init();
     }
 
     public override void OnEnterUIState()
     {
         base.OnEnterUIState();
-        strengthSelection.ChangeValuesOnNewUI(statHandler.PlayerData.Strength);
-        dexteritySelection.ChangeValuesOnNewUI(statHandler.PlayerData.Dexterity);
-        intelligenceSelection.ChangeValuesOnNewUI(statHandler.PlayerData.Intelligence);
-        resilienceSelection.ChangeValuesOnNewUI(statHandler.PlayerData.Resilience);
-        luckSelection.ChangeValuesOnNewUI(statHandler.PlayerData.Luck);
-        speedSelection.ChangeValuesOnNewUI(statHandler.PlayerData.Speed);
-
-        beforePlayerData = Instantiate(statHandler.PlayerData);
-        currentPlayerData = statHandler.PlayerData;
-        availableSkillPoints = statHandler.PlayerData.CurrentLevel;
-        currentSkillPoints = availableSkillPoints;
-
-        levelText.text = "Level " + statHandler.PlayerData.CurrentLevel;
-        skillPointsAmountText.text = "Skillpoints: " + availableSkillPoints.ToString();
-        UpdateStatText();
+        Time.timeScale = 0.0f;
         SGameManager.Instance.SetCursorVisibility(true, CursorLockMode.None);
-        Time.timeScale = 0;
     }
 
-
-
-    public bool HasEnoughSkillPoints()
+    private void SetLoot(BattleLoot battleLoot)
     {
-        return currentSkillPoints > 0;
+        if (battleLoot is WeaponBattleLoot weaponBattleLoot)
+        {
+            playerData.AddItem(weaponBattleLoot.WeaponData);
+            if(weaponBattleLoot.WeaponData is MagicSpell magic)
+            {
+                if(playerData.CurrentMagicSpell_1 == null)
+                {
+                    playerWeaponEquiper.EquipSpell1(magic);
+                }
+                else if(playerData.CurrentMagicSpell_2 == null)
+                {
+                    playerWeaponEquiper.EquipSpell2(magic);
+                }
+                else if(playerData.CurrentMagicSpell_3 == null)
+                {
+                    playerWeaponEquiper.EquipSpell3(magic);
+                }
+                else
+                {
+                    Debug.LogError("Something went wrong!");
+                }
+            }
+        }
+        if(battleLoot is SpellInflluenceBattleLoot spellInflluenceBattleLoot)
+        {
+            spellInflluenceBattleLoot.UpgradeSpell();
+        }
+        else if (battleLoot is BuffBattleLoot buffBattleLoot) {
+        
+        
+        }
+
+        battleLootTable.ChooseBattleLoot(battleLoot);
+        SUIManager.Instance.ChangeToUIState(SUIManager.GAME_UI_STATENAME);
     }
 
-    public void UpdateStatText()
+    private void OnLevelUp(int index)
     {
-        float currentMovementSpeed = PlayerData.CalculateMovementSpeed(playerMovementController.baseMovementSpeed, currentPlayerData.Speed);
-        float beforeMovementSpeed = PlayerData.CalculateMovementSpeed(playerMovementController.baseMovementSpeed, beforePlayerData.Speed);
+        SUIManager.Instance.ChangeToUIState("LevelUp");
+        float commonPercentage = 0.0f;
+        float uncommonPercentage = 0.0f;
+        float rarePercentage = 0.0f;
+        float epicPercentage = 0.0f;
+        float legendaryPercentage = 0.0f;
 
-        float currentJumpHeight = PlayerData.CalculateMovementSpeed(playerMovementController.baseJumpForce, currentPlayerData.Dexterity);
-        float beforeJumpHeight = PlayerData.CalculateMovementSpeed(playerMovementController.baseJumpForce, beforePlayerData.Dexterity);
+        (commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage) = GetDropPercentage(index);
 
-        float currentMeleeDamage = PlayerData.CalculateMelleDamage(currentPlayerData.Strength);
-        float beforeMeleeDamage = PlayerData.CalculateMelleDamage(beforePlayerData.Strength);
+        int possibleTrys = 100;
 
-        healthText.color = currentPlayerData.Health > beforePlayerData.Health ? increaseColor : Color.white;
-       // manaText.color = currentPlayerData.Mana > beforePlayerData.Mana ? increaseColor : Color.white;
-        movementSpeedText.color = currentMovementSpeed > beforeMovementSpeed ? increaseColor : Color.white;
-        jumpHeightText.color = currentJumpHeight > beforeJumpHeight ? increaseColor : Color.white;
-        meeleDamageText.color = currentMeleeDamage > beforeMeleeDamage ? increaseColor : Color.white;
+        BattleLoot battleLoot1 = null;
+        List<BattleLoot> currentAvailableBattleLoots = new();
+        battleLootTable.AvailableLoots.ForEach(battleLoot => { currentAvailableBattleLoots.Add(battleLoot); });
+        if (playerData.CurrentMagicSpell_1 != null) {
 
-        healthText.text = "Health " + currentPlayerData.Health.ToString();
-      //  manaText.text ="Mana "+ currentPlayerData.Mana.ToString();
-        movementSpeedText.text = "Movement Speed " +PlayerData.CalculateMovementSpeed(playerMovementController.baseMovementSpeed,currentPlayerData.Speed).ToString("F1");
-        jumpHeightText.text = "Jump Height " + PlayerData.CalculateMovementSpeed(playerMovementController.baseJumpForce, currentPlayerData.Dexterity).ToString("F1");
-        meeleDamageText.text = "Base Melee Damage " +  PlayerData.CalculateMelleDamage(currentPlayerData.Strength).ToString("F1");
+            SpellInflluenceBattleLoot spellInflluenceBattleLoot = ScriptableObject.CreateInstance<SpellInflluenceBattleLoot>();
+            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_1, GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
+            battleLoot1 = spellInflluenceBattleLoot;
+        }
+        else
+        {
+            battleLoot1 = currentAvailableBattleLoots[UnityEngine.Random.Range(0, currentAvailableBattleLoots.Count-1)];
+            currentAvailableBattleLoots.Remove(battleLoot1);
+        }
+
+        BattleLoot battleLoot2 = null;
+        if (playerData.CurrentMagicSpell_2 != null)
+        {
+            SpellInflluenceBattleLoot spellInflluenceBattleLoot = ScriptableObject.CreateInstance<SpellInflluenceBattleLoot>();
+            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_2, GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
+            battleLoot2 = spellInflluenceBattleLoot;
+
+        }
+        else
+        {
+            battleLoot2 = currentAvailableBattleLoots[UnityEngine.Random.Range(0, currentAvailableBattleLoots.Count-1)];
+            currentAvailableBattleLoots.Remove(battleLoot2);
+        }
+
+        BattleLoot battleLoot3 = null;
+        if (playerData.CurrentMagicSpell_3 != null)
+        {
+            SpellInflluenceBattleLoot spellInflluenceBattleLoot = ScriptableObject.CreateInstance<SpellInflluenceBattleLoot>();
+            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_3, GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
+            battleLoot3 = spellInflluenceBattleLoot;
+
+        }
+        else
+        {
+            battleLoot3 = currentAvailableBattleLoots[UnityEngine.Random.Range(0, currentAvailableBattleLoots.Count-1)];
+            currentAvailableBattleLoots.Remove(battleLoot3);
+        }
+
+        battleLootButton1.SetBattleLoot(battleLoot1);
+        battleLootButton2.SetBattleLoot(battleLoot2);
+        battleLootButton3.SetBattleLoot(battleLoot3);
+        
     }
+
+
+    public static BattleLoot.LootRarity GetRarity(float commonPercentage,float uncommonPercentage,float rarePercentage,float epicPercentage,float legendaryPercentage)
+    {
+        float randomValue = UnityEngine.Random.Range(0.0f,1.0f);
+        if (randomValue <= commonPercentage)
+        {
+            return BattleLoot.LootRarity.Common;
+        }
+        else if (randomValue <= commonPercentage+uncommonPercentage)
+        {
+            return BattleLoot.LootRarity.Uncommen;
+        }
+        else if (randomValue <= commonPercentage+uncommonPercentage+rarePercentage)
+        {
+            return BattleLoot.LootRarity.Rare;
+        }
+        else if (randomValue < commonPercentage+uncommonPercentage+rarePercentage+epicPercentage)
+        {
+            return BattleLoot.LootRarity.Epic;
+        }
+        else
+        {
+            return BattleLoot.LootRarity.Legendary;
+        }
+
+
+    }
+
+    private (float,float,float,float,float) GetDropPercentage(int waveIndex)
+    {
+        if(waveIndex >= legendaryLevelAmount)
+        {
+            return (0.05f, 0.10f, 0.20f, 0.4f, 0.25f);
+        }
+        else if(waveIndex >= epicLevelAmount)
+        {
+            return (0.19f, 0.3f, 0.35f, 0.1f, 0.01f);
+        }
+        else if (waveIndex >= rareLevelAmount)
+        {
+            return (0.55f, 0.3f, 0.15f, 0, 0);
+        }
+        else if (waveIndex >= uncommonLevelAmount)
+        {
+            return (0.75f, 0.25f, 0, 0, 0);
+        }
+        else {
+            return (1, 0, 0, 0, 0);
+        }
+
+
+        return (0, 0, 0, 0, 0);
+    }
+
+    public static (float, float, float, float, float) GetDropPercentage(BattleLoot.LootRarity rarity)
+    {
+        switch (rarity)
+        {
+            case BattleLoot.LootRarity.Common: return (1, 0, 0, 0, 0);
+            case BattleLoot.LootRarity.Uncommen: return (0.75f, 0.25f, 0, 0, 0);
+            case BattleLoot.LootRarity.Rare: return (0.55f, 0.3f, 0.15f, 0, 0);
+            case BattleLoot.LootRarity.Epic: return (0.19f, 0.3f, 0.35f, 0.1f, 0.01f);
+            case BattleLoot.LootRarity.Legendary: return (0.05f, 0.10f, 0.20f, 0.4f, 0.25f);
+        }
+        return (0, 0, 0, 0, 0);
+    }
+
 
 
 }

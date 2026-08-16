@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85d8212042f19c44a58a9c37f20d14e, type: 3}
-  m_Name: BaseDamage
+  m_Script: {fileID: 11500000, guid: 7b6fd625ad48da84d82e3bef5a200fa7, type: 3}
+  m_Name: SpellDamageBuffBattleLoot
   m_EditorClassIdentifier: 
-  description: Damage
-  commonUpgradePercentage: 0.2
-  uncommonUpgradePercentage: 0.3
-  rareUpgradePercentage: 0.5
-  epicUpgradePercentage: 1
-  legendaryUpgradePercentage: 2
+  name: Bigger Rot
+  description: Adds Spell Damage
+  icon: {fileID: 0}
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  lootRarity: 0
+  spellDamagePercentage: 0.1
