@@ -12,6 +12,7 @@ public class GameUIStateComponent : UIStateComponent
     private PlayerStatHandler playerStatHandler;
     private PlayerAnimationController playerAnimationController;
     private PlayerInteractionHandler playerInteractionHandler;
+    private PlayerChestHandler playerChestHandler;
 
     private PlayerData PlayerData => playerStatHandler.PlayerData;
 
@@ -53,6 +54,9 @@ public class GameUIStateComponent : UIStateComponent
     [SerializeField] private float healBorderTime;
 
 
+    [Header("Other")]
+    [SerializeField] private BattleItemsUIHandler battleItemsUIHandler;
+    [SerializeField] private TextMeshProUGUI goldAmountText; 
     public override void OnInitUIState()
     {
         base.OnInitUIState();
@@ -61,7 +65,7 @@ public class GameUIStateComponent : UIStateComponent
         playerResourceHandler = player.GetComponent<PlayerResourceHandler>();
         playerResourceHandler.OnDamaged.AddListener(GetDamage);
         playerResourceHandler.OnHealthUpdate.AddListener(UpdateHealth);
-        playerResourceHandler.OnHeal.AddListener(ShowHeal);
+   //     playerResourceHandler.OnHeal.AddListener(ShowHeal);
 
         playerCombatController = player.GetComponent<PlayerCombatController>();
         playerCombatController.OnCharge.AddListener(SetChargeValue);
@@ -69,6 +73,7 @@ public class GameUIStateComponent : UIStateComponent
         playerCombatController.OnEndBlock.AddListener(HideStamina);
 
         playerStatHandler = player.GetComponent<PlayerStatHandler>();
+        playerStatHandler.PlayerData.OnStatUpdate.AddListener(StatUpdate);
         playerAnimationController = player.GetComponent<PlayerAnimationController>();
 
         playerInteractionHandler = player.GetComponent<PlayerInteractionHandler>();
@@ -86,18 +91,41 @@ public class GameUIStateComponent : UIStateComponent
         playerInteractionHandler.OnCanBeInteracted.AddListener(() => crossAirUI.ChangeToInteractionSprite());
         playerInteractionHandler.OnCanNotBeInteractedAnymore.AddListener(() => crossAirUI.ReturnToPreviouseSprite());
 
+        playerChestHandler = player.GetComponent<PlayerChestHandler>();
+        playerChestHandler.OnCanOpenChest.AddListener(ShowOpenChest);
+        playerChestHandler.OnCanNotOpenChest.AddListener(HideOpenChest);
+
         SInputManager.Instance.inputActions.Keyboard.Pause.performed += ChangeToPause;
         SInputManager.Instance.inputActions.Keyboard.Inventory.performed += ChangeToInventory;
         SInputManager.Instance.inputActions.Keyboard.Stats.performed += ChangeToStats;
 
-        playerStatHandler.PlayerData.OnItemAdded.AddListener(OnItemAccuired);
+    //  playerStatHandler.PlayerData.OnItemAdded.AddListener(OnItemAccuired);
         playerStatHandler.PlayerData.OnLevelUp.AddListener(ShowLevelUp);
 
         itemAccuiredText.gameObject.SetActive(false);
+        goldAmountText.gameObject.SetActive(false);
         HideHeal();
         HideDamage();
         HideLevelUp();
         HideStamina();
+    }
+
+    private void HideOpenChest()
+    {
+        goldAmountText.gameObject.SetActive(false);
+        crossAirUI.ReturnToPreviouseSprite();
+    }
+
+    private void ShowOpenChest(int gold)
+    {
+        goldAmountText.gameObject.SetActive(true);
+        goldAmountText.text = "[" + gold.ToString() + "]";
+        crossAirUI.ChangeToInteractionSprite();
+    }
+
+    private void StatUpdate()
+    {
+        battleItemsUIHandler.RedrawUI(playerStatHandler.PlayerData);
     }
 
     private void ShowStamina()
@@ -186,6 +214,7 @@ public class GameUIStateComponent : UIStateComponent
         spellHandler_3.Init(PlayerData.CurrentMagicSpell_3);
 
         UpdateStamina(0);
+        goldAmountText.gameObject.SetActive(false);
     }
 
     public override void OnExitUIState()

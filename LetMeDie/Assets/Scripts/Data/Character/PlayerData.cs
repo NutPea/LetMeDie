@@ -31,15 +31,10 @@ public class PlayerData : HealthData
 
     public float baseStaminaReginaration = 1f;
     public float StaminaRegeneration => baseStaminaReginaration;
-
-
     public override int Health => baseHealth + extraHealth;
 
     private int extraHealth;
     public int ExtraHealth {  get { return extraHealth; } set { extraHealth = value; } }
-
-    private int healthRegAmount = 0;
-    public int HealthRegAmount { get { return healthRegAmount; } set { healthRegAmount = value; } }
 
     private float healthRegRate = 0;
     public float HealthRegRate { get { return healthRegRate; } set { healthRegRate = value; } }
@@ -49,6 +44,22 @@ public class PlayerData : HealthData
 
     private float spellBaseDamagePercentage = 0.0f;
     public float SpellBaseDamagePercentage { get { return spellBaseDamagePercentage; } set { spellBaseDamagePercentage = value; } }
+
+    private float knockBackPercentage = 0.0f;
+    public float KnockBackPercentage { get => knockBackPercentage; set => knockBackPercentage = value; }
+
+    private float spellManaReduction = 0.0f;
+    public float SpellManaReduction { get => spellManaReduction; set { spellManaReduction = value; } }
+
+    private float spellManaRegeneration = 0.0f;
+    public float SpellManaRegeneration { get => spellManaRegeneration; set { spellManaRegeneration = value; } }
+
+    public float BaseLifeSteal { get =>  lifeStealPercentage; }
+
+    private float lifeStealPercentage = 0.0f;
+    public float LifeStealPercentage { get => lifeStealPercentage; set => lifeStealPercentage = value; }
+
+
 
     [Header("Other")]
 
@@ -77,13 +88,10 @@ public class PlayerData : HealthData
 
     public float ExperiencePercent;
 
-    private int[] LevelUpTable = {
-        300,900,1200,2000
-    
-    };
 
     // Events
     public UnityEvent<int> OnLevelUp = new();
+    public UnityEvent<int> OnGoldChange = new();
     public UnityEvent<float> OnExpChanged = new();
     public UnityEvent<ItemData> OnItemAdded = new();
     public UnityEvent OnStatUpdate = new();
@@ -96,16 +104,23 @@ public class PlayerData : HealthData
     public void AddGold(int amount)
     {
         goldAmount += amount + Mathf.CeilToInt((float)amount * goldPercentage);
+        OnGoldChange.Invoke(goldAmount);
+    }
+
+    public void RemoveGold(int amount)
+    {
+        goldAmount += amount + Mathf.CeilToInt((float)amount * goldPercentage);
+        OnGoldChange.Invoke(goldAmount);
     }
 
     public void AddExperience(int experience)
     {
         currentExperience += experience + Mathf.CeilToInt((float)experience * expGainPercentage);
-        int levelUpAmount = currentLevel >= LevelUpTable.Length-1 ? LevelUpTable[LevelUpTable.Length-1] : LevelUpTable[currentLevel];
         if (currentExperience >= nextLevelUpExperience)
         {
             currentLevel++;
-            nextLevelUpExperience = currentLevel >= LevelUpTable.Length - 1 ? LevelUpTable[LevelUpTable.Length - 1] : LevelUpTable[currentLevel];
+
+            nextLevelUpExperience = ExpForNextLevel(currentLevel);
             int experienceDifference = currentExperience - nextLevelUpExperience;
             if (experienceDifference <= 0) {
                 currentExperience = 0;
@@ -119,7 +134,10 @@ public class PlayerData : HealthData
         OnExpChanged.Invoke(ExperiencePercent);
     }
 
-
+    private int ExpForNextLevel(int level)
+    {
+        return Mathf.RoundToInt(100 * Mathf.Pow(level, 1.5f));
+    }
 
     public void AddBuffBattleLoot(BuffBattleLoot buff)
     {
@@ -232,6 +250,7 @@ public class PlayerData : HealthData
         {
             consumable_3 = Instantiate(consumable_3);
         }
+        nextLevelUpExperience = ExpForNextLevel(currentLevel);
     }
 
     public void ForceLevelUp()
@@ -328,5 +347,25 @@ public class PlayerData : HealthData
         return Mathf.RoundToInt(Mathf.Lerp(minDamage, maxDamage, chargeAmount)); ;
     }
 
+    internal void RegSpellMana()
+    {
+        if(CurrentMagicSpell_1 != null)
+        {
+            CurrentMagicSpell_1.RegMana();
+        }
+        if (CurrentMagicSpell_2 != null)
+        {
+            CurrentMagicSpell_2.RegMana();
+        }
+        if (CurrentMagicSpell_3 != null)
+        {
+            CurrentMagicSpell_3.RegMana();
+        }
+    }
+
+    internal bool HasEnoughGold(int price)
+    {
+        return goldAmount >= price;
+    }
 }
 

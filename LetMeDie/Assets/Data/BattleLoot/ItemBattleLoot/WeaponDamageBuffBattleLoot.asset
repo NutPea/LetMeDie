@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e34420d0b028149834092b1c374482, type: 3}
   m_Name: WeaponDamageBuffBattleLoot
   m_EditorClassIdentifier: 
-  name: Hard Stuff
-  description: Adds Damage
-  icon: {fileID: 0}
-  tint: {r: 1, g: 1, b: 1, a: 1}
+  name: Damage Potion
+  description: 'Adds Weapon Damage :'
+  icon: {fileID: 21300000, guid: cbb9e32f9f588e74494a6aad2792ea61, type: 3}
+  tint: {r: 0.6037736, g: 0.2249911, b: 0.2249911, a: 1}
   lootRarity: 0
-  damagePercentage: 0.15
+  showsAsItem: 1
+  damagePercentage: 0.1

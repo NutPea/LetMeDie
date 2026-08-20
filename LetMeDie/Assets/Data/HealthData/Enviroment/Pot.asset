@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
   characterName: Pot
-  baseHealth: 20
+  baseHealth: 1
   team: 2

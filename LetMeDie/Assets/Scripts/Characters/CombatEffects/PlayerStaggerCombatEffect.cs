@@ -9,6 +9,11 @@ public class PlayerStaggerCombatEffect : CombatEffect
 
     [SerializeField] private float minKnockBackStrength = 2;
     [SerializeField] private float maxKnockBackStrength = 5;
+
+    [HideInInspector] public float KnockBackGainPercentage = 0;
+    [HideInInspector] public float MinKnockBackStregth => minKnockBackStrength + minKnockBackStrength * KnockBackGainPercentage;
+    [HideInInspector] public float MaxKnockBackStrength => maxKnockBackStrength + maxKnockBackStrength * KnockBackGainPercentage;
+
     [SerializeField] private float knockBackLength = 0.5f;
 
     private float knockBackPercentageStrength = 1;
@@ -40,7 +45,7 @@ public class PlayerStaggerCombatEffect : CombatEffect
                 knockBackDir = knockBackDir.normalized;
 
                 enemyCombat.BaseEnemyMovement
-                    .Knockback(knockBackDir * CalculateKnockBackStregth(Mathf.Lerp(minKnockBackStrength, maxKnockBackStrength, knockBackPercentageStrength), enemyData.Mass), knockBackLength);
+                    .Knockback(knockBackDir * CalculateKnockBackStregth(Mathf.Lerp(MinKnockBackStregth, MaxKnockBackStrength, knockBackPercentageStrength), enemyData.Mass), knockBackLength);
             }
 
 

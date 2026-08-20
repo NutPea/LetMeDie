@@ -58,6 +58,8 @@ public class SwordData : WeaponData
     public override void Attack(Transform camera, float chargeAmount)
     {
         base.Attack(camera, chargeAmount);
+        instatiatedNormalAttackStaggerEffect.KnockBackGainPercentage = playerData.KnockBackPercentage;
+        instatiatedBlockAttackStaggerEffect.KnockBackGainPercentage = playerData.KnockBackPercentage;
         instatiatedNormalAttackStaggerEffect.KnockBackPercentageStrength = chargeAmount;
         lastChargeAmount = chargeAmount;
         hitPositions.Clear();
@@ -92,6 +94,7 @@ public class SwordData : WeaponData
                 else
                 {
                     healthManager.InflictDamage(calculatedDamage, CombatEffects, TeamFlag.Player, camera);
+                    DamageDone(calculatedDamage);
                 }
 
                 isEnemyHit = true;
@@ -131,6 +134,7 @@ public class SwordData : WeaponData
                 else{
                     
                     healthManager.InflictDamage(calculatedDamage, CombatEffects, TeamFlag.Player, camera);
+                    DamageDone(calculatedDamage);
                 }
                 isEnemyHit = true;
             }

@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class PathfindingMovementEnemyExtension : BaseEnemyMovement
 {
     private NavMeshAgent agent;
-    private Rigidbody rb;
     private bool lookOnPlayer;
     private bool isDead;
     protected override void Start()

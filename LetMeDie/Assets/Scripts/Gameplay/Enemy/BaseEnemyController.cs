@@ -31,7 +31,14 @@ public class BaseEnemyController : MonoBehaviour
     {
         healthManager = GetComponent<HealthManager>();
         healthManager.healthData = EnemyData;
+        healthManager.OnDeath.AddListener(OnDeath);
     }
+
+    private void OnDeath(GameObject death)
+    {
+        SGameManager.Instance.EnemyDied();
+    }
+
     private void Start()
     {
         healthManager.OnDamaged.AddListener(GotHit);

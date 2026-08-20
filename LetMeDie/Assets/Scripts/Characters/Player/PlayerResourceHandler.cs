@@ -1,5 +1,8 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using static PixelCrushers.AnimatorSaver;
 
 public class PlayerResourceHandler : HealthManager
 {
@@ -16,12 +19,19 @@ public class PlayerResourceHandler : HealthManager
 
     private float currentRegenerationTime = 0;
 
+    private const float STAT_REGENERATION_TIME = 1;
+
+    private float currentStatRegenerationTime = 0;
+
+    private float manaRegValue;
+    private float healthRegValue;
 
     private void Start()
     {
         currentRegenerationTime = data.StaminaRegeneration;
         OnDamageBlocked.AddListener(UseStamina);
         CurrentStamina = data.Stamina;
+        currentStatRegenerationTime = STAT_REGENERATION_TIME;
     }
 
     private void Update()
@@ -38,6 +48,39 @@ public class PlayerResourceHandler : HealthManager
             {
                 currentRegenerationTime -= Time.deltaTime;
             }
+        }
+
+        if(currentRegenerationTime < 0)
+        {
+            currentRegenerationTime = STAT_REGENERATION_TIME;
+            if(data.SpellManaRegeneration > 0)
+            {
+                manaRegValue += data.SpellManaRegeneration;
+                if(manaRegValue > 1)
+                {
+                    int toManaRegValue = Mathf.CeilToInt(manaRegValue);
+                    manaRegValue -= toManaRegValue;
+                    for (int i = 0; i < toManaRegValue; i++) {
+                        data.RegSpellMana();
+                    }
+                }
+
+            }
+
+            if(data.HealthRegRate > 0)
+            {
+                healthRegValue += data.HealthRegRate;
+                if(healthRegValue > 1)
+                {
+                    int toHealReg = Mathf.CeilToInt(healthRegValue);
+                    healthRegValue -= toHealReg;
+                    Heal(toHealReg);
+                }
+            }
+        }
+        else
+        {
+            currentRegenerationTime -= Time.deltaTime;
         }
     }
 
@@ -75,6 +118,8 @@ public class PlayerResourceHandler : HealthManager
         OnStaminaChanged.Invoke(CurrentStamina);
     }
 
+    
+
     public void FullManaReg()
     {
         CurrentStamina = data.Stamina;
@@ -84,5 +129,14 @@ public class PlayerResourceHandler : HealthManager
     {
         base.Recover();
         FullManaReg();
+    }
+
+    internal void LifeSteal(int amount, float baseLifeSteal)
+    {
+        if(baseLifeSteal > 0)
+        {
+            int healAmount = Mathf.CeilToInt((float)amount * baseLifeSteal);
+            Heal(healAmount);
+        }
     }
 }

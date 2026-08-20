@@ -5,17 +5,8 @@ using UnityEngine.AI;
 
 public class WaveSpawnManager : MonoBehaviour
 {
-    [Header("Game")]
-    [SerializeField] private float gameDuration = 600.0f;
 
-    private float elapsedGameTime;
-
-    private bool IsGameTime => elapsedGameTime < gameDuration;
-
-    private float RemainingGameTime =>
-        Mathf.Max(0.0f, gameDuration - elapsedGameTime);
-
-
+    private SGameManager gameManager;
     [Header("Enemies")]
     [SerializeField] private List<SpawnEnemy> enemies = new();
     [SerializeField] private List<SpawnEnemy> afterGameTimeEnemies = new();
@@ -58,12 +49,13 @@ public class WaveSpawnManager : MonoBehaviour
         // Make sure events are ordered by trigger time.
         events.Sort((a, b) =>
             a.TriggerTime.CompareTo(b.TriggerTime));
+
+        gameManager = SGameManager.Instance;
     }
 
 
     private void Update()
     {
-        elapsedGameTime += Time.deltaTime;
 
         UpdateEvents();
 
@@ -84,7 +76,7 @@ public class WaveSpawnManager : MonoBehaviour
 
         SpawnEvent currentEvent = events[nextEventIndex];
 
-        if (elapsedGameTime >= currentEvent.TriggerTime)
+        if (gameManager.ElapsedGameTime >= currentEvent.TriggerTime)
         {
             TriggerEvent(currentEvent);
 
@@ -210,7 +202,7 @@ public class WaveSpawnManager : MonoBehaviour
 
 
         List<SpawnEnemy> availableEnemies =
-            IsGameTime
+            gameManager.IsGameTime
                 ? enemies
                 : afterGameTimeEnemies;
 
@@ -348,12 +340,12 @@ public class WaveSpawnManager : MonoBehaviour
          */
 
 
-        if (elapsedGameTime < enemy.StartTime)
+        if (gameManager.ElapsedGameTime < enemy.StartTime)
             return 0;
 
 
         float timeSinceStart =
-            elapsedGameTime - enemy.StartTime;
+            gameManager.ElapsedGameTime - enemy.StartTime;
 
 
         float weightProgress =
@@ -386,7 +378,7 @@ public class WaveSpawnManager : MonoBehaviour
         float rate;
 
 
-        if (IsGameTime)
+        if (gameManager.IsGameTime)
         {
             /*
              * 0 = beginning of game
@@ -395,8 +387,8 @@ public class WaveSpawnManager : MonoBehaviour
 
 
             float progress =
-                elapsedGameTime /
-                gameDuration;
+                gameManager.ElapsedGameTime /
+                gameManager.GameDuration;
 
 
             progress =

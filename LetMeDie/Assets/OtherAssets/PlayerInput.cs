@@ -150,7 +150,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""9a0f20ae-85c2-4b86-a451-065615d014a8"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -407,7 +407,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0449d028-93e3-4061-9877-cf6b85e5d739"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -581,6 +581,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GetSpell"",
+                    ""type"": ""Button"",
+                    ""id"": ""ded0b682-6cee-49dd-8ec6-e47958b64eff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -603,6 +612,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""GetItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f28f4873-b922-41f7-8d77-d98b8ca3f89e"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GetSpell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -638,6 +658,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
         m_Cheats_LevelUp = m_Cheats.FindAction("LevelUp", throwIfNotFound: true);
         m_Cheats_GetItem = m_Cheats.FindAction("GetItem", throwIfNotFound: true);
+        m_Cheats_GetSpell = m_Cheats.FindAction("GetSpell", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -1037,6 +1058,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<ICheatsActions> m_CheatsActionsCallbackInterfaces = new List<ICheatsActions>();
     private readonly InputAction m_Cheats_LevelUp;
     private readonly InputAction m_Cheats_GetItem;
+    private readonly InputAction m_Cheats_GetSpell;
     /// <summary>
     /// Provides access to input actions defined in input action map "Cheats".
     /// </summary>
@@ -1056,6 +1078,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Cheats/GetItem".
         /// </summary>
         public InputAction @GetItem => m_Wrapper.m_Cheats_GetItem;
+        /// <summary>
+        /// Provides access to the underlying input action "Cheats/GetSpell".
+        /// </summary>
+        public InputAction @GetSpell => m_Wrapper.m_Cheats_GetSpell;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1088,6 +1114,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @GetItem.started += instance.OnGetItem;
             @GetItem.performed += instance.OnGetItem;
             @GetItem.canceled += instance.OnGetItem;
+            @GetSpell.started += instance.OnGetSpell;
+            @GetSpell.performed += instance.OnGetSpell;
+            @GetSpell.canceled += instance.OnGetSpell;
         }
 
         /// <summary>
@@ -1105,6 +1134,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @GetItem.started -= instance.OnGetItem;
             @GetItem.performed -= instance.OnGetItem;
             @GetItem.canceled -= instance.OnGetItem;
+            @GetSpell.started -= instance.OnGetSpell;
+            @GetSpell.performed -= instance.OnGetSpell;
+            @GetSpell.canceled -= instance.OnGetSpell;
         }
 
         /// <summary>
@@ -1314,5 +1346,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGetItem(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "GetSpell" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGetSpell(InputAction.CallbackContext context);
     }
 }

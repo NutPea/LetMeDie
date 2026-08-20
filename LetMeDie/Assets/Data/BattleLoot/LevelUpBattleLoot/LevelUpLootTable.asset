@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faead80f7107ef9428bd6ddaf76e1426, type: 3}
+  m_Name: LevelUpLootTable
+  m_EditorClassIdentifier: 
+  battleLoots:
+  - {fileID: 11400000, guid: d15628f453820c640819a0c407f4f2b2, type: 2}
+  - {fileID: 11400000, guid: 00a4c105e92dfd648af5451a8e165e6f, type: 2}
+  - {fileID: 11400000, guid: bb1b2ccd2813fc2468ba78a0448246bd, type: 2}
+  - {fileID: 11400000, guid: 2f06c32718b78e048986557cf16bf411, type: 2}
+  - {fileID: 11400000, guid: 0c91dc99139fd4a4994abe19a15ced26, type: 2}
+  - {fileID: 11400000, guid: 9ecc80abe26d2ce4087e2a69ec489afe, type: 2}
+  - {fileID: 11400000, guid: f6bb6ab19a9dcb1499d8e94be6a5eeb9, type: 2}
+  AvailableLoots: []

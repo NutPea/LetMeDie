@@ -15,7 +15,7 @@ MonoBehaviour:
   _guid: FireArrow
   itemName: IceArrow
   description: NO DESCRIPTION
-  sprite: {fileID: 21300000, guid: 6d7b8ce731b92014bbeddfccad4609ae, type: 3}
+  sprite: {fileID: 21300000, guid: 50a435cd062c3f140bbfc7691f413add, type: 3}
   _tint: {r: 0.101960756, g: 0.6508002, b: 0.7529412, a: 1}
   minDamageAmount: 0
   maxDamageAmount: 0
@@ -23,12 +23,15 @@ MonoBehaviour:
   fullChargeTime: 0.5
   attackCooldown: 0.5
   combatEffect: []
-  spellManaCost: 4
+  spellManaCost: 5
   OnSpellCast:
     m_PersistentCalls:
       m_Calls: []
   spellInfluences:
   - {fileID: 11400000, guid: db2ec32a240d80b43828291fb213b247, type: 2}
+  OnSpellAmountUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   baseDamage: 5
   ExtraDamage: 0
   projectile: {fileID: 6903004982847926900, guid: 4f858ed47828c0a4fba66d099f0e7235, type: 3}

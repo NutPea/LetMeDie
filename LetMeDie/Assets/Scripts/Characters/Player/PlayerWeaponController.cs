@@ -12,6 +12,9 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField]private Transform cameraTransform;
     private PlayerStatHandler playerStatHandler;
     public PlayerData PlayerData => playerStatHandler.PlayerData;
+
+    private PlayerResourceHandler playerResourceHandler;
+
     private bool HasSomethingEquiped;
     public bool CanBlock => weaponData.CanBlock;
 
@@ -23,6 +26,7 @@ public class PlayerWeaponController : MonoBehaviour
     {
         playerCombatController = GetComponent<PlayerCombatController>();
         playerStatHandler = GetComponent<PlayerStatHandler>();
+        playerResourceHandler = GetComponent<PlayerResourceHandler>();
 
     }
 
@@ -124,4 +128,8 @@ public class PlayerWeaponController : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    internal void DamageDone(int amount)
+    {
+        playerResourceHandler.LifeSteal(amount, PlayerData.BaseLifeSteal);
+    }
 }

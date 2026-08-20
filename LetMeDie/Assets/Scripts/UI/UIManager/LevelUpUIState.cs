@@ -1,13 +1,10 @@
 using Essentials;
-using NUnit.Framework;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
 using UnityEngine;
 
 public class LevelUpUIState : UIStateComponent
 {
+
     [SerializeField] private BattleLootTable battleLootTable;
 
     private PlayerStatHandler playerStatHandler;
@@ -25,6 +22,7 @@ public class LevelUpUIState : UIStateComponent
     [SerializeField] private int legendaryLevelAmount = 20;
 
 
+   
 
     public override void OnInitUIState()
     {
@@ -51,17 +49,17 @@ public class LevelUpUIState : UIStateComponent
         if (battleLoot is WeaponBattleLoot weaponBattleLoot)
         {
             playerData.AddItem(weaponBattleLoot.WeaponData);
-            if(weaponBattleLoot.WeaponData is MagicSpell magic)
+            if (weaponBattleLoot.WeaponData is MagicSpell magic)
             {
-                if(playerData.CurrentMagicSpell_1 == null)
+                if (playerData.CurrentMagicSpell_1 == null)
                 {
                     playerWeaponEquiper.EquipSpell1(magic);
                 }
-                else if(playerData.CurrentMagicSpell_2 == null)
+                else if (playerData.CurrentMagicSpell_2 == null)
                 {
                     playerWeaponEquiper.EquipSpell2(magic);
                 }
-                else if(playerData.CurrentMagicSpell_3 == null)
+                else if (playerData.CurrentMagicSpell_3 == null)
                 {
                     playerWeaponEquiper.EquipSpell3(magic);
                 }
@@ -71,13 +69,13 @@ public class LevelUpUIState : UIStateComponent
                 }
             }
         }
-        if(battleLoot is SpellInflluenceBattleLoot spellInflluenceBattleLoot)
+        if (battleLoot is SpellInflluenceBattleLoot spellInflluenceBattleLoot)
         {
             spellInflluenceBattleLoot.UpgradeSpell();
         }
-        else if (battleLoot is BuffBattleLoot buffBattleLoot) {
-        
-        
+        else if (battleLoot is BuffBattleLoot buffBattleLoot)
+        {
+            playerData.AddBuffBattleLoot(buffBattleLoot);
         }
 
         battleLootTable.ChooseBattleLoot(battleLoot);
@@ -97,72 +95,39 @@ public class LevelUpUIState : UIStateComponent
 
         int possibleTrys = 100;
 
-        BattleLoot battleLoot1 = null;
         List<BattleLoot> currentAvailableBattleLoots = new();
         battleLootTable.AvailableLoots.ForEach(battleLoot => { currentAvailableBattleLoots.Add(battleLoot); });
-        if (playerData.CurrentMagicSpell_1 != null) {
-
-            SpellInflluenceBattleLoot spellInflluenceBattleLoot = ScriptableObject.CreateInstance<SpellInflluenceBattleLoot>();
-            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_1, GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
-            battleLoot1 = spellInflluenceBattleLoot;
-        }
-        else
-        {
-            battleLoot1 = currentAvailableBattleLoots[UnityEngine.Random.Range(0, currentAvailableBattleLoots.Count-1)];
-            currentAvailableBattleLoots.Remove(battleLoot1);
-        }
-
-        BattleLoot battleLoot2 = null;
-        if (playerData.CurrentMagicSpell_2 != null)
-        {
-            SpellInflluenceBattleLoot spellInflluenceBattleLoot = ScriptableObject.CreateInstance<SpellInflluenceBattleLoot>();
-            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_2, GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
-            battleLoot2 = spellInflluenceBattleLoot;
-
-        }
-        else
-        {
-            battleLoot2 = currentAvailableBattleLoots[UnityEngine.Random.Range(0, currentAvailableBattleLoots.Count-1)];
-            currentAvailableBattleLoots.Remove(battleLoot2);
-        }
-
-        BattleLoot battleLoot3 = null;
-        if (playerData.CurrentMagicSpell_3 != null)
-        {
-            SpellInflluenceBattleLoot spellInflluenceBattleLoot = ScriptableObject.CreateInstance<SpellInflluenceBattleLoot>();
-            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_3, GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
-            battleLoot3 = spellInflluenceBattleLoot;
-
-        }
-        else
-        {
-            battleLoot3 = currentAvailableBattleLoots[UnityEngine.Random.Range(0, currentAvailableBattleLoots.Count-1)];
-            currentAvailableBattleLoots.Remove(battleLoot3);
-        }
+      
+        BattleLoot battleLoot1 = currentAvailableBattleLoots[UnityEngine.Random.Range(0, currentAvailableBattleLoots.Count - 1)];
+        currentAvailableBattleLoots.Remove(battleLoot1);
+        BattleLoot battleLoot2 = currentAvailableBattleLoots[UnityEngine.Random.Range(0, currentAvailableBattleLoots.Count - 1)];
+        currentAvailableBattleLoots.Remove(battleLoot2);
+        BattleLoot battleLoot3 = currentAvailableBattleLoots[UnityEngine.Random.Range(0, currentAvailableBattleLoots.Count - 1)];
+       currentAvailableBattleLoots.Remove(battleLoot3);
 
         battleLootButton1.SetBattleLoot(battleLoot1);
         battleLootButton2.SetBattleLoot(battleLoot2);
         battleLootButton3.SetBattleLoot(battleLoot3);
-        
+
     }
 
 
-    public static BattleLoot.LootRarity GetRarity(float commonPercentage,float uncommonPercentage,float rarePercentage,float epicPercentage,float legendaryPercentage)
+    public static BattleLoot.LootRarity GetRarity(float commonPercentage, float uncommonPercentage, float rarePercentage, float epicPercentage, float legendaryPercentage)
     {
-        float randomValue = UnityEngine.Random.Range(0.0f,1.0f);
+        float randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
         if (randomValue <= commonPercentage)
         {
             return BattleLoot.LootRarity.Common;
         }
-        else if (randomValue <= commonPercentage+uncommonPercentage)
+        else if (randomValue <= commonPercentage + uncommonPercentage)
         {
             return BattleLoot.LootRarity.Uncommen;
         }
-        else if (randomValue <= commonPercentage+uncommonPercentage+rarePercentage)
+        else if (randomValue <= commonPercentage + uncommonPercentage + rarePercentage)
         {
             return BattleLoot.LootRarity.Rare;
         }
-        else if (randomValue < commonPercentage+uncommonPercentage+rarePercentage+epicPercentage)
+        else if (randomValue < commonPercentage + uncommonPercentage + rarePercentage + epicPercentage)
         {
             return BattleLoot.LootRarity.Epic;
         }
@@ -174,13 +139,13 @@ public class LevelUpUIState : UIStateComponent
 
     }
 
-    private (float,float,float,float,float) GetDropPercentage(int waveIndex)
+    private (float, float, float, float, float) GetDropPercentage(int waveIndex)
     {
-        if(waveIndex >= legendaryLevelAmount)
+        if (waveIndex >= legendaryLevelAmount)
         {
             return (0.05f, 0.10f, 0.20f, 0.4f, 0.25f);
         }
-        else if(waveIndex >= epicLevelAmount)
+        else if (waveIndex >= epicLevelAmount)
         {
             return (0.19f, 0.3f, 0.35f, 0.1f, 0.01f);
         }
@@ -192,7 +157,8 @@ public class LevelUpUIState : UIStateComponent
         {
             return (0.75f, 0.25f, 0, 0, 0);
         }
-        else {
+        else
+        {
             return (1, 0, 0, 0, 0);
         }
 

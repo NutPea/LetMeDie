@@ -40,6 +40,7 @@ public class BattleLootButton : MonoBehaviour
         
         head.text = battleLoot.Name;
         iconImage.sprite = battleLoot.Icon;
+        iconImage.color = battleLoot.Tint;
         description.text = battleLoot.Description;
         currentBattleLoot = battleLoot;
     }

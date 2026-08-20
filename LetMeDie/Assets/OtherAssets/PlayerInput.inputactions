@@ -64,7 +64,7 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "9a0f20ae-85c2-4b86-a451-065615d014a8",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -321,7 +321,7 @@
                 {
                     "name": "",
                     "id": "0449d028-93e3-4061-9877-cf6b85e5d739",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -495,6 +495,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "GetSpell",
+                    "type": "Button",
+                    "id": "ded0b682-6cee-49dd-8ec6-e47958b64eff",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -517,6 +526,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "GetItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f28f4873-b922-41f7-8d77-d98b8ca3f89e",
+                    "path": "<Keyboard>/f3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetSpell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

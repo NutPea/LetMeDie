@@ -6,12 +6,18 @@ using UnityEngine.Events;
 public class MagicSpell : WeaponData
 {
     [SerializeField] private int spellManaCost = 10;
-    public int SpellManaCost => spellManaCost;
+    public int SpellManaCost => spellManaCost - Mathf.CeilToInt((float)spellManaCost * playerData.SpellManaReduction);
+
+    private int currentSpellMana = 0;
+    private bool SpellIsReady => currentSpellMana >= SpellManaCost;
+
     protected PlayerResourceHandler playerResourceHandler;
     public UnityEvent<MagicSpell> OnSpellCast = new();
     [SerializeField] private List<InfluenceData> spellInfluences = new();
     public List<InfluenceData> SpellInfluences => copiedSpellInfluences;
     private List<InfluenceData> copiedSpellInfluences = new();
+
+    [HideInInspector] public UnityEvent<int,int> OnSpellAmountUpdate = new();
 
     public override void Equip(PlayerWeaponController playerWeaponController)
     {
@@ -24,25 +30,41 @@ public class MagicSpell : WeaponData
             data.Init(playerWeaponController, this);
             copiedSpellInfluences.Add(data);
         }
+        currentSpellMana = SpellManaCost;
     }
 
     public override void Attack(Transform camera, float chargeAmount)
     {
         base.Attack(camera, chargeAmount);
-        /*
-        if (playerResourceHandler.CurrentMana >= SpellManaCost) {
-            playerResourceHandler.UseMana(SpellManaCost);
+        
+        if (SpellIsReady) {
+            Cast(camera);
             OnSpellCast.Invoke(this);
+            currentSpellMana = 0;
+            OnSpellAmountUpdate.Invoke(currentSpellMana, SpellManaCost);
         }
-        */
-
-        Cast(camera);
-        OnSpellCast.Invoke(this);
     }
 
     public virtual void Cast(Transform camera)
     {
 
+    }
+
+    public void RegMana()
+    {
+        if(currentSpellMana < SpellManaCost)
+        {
+            AddMana();
+            OnSpellAmountUpdate.Invoke(currentSpellMana , SpellManaCost);
+        }
+    }
+
+    public void AddMana()
+    {
+        currentSpellMana++;
+        if (currentSpellMana > SpellManaCost) {
+            currentSpellMana = SpellManaCost;
+        }
     }
 
 }

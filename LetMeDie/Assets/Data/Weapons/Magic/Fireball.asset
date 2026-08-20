@@ -15,7 +15,7 @@ MonoBehaviour:
   _guid: Fireball
   itemName: Fireball
   description: NO DESCRIPTION
-  sprite: {fileID: 21300000, guid: 6d7b8ce731b92014bbeddfccad4609ae, type: 3}
+  sprite: {fileID: 21300000, guid: 469ee53dc35b3fe4091ac89246a10648, type: 3}
   _tint: {r: 0.8018868, g: 0.19472241, b: 0.10969208, a: 1}
   minDamageAmount: 0
   maxDamageAmount: 0
@@ -23,12 +23,15 @@ MonoBehaviour:
   fullChargeTime: 0.5
   attackCooldown: 0.5
   combatEffect: []
-  spellManaCost: 10
+  spellManaCost: 25
   OnSpellCast:
     m_PersistentCalls:
       m_Calls: []
   spellInfluences:
   - {fileID: 11400000, guid: db2ec32a240d80b43828291fb213b247, type: 2}
-  baseDamage: 5
+  OnSpellAmountUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  baseDamage: 15
   ExtraDamage: 0
   projectile: {fileID: 3730081872900235946, guid: 5e8893bbcaf19264985372a7497f7a09, type: 3}

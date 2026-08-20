@@ -12,6 +12,7 @@ public class CheatHandler : MonoBehaviour
         PlayerInput inputs = SInputManager.Instance.inputActions;
         inputs.Cheats.LevelUp.performed += LevelUpPlayer;
         inputs.Cheats.GetItem.performed += GetItem;
+        inputs.Cheats.GetSpell.performed += GetSpell;
 
         playerStatHandler = GetComponent<PlayerStatHandler>();
     }
@@ -25,5 +26,10 @@ public class CheatHandler : MonoBehaviour
     private void GetItem(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
         SUIManager.Instance.ChangeToUIState("GetItem");
+    }
+
+    private void GetSpell(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        SUIManager.Instance.ChangeToUIState("SpellLevelUp");
     }
 }

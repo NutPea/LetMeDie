@@ -47,4 +47,9 @@ public class WeaponData : ItemData
 
     }
 
+    protected void DamageDone(int amount)
+    {
+        playerWeaponController.DamageDone(amount);
+    }
+
 }

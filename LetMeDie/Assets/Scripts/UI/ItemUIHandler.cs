@@ -8,6 +8,8 @@ public class ItemUIHandler : MonoBehaviour
 {
     private ItemData currentItemData;
 
+    [SerializeField] private Image cooldownAmount;
+    [SerializeField] private Image cantUseBackground;
     [SerializeField] private Image image;
     [SerializeField] private TextMeshProUGUI text;
 
@@ -15,9 +17,11 @@ public class ItemUIHandler : MonoBehaviour
     [SerializeField] private float duration;
     [SerializeField] private float scaleAmount;
 
+    private MagicSpell currentSpell;
     private void Awake()
     {
         image.gameObject.SetActive(false);
+        cooldownAmount.fillAmount = 0;
     }
 
     public void Init(ItemData data)
@@ -59,9 +63,29 @@ public class ItemUIHandler : MonoBehaviour
 
     private void HandleMagicSpell(MagicSpell magic)
     {
-        text.text = magic.SpellManaCost.ToString();
+        if (currentSpell != null) {
+            currentSpell.OnSpellAmountUpdate.RemoveAllListeners();
+        }
+        currentSpell = magic;
+        magic.OnSpellAmountUpdate.AddListener(ShowSpellUpdate);
         magic.OnSpellCast.AddListener(OnSpellCast);
     }
+
+    private void ShowSpellUpdate(int currentMana, int neededMana)
+    {
+        if(currentMana == neededMana) {
+            text.text = "";
+            cantUseBackground.gameObject.SetActive(false);
+            cooldownAmount.gameObject.SetActive(false);
+            return;
+        }
+        cooldownAmount.gameObject.SetActive(true);
+        cantUseBackground.gameObject.SetActive(true);
+        cooldownAmount.fillAmount = (float) currentMana / (float) neededMana;
+        int manaDifference = neededMana - currentMana;
+        text.text = manaDifference.ToString();
+    }
+
 
     private void OnSpellCast(MagicSpell magic)
     {
