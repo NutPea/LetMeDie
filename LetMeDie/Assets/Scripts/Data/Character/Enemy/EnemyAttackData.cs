@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyAttackData : ScriptableObject
@@ -5,6 +6,15 @@ public class EnemyAttackData : ScriptableObject
 
     [SerializeField] private float attackWaitTime = 1.0f;
     public float AttackWaitTime => attackWaitTime;
+
+
+    [SerializeField] private float attackCooldown;
+    private float currentAttackCooldown;
+
+    private bool hasCooldown;
+    public bool HasCooldown => hasCooldown;
+    public bool IsOnCooldown => currentAttackCooldown > 0;
+
 
     protected EnemyData currentEnemyData;
 
@@ -20,6 +30,27 @@ public class EnemyAttackData : ScriptableObject
 
     [SerializeField] private AnimationEnum currentAttackAnimation = AnimationEnum.Attack1;
     protected BaseEnemyController BaseEnemyController;
+
+    public void SetCooldown(Action<EnemyAttackData> hasCooldownAction)
+    {
+        if(attackCooldown <= 0)
+        {
+            return;
+        }
+        currentAttackCooldown = attackCooldown;
+        hasCooldown = true;
+        hasCooldownAction.Invoke(this);
+    }
+
+    public void UpdateCooldown()
+    {
+        currentAttackCooldown -= Time.deltaTime;
+    }
+
+    public void ResetCooldown()
+    {
+        hasCooldown = false;
+    }
 
     public virtual void Init(BaseEnemyController enemy,EnemyData enemyData)
     {

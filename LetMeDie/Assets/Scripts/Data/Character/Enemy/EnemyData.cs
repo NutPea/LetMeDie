@@ -50,7 +50,22 @@ public class EnemyData : HealthData
     
     public EnemyAttackData GetAttack()
     {
-        return enemyAttackDatas[0];
+
+        for (int i = 0; i < 100; i++) {
+            EnemyAttackData data = EnemyAttackDatas[Random.Range(0, EnemyAttackDatas.Count)];
+            
+            if (data.HasCooldown)
+            {
+                continue;
+            }
+            else
+            {
+                return data;
+            }
+
+        }
+
+        return EnemyAttackDatas[0];
     }
 
 

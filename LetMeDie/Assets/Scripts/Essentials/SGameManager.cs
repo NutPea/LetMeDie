@@ -31,6 +31,7 @@ public class SGameManager : MonoBehaviour
 
     private int killedEnemies = 0;
     public UnityEvent<int> OnEnemyKilled = new();
+    public UnityEvent<HealthManager> OnBossRegistered = new();
     private void Awake()
     {
         if (Instance == null) {
@@ -82,5 +83,10 @@ public class SGameManager : MonoBehaviour
     private void Update()
     {
         ElapsedGameTime += Time.deltaTime;
+    }
+
+    internal void RegisterBoss(HealthManager healthManager)
+    {
+        OnBossRegistered.Invoke(healthManager);
     }
 }

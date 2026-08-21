@@ -7,11 +7,13 @@ public class PathfindingMovementEnemyExtension : BaseEnemyMovement
     private NavMeshAgent agent;
     private bool lookOnPlayer;
     private bool isDead;
+    private  RigidbodyConstraints startConstrain;
     protected override void Start()
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        startConstrain = rb.constraints;
     }
 
     protected override void StopEverything(GameObject died)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
@@ -19,6 +20,7 @@ public class BaseEnemyCombat : MonoBehaviour
     private bool canAttack;
 
     private EnemyAttackData currentEnemyAttackData;
+    private List<EnemyAttackData> attackDataOnCooldown = new();
 
     private void Start()
     {
@@ -49,6 +51,12 @@ public class BaseEnemyCombat : MonoBehaviour
         currentEnemyAttackData = enemyData.GetAttack();
         currentEnemyAttackData.Select(this, player);
         canAttack = true;
+        currentEnemyAttackData.SetCooldown(AddToCooldownList);
+    }
+
+    private void AddToCooldownList(EnemyAttackData data)
+    {
+        attackDataOnCooldown.Add(data);
     }
 
     public virtual void Stagger(float time)
@@ -72,11 +80,31 @@ public class BaseEnemyCombat : MonoBehaviour
 
     private void Update()
     {
+        if (attackDataOnCooldown.Count > 0)
+        {
+            EnemyAttackData removeData = null;
+            foreach (EnemyAttackData enemyAttackData in attackDataOnCooldown)
+            {
+                enemyAttackData.UpdateCooldown();
+                if (!enemyAttackData.IsOnCooldown)
+                {
+                    enemyAttackData.ResetCooldown();
+                    removeData = enemyAttackData;
+                }
+            }
+            if (removeData != null)
+            {
+                attackDataOnCooldown.Remove(removeData);
+            }
+        }
+
         if (isDead || !BaseEnemyController.IsAggro || !canAttack)
         {
             return;
         }
         currentEnemyAttackData.AttackUpdate(this,player);
+
+        
     }
 
     public void Attack()
