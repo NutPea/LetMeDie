@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class WaveSpawnManager : MonoBehaviour
 {
-
-    private SGameManager gameManager;
     [Header("Enemies")]
     [SerializeField] private List<SpawnEnemy> enemies = new();
     [SerializeField] private List<SpawnEnemy> afterGameTimeEnemies = new();
@@ -21,9 +19,13 @@ public class WaveSpawnManager : MonoBehaviour
 
 
     [Header("Spawn Rate")]
-    [SerializeField] private float startSpawnRate = 3.0f;
-    [SerializeField] private float endSpawnRate = 0.5f;
-    [SerializeField] private AnimationCurve spawnCurve;
+
+    [Tooltip("Ab welcher Zeit überhaupt Gegner spawnen dürfen.")]
+    [SerializeField] private float enemySpawnStartTime = 0.0f;
+
+    [Tooltip("Spawnzeiten abhängig von der vergangenen GameTime.")]
+    [SerializeField] private List<SpawnRateStep> spawnRateSteps = new();
+
 
     private float currentSpawnRate;
 
@@ -42,21 +44,40 @@ public class WaveSpawnManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(SGameManager.Instance);
+
         player = SGameManager.Instance.PlayerBody;
 
+        /*
+         * Spawnrate-Liste nach Zeit sortieren.
+         *
+         * Beispiel:
+         *
+         * 120 Sekunden
+         * 20 Sekunden
+         * 60 Sekunden
+         *
+         * wird zu:
+         *
+         * 20
+         * 60
+         * 120
+         */
+        spawnRateSteps.Sort((a, b) =>
+            a.TriggerTime.CompareTo(b.TriggerTime));
+
+
         currentSpawnRate = SpawnRate;
+
 
         // Make sure events are ordered by trigger time.
         events.Sort((a, b) =>
             a.TriggerTime.CompareTo(b.TriggerTime));
-
-        gameManager = SGameManager.Instance;
     }
 
 
     private void Update()
     {
-
         UpdateEvents();
 
         UpdateSpawnEvent();
@@ -74,9 +95,13 @@ public class WaveSpawnManager : MonoBehaviour
         if (nextEventIndex >= events.Count)
             return;
 
-        SpawnEvent currentEvent = events[nextEventIndex];
 
-        if (gameManager.ElapsedGameTime >= currentEvent.TriggerTime)
+        SpawnEvent currentEvent =
+            events[nextEventIndex];
+
+
+        if (SGameManager.Instance.ElapsedGameTime >=
+            currentEvent.TriggerTime)
         {
             TriggerEvent(currentEvent);
 
@@ -106,10 +131,15 @@ public class WaveSpawnManager : MonoBehaviour
 
     private void StartSpawnEvent(SpawnEvent spawnEvent)
     {
-        spawnEventTimeRemaining = spawnEvent.Duration;
+        spawnEventTimeRemaining =
+            spawnEvent.Duration;
 
         spawnEventMultiplier =
-            Mathf.Max(1.0f, spawnEvent.SpawnRateMultiplier);
+            Mathf.Max(
+                1.0f,
+                spawnEvent.SpawnRateMultiplier
+            );
+
 
         Debug.Log(
             $"Spawn Event Started: {spawnEvent.EventName}"
@@ -125,7 +155,10 @@ public class WaveSpawnManager : MonoBehaviour
             return;
         }
 
-        spawnEventTimeRemaining -= Time.deltaTime;
+
+        spawnEventTimeRemaining -=
+            Time.deltaTime;
+
 
         if (spawnEventTimeRemaining <= 0.0f)
         {
@@ -158,9 +191,12 @@ public class WaveSpawnManager : MonoBehaviour
         );
 
 
-        for (int i = 0; i < spawnEvent.BossCount; i++)
+        for (int i = 0;
+             i < spawnEvent.BossCount;
+             i++)
         {
-            if (TryGetSpawnPosition(out Vector3 spawnPosition))
+            if (TryGetSpawnPosition(
+                    out Vector3 spawnPosition))
             {
                 Instantiate(
                     spawnEvent.BossPrefab,
@@ -184,13 +220,28 @@ public class WaveSpawnManager : MonoBehaviour
 
     private void UpdateSpawnTimer()
     {
-        currentSpawnRate -= Time.deltaTime;
+        /*
+         * Noch keine Gegner spawnen?
+         *
+         * Timer pausieren.
+         */
+        if (!CanSpawnEnemies())
+        {
+            currentSpawnRate = SpawnRate;
+            return;
+        }
+
+
+        currentSpawnRate -=
+            Time.deltaTime;
+
 
         if (currentSpawnRate <= 0.0f)
         {
             SpawnEnemy();
 
-            currentSpawnRate = SpawnRate;
+            currentSpawnRate =
+                SpawnRate;
         }
     }
 
@@ -201,8 +252,12 @@ public class WaveSpawnManager : MonoBehaviour
             return;
 
 
+        if (!CanSpawnEnemies())
+            return;
+
+
         List<SpawnEnemy> availableEnemies =
-            gameManager.IsGameTime
+            SGameManager.Instance.IsGameTime
                 ? enemies
                 : afterGameTimeEnemies;
 
@@ -219,7 +274,9 @@ public class WaveSpawnManager : MonoBehaviour
 
 
         SpawnEnemy enemy =
-            GetWeightedEnemy(availableEnemies);
+            GetWeightedEnemy(
+                availableEnemies
+            );
 
 
         if (enemy == null)
@@ -253,15 +310,38 @@ public class WaveSpawnManager : MonoBehaviour
         }
 
 
-        GameObject spawnedEnemy = Instantiate(
-            enemy.EnemyPrefab,
-            spawnPosition,
-            Quaternion.identity
-        );
+        GameObject spawnedEnemy =
+            Instantiate(
+                enemy.EnemyPrefab,
+                spawnPosition,
+                Quaternion.identity
+            );
 
-        if(spawnedEnemy.TryGetComponent(out BaseEnemyMovement baseEnemyMovement)){
+
+        if (spawnedEnemy.TryGetComponent(
+                out BaseEnemyMovement baseEnemyMovement))
+        {
             baseEnemyMovement.OnAggro();
         }
+    }
+
+
+    // ============================================================
+    // ENEMY SPAWN START
+    // ============================================================
+
+    private bool CanSpawnEnemies()
+    {
+        /*
+         * Nach der normalen GameTime
+         * werden die afterGameTimeEnemies verwendet.
+         */
+        if (!SGameManager.Instance.IsGameTime)
+            return true;
+
+
+        return SGameManager.Instance.ElapsedGameTime >=
+               enemySpawnStartTime;
     }
 
 
@@ -326,26 +406,23 @@ public class WaveSpawnManager : MonoBehaviour
         SpawnEnemy enemy)
     {
         /*
-         * Enemies have:
+         * Vor StartTime:
+         * Weight = 0
          *
-         * Start Time
-         * Maximum Weight
-         *
-         * Before Start Time:
-         *      Weight = 0
-         *
-         * After Start Time:
-         *      Weight gradually increases
-         *      until Maximum Weight.
+         * Danach:
+         * Weight steigt linear bis Maximum Weight.
          */
 
-
-        if (gameManager.ElapsedGameTime < enemy.StartTime)
+        if (SGameManager.Instance.ElapsedGameTime <
+            enemy.StartTime)
+        {
             return 0;
+        }
 
 
         float timeSinceStart =
-            gameManager.ElapsedGameTime - enemy.StartTime;
+            SGameManager.Instance.ElapsedGameTime -
+            enemy.StartTime;
 
 
         float weightProgress =
@@ -375,57 +452,103 @@ public class WaveSpawnManager : MonoBehaviour
 
     private float CalculateSpawnRate()
     {
-        float rate;
-
-
-        if (gameManager.IsGameTime)
+        /*
+         * Nach der GameTime:
+         * schnellste eingestellte Spawnrate verwenden.
+         */
+        if (!SGameManager.Instance.IsGameTime)
         {
-            /*
-             * 0 = beginning of game
-             * 1 = end of game
-             */
+            if (spawnRateSteps == null ||
+                spawnRateSteps.Count == 0)
+            {
+                return 1.0f;
+            }
 
 
-            float progress =
-                gameManager.ElapsedGameTime /
-                gameManager.GameDuration;
-
-
-            progress =
-                Mathf.Clamp01(progress);
-
-
-            rate =
-                Mathf.Lerp(
-                    startSpawnRate,
-                    endSpawnRate,
-                   spawnCurve.Evaluate(progress)
-                );
+            return spawnRateSteps[
+                spawnRateSteps.Count - 1
+            ].SpawnRate / spawnEventMultiplier;
         }
-        else
+
+
+        float elapsedTime =
+            SGameManager.Instance.ElapsedGameTime;
+
+
+        /*
+         * Falls keine SpawnRate-Einträge vorhanden sind.
+         */
+        if (spawnRateSteps == null ||
+            spawnRateSteps.Count == 0)
         {
-            rate = endSpawnRate;
+            return 1.0f;
         }
 
 
         /*
-         * Spawn event multiplier.
+         * Standardmäßig den ersten Wert verwenden.
+         */
+        float selectedSpawnRate =
+            spawnRateSteps[0].SpawnRate;
+
+
+        /*
+         * Wir suchen den letzten Eintrag,
+         * dessen TriggerTime bereits erreicht wurde.
          *
-         * Example:
+         * Beispiel:
          *
-         * Normal rate = 2 seconds
-         * Multiplier = 4
+         * 0s   -> 3.0
+         * 20s  -> 2.0
+         * 60s  -> 1.0
+         * 120s -> 0.5
          *
-         * Result = 0.5 seconds
+         * Bei 75 Sekunden:
+         * -> 1.0
          */
 
+        for (int i = 0;
+             i < spawnRateSteps.Count;
+             i++)
+        {
+            SpawnRateStep step =
+                spawnRateSteps[i];
 
-        rate /= spawnEventMultiplier;
+
+            if (elapsedTime >= step.TriggerTime)
+            {
+                selectedSpawnRate =
+                    step.SpawnRate;
+            }
+            else
+            {
+                /*
+                 * Da die Liste sortiert ist,
+                 * können wir hier abbrechen.
+                 */
+                break;
+            }
+        }
+
+
+        /*
+         * Spawn Event Multiplikator anwenden.
+         *
+         * Beispiel:
+         *
+         * SpawnRate = 2 Sekunden
+         * Multiplier = 4
+         *
+         * Ergebnis = 0.5 Sekunden
+         */
+
+        selectedSpawnRate /=
+            spawnEventMultiplier;
 
 
         return Mathf.Max(
             0.05f,
-            rate
+            selectedSpawnRate
         );
     }
 
@@ -449,9 +572,8 @@ public class WaveSpawnManager : MonoBehaviour
              i++)
         {
             /*
-             * Random direction around player.
+             * Zufällige Richtung um den Spieler.
              */
-
 
             Vector2 randomDirection =
                 UnityEngine.Random.insideUnitCircle
@@ -459,10 +581,8 @@ public class WaveSpawnManager : MonoBehaviour
 
 
             /*
-             * Random distance between
-             * min and max spawn distance.
+             * Zufällige Distanz.
              */
-
 
             float distance =
                 UnityEngine.Random.Range(
@@ -481,9 +601,8 @@ public class WaveSpawnManager : MonoBehaviour
 
 
             /*
-             * Find the nearest NavMesh position.
+             * Nächste NavMesh Position suchen.
              */
-
 
             if (!NavMesh.SamplePosition(
                     randomPosition,
@@ -496,10 +615,8 @@ public class WaveSpawnManager : MonoBehaviour
 
 
             /*
-             * Make sure the resulting NavMesh
-             * position isn't too close to player.
+             * Sicherheitsabstand zum Spieler.
              */
-
 
             float distanceToPlayer =
                 Vector3.Distance(
@@ -525,6 +642,36 @@ public class WaveSpawnManager : MonoBehaviour
 
         return false;
     }
+}
+
+
+// ================================================================
+// SPAWN RATE STEP
+// ================================================================
+
+[Serializable]
+public class SpawnRateStep
+{
+    [Tooltip(
+        "Ab welcher GameTime diese Spawnrate verwendet wird."
+    )]
+    [SerializeField]
+    private float triggerTime = 0.0f;
+
+
+    [Tooltip(
+        "Zeit in Sekunden zwischen zwei Enemy-Spawns."
+    )]
+    [SerializeField]
+    private float spawnRate = 1.0f;
+
+
+    public float TriggerTime =>
+        Mathf.Max(0.0f, triggerTime);
+
+
+    public float SpawnRate =>
+        Mathf.Max(0.05f, spawnRate);
 }
 
 

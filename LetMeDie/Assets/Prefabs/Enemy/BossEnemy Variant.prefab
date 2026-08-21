@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: aggroRange
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5164046709175685078, guid: 532b674cb6535be4f87f866c00b02a89, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bce32739db90b6843ac7f0179bcaa6b7, type: 2}
     - target: {fileID: 5755236780041669932, guid: 532b674cb6535be4f87f866c00b02a89, type: 3}
       propertyPath: m_LocalScale.x
       value: 2

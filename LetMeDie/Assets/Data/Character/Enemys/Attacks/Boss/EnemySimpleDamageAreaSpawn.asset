@@ -19,4 +19,4 @@ MonoBehaviour:
   damageArePrefab: {fileID: 5289989754590724, guid: 67467ffed2ff54a41a3857dd4725099d, type: 3}
   areaSize: 5
   timeUntilDamage: 2
-  damageAmount: 1
+  damageAmount: 40

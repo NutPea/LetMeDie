@@ -32,6 +32,7 @@ public class SpellShrine : MonoBehaviour
                 SUIManager.Instance.ChangeToUIState("SpellLevelUp");
                 rangeIndikator.gameObject.SetActive(false);
                 fillIndikator.gameObject.SetActive(false);
+                Destroy(gameObject);
             }
             else
             {

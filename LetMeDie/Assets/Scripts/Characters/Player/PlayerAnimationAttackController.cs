@@ -40,7 +40,7 @@ public class PlayerAnimationAttackController : MonoBehaviour
 
     public void PlaySwordWoosh()
     {
-        SoundManager.instance.PlayLibarySound(SoundLibary.SFX.Sword_Swing_Default);
+      //  SoundManager.instance.PlayLibarySound(SoundLibary.SFX.Sword_Swing_Default);
     }
 
     public void ShowTrail()

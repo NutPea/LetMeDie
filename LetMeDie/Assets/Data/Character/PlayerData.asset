@@ -16,9 +16,17 @@ MonoBehaviour:
   characterName: Player
   baseHealth: 100
   team: 1
+  baseMovementSpeed: 5
+  baseJumpForce: 5
   baseStamina: 3
   baseStaminaReginaration: 5
+  currentLevel: 1
+  currentExperience: 0
+  ExperiencePercent: 0
   OnLevelUp:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGoldChange:
     m_PersistentCalls:
       m_Calls: []
   OnExpChanged:
@@ -27,15 +35,9 @@ MonoBehaviour:
   OnItemAdded:
     m_PersistentCalls:
       m_Calls: []
-  currentLevel: 1
-  currentExperience: 0
-  ExperiencePercent: 0
-  strength: 10
-  dexterity: 14
-  intelligence: 5
-  resilience: 2
-  speed: 10
-  luck: 1
+  OnStatUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   ForceUpdateStats: 0
   currentEquipedWeapon: {fileID: 11400000, guid: 7fde9af1c120a1b43a4992da366b8def, type: 2}
   currentMagicSpell_1: {fileID: 0}
@@ -47,4 +49,3 @@ MonoBehaviour:
   consumable_1: {fileID: 0}
   consumable_2: {fileID: 0}
   consumable_3: {fileID: 0}
-  _goldItem: {fileID: 11400000, guid: 44c60dbbf00b2bd488691c7cd4e2a358, type: 2}

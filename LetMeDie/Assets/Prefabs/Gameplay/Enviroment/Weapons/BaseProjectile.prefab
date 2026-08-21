@@ -97,12 +97,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0156cdacb53d24f48be78d0f4ee294d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
   minSpeed: 5
   maxSpeed: 15
   OnCollided:
     m_PersistentCalls:
       m_Calls: []
   destroyOnInpact: 1
+  isAOE: 0
+  isPiercing: 0
+  stopWhenHit: 0
+  aoeRange: 4
 --- !u!1001 &9069059434057033472
 PrefabInstance:
   m_ObjectHideFlags: 0

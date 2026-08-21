@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class ProjectileHandler : MonoBehaviour
 {
-
+    [SerializeField] private LayerMask layerMask;
     private Rigidbody rb;
 
     [SerializeField] private float minSpeed;
@@ -19,6 +19,10 @@ public class ProjectileHandler : MonoBehaviour
     public float CurrentChargeAmount => currentChargeAmount;
     [HideInInspector] public UnityEvent OnCollided = new();
     [SerializeField] private bool destroyOnInpact = true;
+    [SerializeField] private bool isAOE;
+    [SerializeField] private bool isPiercing;
+    [SerializeField] private bool stopWhenHit;
+    [SerializeField] private float aoeRange = 2f;
 
     private void Awake()
     {
@@ -48,16 +52,42 @@ public class ProjectileHandler : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         OnCollided.Invoke();
+        GameObject hittedObject = null;
         if (other.gameObject.layer == LayerMask.NameToLayer("Hitable"))
         {
+            hittedObject = other.gameObject;
             other.gameObject.GetComponent<HealthManager>().InflictDamage(damage, team, transform);
-            Destroy(gameObject);
+            if (!isPiercing)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject, 1f);
+            }
         }
-        if (destroyOnInpact)
+        else if (destroyOnInpact)
         {
             Destroy(gameObject);
         }
-        canMove = false;
+        if (isAOE)
+        {
+            Collider[] hittable = Physics.OverlapSphere(transform.position, aoeRange, layerMask);
+            foreach(Collider col in hittable)
+            {
+                if(col.gameObject == hittedObject)
+                {
+                    continue;
+                }
+                Debug.Log(col.name);
+                col.gameObject.GetComponent<HealthManager>().InflictDamage(damage, team, transform);
+            }
+        }
+
+        if (stopWhenHit)
+        {
+            canMove = false;
+        }
     }
 
 }

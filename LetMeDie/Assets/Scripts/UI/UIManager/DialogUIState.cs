@@ -11,8 +11,8 @@ public class DialogUIState : UIStateComponent
     public override void OnInitUIState()
     {
         base.OnInitUIState();
-        GetComponentInChildren<StandardDialogueUI>().conversationUIElements.mainPanel.onClose.AddListener(CloseDialogUI);
-        playerAnimationController = SGameManager.Instance.PlayerBody.GetComponent<PlayerAnimationController>();
+        //GetComponentInChildren<StandardDialogueUI>().conversationUIElements.mainPanel.onClose.AddListener(CloseDialogUI);
+       // playerAnimationController = SGameManager.Instance.PlayerBody.GetComponent<PlayerAnimationController>();
     }
 
     private void CloseDialogUI()

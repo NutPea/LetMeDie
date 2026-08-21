@@ -23,7 +23,7 @@ MonoBehaviour:
   fullChargeTime: 0.5
   attackCooldown: 0.5
   combatEffect: []
-  spellManaCost: 5
+  spellManaCost: 10
   OnSpellCast:
     m_PersistentCalls:
       m_Calls: []
@@ -32,6 +32,6 @@ MonoBehaviour:
   OnSpellAmountUpdate:
     m_PersistentCalls:
       m_Calls: []
-  baseDamage: 5
-  ExtraDamage: 0
+  baseDamage: 25
+  ExtraDamage: 5
   projectile: {fileID: 6903004982847926900, guid: 4f858ed47828c0a4fba66d099f0e7235, type: 3}

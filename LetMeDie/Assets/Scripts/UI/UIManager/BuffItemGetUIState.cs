@@ -50,10 +50,15 @@ public class BuffItemGetUIState : UIStateComponent
         image.sprite = choosenBuffBattleLoot.Icon;
 
         SGameManager.Instance.SetCursorVisibility(true, CursorLockMode.None);
+        Time.timeScale = 0.0f;
 
     }
 
-
+    public override void OnExitUIState()
+    {
+        base.OnExitUIState();
+        Time.timeScale = 1.0f;
+    }
     public BuffBattleLoot GetBuffBattleLoot()
     {
         return buffItemTable.AvailableLoots[Random.Range(0,buffItemTable.AvailableLoots.Count -1)] as BuffBattleLoot;

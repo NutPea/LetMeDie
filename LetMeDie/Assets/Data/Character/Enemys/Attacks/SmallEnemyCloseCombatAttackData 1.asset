@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: SmallEnemyCloseCombatAttackData 1
   m_EditorClassIdentifier: 
   attackWaitTime: 1
+  attackCooldown: 0
   ShowDebug: 1
   currentAttackAnimation: 0
   attackOffset: {x: 0, y: 1, z: 0}
-  damage: 2
+  damage: 5
   attackCollisionSphereRadius: 0.75
   attackDistance: 1
   attackMoveAmount: 6
