@@ -11,6 +11,8 @@ public class WaveSpawnManager : MonoBehaviour
 
 
     [Header("Spawn Distance")]
+
+
     [SerializeField] private float cantSpawnDistance = 5.0f;
     [SerializeField] private float minSpawnDistance = 10.0f;
     [SerializeField] private float maxSpawnDistance = 30.0f;
@@ -607,7 +609,7 @@ public class WaveSpawnManager : MonoBehaviour
             if (!NavMesh.SamplePosition(
                     randomPosition,
                     out NavMeshHit hit,
-                    5.0f,
+                    1000.0f,
                     NavMesh.AllAreas))
             {
                 continue;

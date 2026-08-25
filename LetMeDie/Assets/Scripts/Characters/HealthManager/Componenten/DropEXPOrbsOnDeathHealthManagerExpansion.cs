@@ -5,6 +5,8 @@ using UnityEngine;
 public class DropEXPOrbsOnDeathHealthManagerExpansion : MonoBehaviour
 {
     [SerializeField] private GameObject expDrop;
+
+
     [SerializeField] private int minAmountOfDrops = 1;
     [SerializeField] private int maxAmountOfDrops = 3;
     private HealthManager healthManager;
@@ -16,6 +18,7 @@ public class DropEXPOrbsOnDeathHealthManagerExpansion : MonoBehaviour
     {
         healthManager = GetComponent<HealthManager>();
         healthManager.OnDeath.AddListener(SpawnDrops);
+
     }
 
     private void SpawnDrops(GameObject arg0)

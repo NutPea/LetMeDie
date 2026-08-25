@@ -9,8 +9,6 @@ public class WeaponData : ItemData
     [SerializeField] protected int maxDamageAmount;
     [SerializeField] protected bool canBlock;
     public bool CanBlock => canBlock;
-    [SerializeField] private float fullChargeTime = 0.5f;
-    public float FullChargeTime => fullChargeTime;
 
     protected PlayerData playerData;
     protected PlayerWeaponController playerWeaponController;

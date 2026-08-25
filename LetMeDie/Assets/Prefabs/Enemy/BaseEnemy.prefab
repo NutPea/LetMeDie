@@ -178,7 +178,8 @@ GameObject:
   - component: {fileID: 5055854035177224684}
   - component: {fileID: 2883480203658708997}
   - component: {fileID: 2247827901959566834}
-  - component: {fileID: 6871741462003036706}
+  - component: {fileID: 4472193178693421507}
+  - component: {fileID: 3626362210238760648}
   m_Layer: 6
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -379,7 +380,7 @@ MonoBehaviour:
   dropPrefab: {fileID: 3646366291811512748, guid: a34118eb34e76e64eabcce72a7259bd4, type: 3}
   spawnPosition: {fileID: 8336637633549908635}
   dropChance: 0.3
---- !u!114 &6871741462003036706
+--- !u!114 &4472193178693421507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -388,10 +389,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4391572459125369179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a189cf97b280e3d41892f7a50311606a, type: 3}
+  m_Script: {fileID: 11500000, guid: 691ea5addd9546d4d8f9375796d240e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expDrop: {fileID: 9171820792960154368, guid: 4431485e178f0b448b950c9d6878dce3, type: 3}
-  minAmountOfDrops: 1
-  maxAmountOfDrops: 3
-  randomSpawnRadius: 0.75
+  amountOfDamage: 1
+--- !u!114 &3626362210238760648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4391572459125369179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35faf19ab2a6894a9ba8853c12b6612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commonAmount: 10
+  uncommoonAmount: 30
+  rareAmount: 75
+  epicAmount: 200
+  legendaryAmount: 500
+  dropPercentage: 0.5

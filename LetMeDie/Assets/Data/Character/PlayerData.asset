@@ -16,10 +16,12 @@ MonoBehaviour:
   characterName: Player
   baseHealth: 100
   team: 1
+  baseInvincibleTime: 0.5
   baseMovementSpeed: 5
   baseJumpForce: 5
   baseStamina: 3
   baseStaminaReginaration: 5
+  weaponChargeTime: 0.5
   currentLevel: 1
   currentExperience: 0
   ExperiencePercent: 0
@@ -38,6 +40,7 @@ MonoBehaviour:
   OnStatUpdate:
     m_PersistentCalls:
       m_Calls: []
+  tempBuffBattleLoot: []
   ForceUpdateStats: 0
   currentEquipedWeapon: {fileID: 11400000, guid: 7fde9af1c120a1b43a4992da366b8def, type: 2}
   currentMagicSpell_1: {fileID: 0}

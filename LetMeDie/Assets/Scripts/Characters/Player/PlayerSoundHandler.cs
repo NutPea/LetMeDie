@@ -25,7 +25,7 @@ public class PlayerSoundHandler : MonoBehaviour
 
     private void PlayHeal()
     {
-        SoundManager.instance.PlayLibarySound(SoundLibary.SFX.Feedback_Heal);
+      //  SoundManager.instance.PlayLibarySound(SoundLibary.SFX.Feedback_Heal);
     }
 
     private void PlayDamage(bool arg0, int arg1, Transform arg2)

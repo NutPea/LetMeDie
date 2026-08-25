@@ -1,15 +1,18 @@
-using System;
+
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Events;
-using static PixelCrushers.AnimatorSaver;
+
 
 [CreateAssetMenu(fileName = "Data", menuName = "Character/PlayerData", order = 1)]
 public class PlayerData : HealthData
 {
 
+    [SerializeField] private float baseInvincibleTime;
+    public float InvincibleTime => baseInvincibleTime + baseInvincibleTime * extraInvinciblePerventage;
 
+    private float extraInvinciblePerventage;
+    public float ExtraInvinciblePerventage { set =>  extraInvinciblePerventage = value;}
 
     [Header("Movement")]
 
@@ -54,11 +57,16 @@ public class PlayerData : HealthData
     private float spellManaRegeneration = 0.0f;
     public float SpellManaRegeneration { get => spellManaRegeneration; set { spellManaRegeneration = value; } }
 
-    public float BaseLifeSteal { get =>  lifeStealPercentage; }
-
     private float lifeStealPercentage = 0.0f;
     public float LifeStealPercentage { get => lifeStealPercentage; set => lifeStealPercentage = value; }
 
+    [SerializeField] private float weaponChargeTime = 1.0f;
+
+    public float WeaponChargeTime => weaponChargeTime - (Mathf.Lerp(0.0f, (weaponChargeTime / 2), extraAttackSpeedPercent));
+
+    private float extraAttackSpeedPercent = 0.0f;
+
+    public float ExtraAttackSpeed { get => extraAttackSpeedPercent; set { extraAttackSpeedPercent = value; } }
 
 
     [Header("Other")]
@@ -101,6 +109,11 @@ public class PlayerData : HealthData
     private List<BuffBattleLoot> buffBattleLoots = new List<BuffBattleLoot>();
     public List<BuffBattleLoot> BuffBattleLoots => buffBattleLoots;
 
+    public List<BuffBattleLoot> tempBuffBattleLoot = new List<BuffBattleLoot>();
+
+    public List<BuffBattleLoot> TempBuffBattleLoot => tempBuffBattleLoot;
+
+
     public void AddGold(int amount)
     {
         goldAmount += amount + Mathf.CeilToInt((float)amount * goldPercentage);
@@ -109,7 +122,7 @@ public class PlayerData : HealthData
 
     public void RemoveGold(int amount)
     {
-        goldAmount += amount + Mathf.CeilToInt((float)amount * goldPercentage);
+        goldAmount -= amount + Mathf.CeilToInt((float)amount * goldPercentage);
         OnGoldChange.Invoke(goldAmount);
     }
 
@@ -136,17 +149,32 @@ public class PlayerData : HealthData
 
     private int ExpForNextLevel(int level)
     {
-        return Mathf.RoundToInt(100 * Mathf.Pow(level, 1.5f));
+        return Mathf.RoundToInt(100 * Mathf.Pow(level, 1.1f));
     }
 
     public void AddBuffBattleLoot(BuffBattleLoot buff)
     {
         BuffBattleLoot copiedBuff = Instantiate(buff);
-        BuffBattleLoots.Add(buff);
-        buff.BuffBattleLootAdded(currentPlayer, this);
+        BuffBattleLoots.Add(copiedBuff);
+        copiedBuff.BuffBattleLootAdded(currentPlayer, this);
         OnStatUpdate.Invoke();
     }
 
+    public void AddTempBuffBattleLoot(BuffBattleLoot buff)
+    {
+        BuffBattleLoot copiedBuff = Instantiate(buff);
+        TempBuffBattleLoot.Add(copiedBuff);
+        copiedBuff.BuffBattleLootAdded(currentPlayer, this);
+        copiedBuff.StartTempBuff();
+        OnStatUpdate?.Invoke();
+    }
+
+    private void RemoveTempBuffBattleLoot(BuffBattleLoot buff)
+    {
+        TempBuffBattleLoot.Remove(buff);
+        buff.BuffBattleLootRemoved(currentPlayer, this);
+        OnStatUpdate?.Invoke();
+    }
 
 
     public bool ForceUpdateStats = false;
@@ -253,6 +281,27 @@ public class PlayerData : HealthData
         nextLevelUpExperience = ExpForNextLevel(currentLevel);
     }
 
+    public void GameUpdate()
+    {
+        if(tempBuffBattleLoot.Count > 0)
+        {
+            BuffBattleLoot toRemoveBuff = null;
+            foreach(BuffBattleLoot buffBattleLoot in tempBuffBattleLoot)
+            {
+                buffBattleLoot.CurrentTemporaryBuffTime -= Time.deltaTime;
+                if (!buffBattleLoot.IsTempBuffActiv)
+                {
+                    toRemoveBuff = buffBattleLoot;
+                }
+            }
+
+            if(toRemoveBuff != null)
+            {
+                RemoveTempBuffBattleLoot(toRemoveBuff);
+            }
+        }
+    }
+
     public void ForceLevelUp()
     {
         AddExperience(nextLevelUpExperience);
@@ -345,6 +394,14 @@ public class PlayerData : HealthData
     public static int CalculateChargeDamage(float minDamage, float maxDamage, float chargeAmount)
     {
         return Mathf.RoundToInt(Mathf.Lerp(minDamage, maxDamage, chargeAmount)); ;
+    }
+
+    internal void RegSpellMana(int regAmount)
+    {
+        for(int i = 0; i< regAmount; i++)
+        {
+            RegSpellMana();
+        }
     }
 
     internal void RegSpellMana()

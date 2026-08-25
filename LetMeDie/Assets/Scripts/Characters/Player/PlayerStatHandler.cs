@@ -81,6 +81,7 @@ public class PlayerStatHandler : MonoBehaviour
             UpdateStats();
             _clonedPlayerData.ForceUpdateStats = false;
         }
+        PlayerData.GameUpdate();
     }
 
     private void UpdateStats()

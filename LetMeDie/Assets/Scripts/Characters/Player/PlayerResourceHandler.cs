@@ -26,12 +26,28 @@ public class PlayerResourceHandler : HealthManager
     private float manaRegValue;
     private float healthRegValue;
 
+    private float lifeStealAmount;
+
+
     private void Start()
     {
         currentRegenerationTime = data.StaminaRegeneration;
         OnDamageBlocked.AddListener(UseStamina);
         CurrentStamina = data.Stamina;
         currentStatRegenerationTime = STAT_REGENERATION_TIME;
+        OnDamaged.AddListener(SetInvincible);
+    }
+
+    private void SetInvincible(bool arg0, int arg1, Transform arg2)
+    {
+        isInvincible = true;
+        CancelInvoke(nameof(ResetInvincible));
+        Invoke(nameof(ResetInvincible), data.InvincibleTime);
+    }
+
+    private void ResetInvincible()
+    {
+        isInvincible = false;
     }
 
     private void Update()
@@ -135,8 +151,13 @@ public class PlayerResourceHandler : HealthManager
     {
         if(baseLifeSteal > 0)
         {
-            int healAmount = Mathf.CeilToInt((float)amount * baseLifeSteal);
-            Heal(healAmount);
+            lifeStealAmount += (float)amount * baseLifeSteal;
+            if(lifeStealAmount > 1)
+            {
+                int potentialHeal = (int)lifeStealAmount;
+                lifeStealAmount -= potentialHeal;
+                Heal(potentialHeal);
+            }
         }
     }
 }

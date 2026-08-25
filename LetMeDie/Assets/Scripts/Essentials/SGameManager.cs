@@ -18,7 +18,11 @@ public class SGameManager : MonoBehaviour
 
     [HideInInspector] public float ElapsedGameTime;
     [HideInInspector] public bool IsGameTime => ElapsedGameTime < GameDuration;
+
+    private bool GameHasBeenEnded = false;
     [HideInInspector] public float RemainingGameTime => Mathf.Max(0.0f, GameDuration - ElapsedGameTime);
+
+    
 
 
     [Header("Debug")]
@@ -32,6 +36,7 @@ public class SGameManager : MonoBehaviour
     private int killedEnemies = 0;
     public UnityEvent<int> OnEnemyKilled = new();
     public UnityEvent<HealthManager> OnBossRegistered = new();
+    public UnityEvent OnGameEnded = new();
     private void Awake()
     {
         if (Instance == null) {
@@ -83,6 +88,14 @@ public class SGameManager : MonoBehaviour
     private void Update()
     {
         ElapsedGameTime += Time.deltaTime;
+        if (!IsGameTime)
+        {
+            if (!GameHasBeenEnded)
+            {
+                OnGameEnded.Invoke();
+                GameHasBeenEnded = true;
+            }
+        }
     }
 
     internal void RegisterBoss(HealthManager healthManager)

@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -30,6 +28,8 @@ public class HealthManager : MonoBehaviour
     [HideInInspector] public bool IsBlocked = false;
     [HideInInspector] public UnityEvent<int> OnDamageBlocked = new();
 
+    protected bool isInvincible;
+
     private void Awake()
     {
         OnDamaged = new CalculateDamageEvent();
@@ -57,6 +57,11 @@ public class HealthManager : MonoBehaviour
 
     public void InflictDamage(int damage,TeamFlag team,Transform hitSource)
     {
+        if (isInvincible)
+        {
+            return;
+        }
+
         int appliedDamage = damage;
         bool isDead = false;
         if (IsBlocked)
@@ -101,6 +106,10 @@ public class HealthManager : MonoBehaviour
 
     public void Heal(int amount)
     {
+        if (IsFullHealth){
+            return;
+        }
+
         currentHealth += amount;
         if(currentHealth >= healthData.Health)
         {

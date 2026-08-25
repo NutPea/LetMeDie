@@ -39,7 +39,6 @@ public class PlayerWeaponEquiper : MonoBehaviour
     {
         playerWeaponController.EquipWeapon(data);
         OnEquipWeapon.Invoke(data);
-        playerCombatController.CurrentFullChargeTime = data.FullChargeTime;
         playerStatHandler.PlayerData.CurrentEquipedWeapon = data;
         if(data is BowData bowData){
             playerCombatController.CanChangeFOVOnCharge = true;

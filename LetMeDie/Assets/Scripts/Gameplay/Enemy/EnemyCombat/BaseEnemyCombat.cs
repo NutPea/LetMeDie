@@ -7,6 +7,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class BaseEnemyCombat : MonoBehaviour
 {
     [SerializeField] private EnemyAnmationEventHelper enemyAnmationHelper;
+    private Collider col;
     private HealthManager healthManager;
     private BaseEnemyController baseEnemyController;
     public BaseEnemyController BaseEnemyController => baseEnemyController;
@@ -36,6 +37,7 @@ public class BaseEnemyCombat : MonoBehaviour
         enemyAnmationHelper.OnAntizipationAttack.AddListener(AttackAntizipation);
 
         player = SGameManager.Instance.PlayerBody.transform;
+        col = GetComponent<Collider>();
         PickAttack(); 
     }
 
@@ -75,6 +77,7 @@ public class BaseEnemyCombat : MonoBehaviour
         
         BaseEnemyController.Animator.SetBool("Death",true);
         BaseEnemyController.Animator.SetTrigger("DeathTrigger");
+        col.enabled = false;
         isDead = true;
     }
 

@@ -130,6 +130,6 @@ public class PlayerWeaponController : MonoBehaviour
 
     internal void DamageDone(int amount)
     {
-        playerResourceHandler.LifeSteal(amount, PlayerData.BaseLifeSteal);
+        playerResourceHandler.LifeSteal(amount, PlayerData.LifeStealPercentage);
     }
 }

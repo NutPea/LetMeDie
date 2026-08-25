@@ -15,15 +15,14 @@ public class PlayerCombatController : MonoBehaviour
     [HideInInspector] public UnityEvent OnEndBlock = new();
 
     private bool isCharging;
-    [SerializeField] private float currentFullChargeTime = 1f;
-    public float CurrentFullChargeTime
-    {
-        set { currentFullChargeTime = value; }
-    }
+
+    private float ChargeAmount => playerStatHandler.PlayerData.WeaponChargeTime;
+
     private float currentChargeAmount;
-    private float CurrentChargePercentage => currentChargeAmount / currentFullChargeTime; 
+    private float CurrentChargePercentage => currentChargeAmount / ChargeAmount; 
     private HealthManager healthManager;
     private PlayerWeaponController playerWeaponController;
+    private PlayerStatHandler playerStatHandler;
 
     [Header("FOV Change")]
     [HideInInspector] public bool CanChangeFOVOnCharge = false;
@@ -46,6 +45,7 @@ public class PlayerCombatController : MonoBehaviour
     {
         healthManager = GetComponent<HealthManager>();
         playerWeaponController = GetComponent<PlayerWeaponController>();
+        playerStatHandler = GetComponent<PlayerStatHandler>();
     }
 
     void Start()
@@ -162,7 +162,7 @@ public class PlayerCombatController : MonoBehaviour
             return;
         }
 
-        if(currentChargeAmount > currentFullChargeTime)
+        if(currentChargeAmount > ChargeAmount)
         {
             return;
         }
