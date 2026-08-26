@@ -52,6 +52,18 @@ PrefabInstance:
       propertyPath: isPiercing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4097503256647426307, guid: 14ebfa3753935b14a9e3ffb3b7ae1917, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4097503256647426307, guid: 14ebfa3753935b14a9e3ffb3b7ae1917, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4097503256647426307, guid: 14ebfa3753935b14a9e3ffb3b7ae1917, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 6442334304606653132, guid: 14ebfa3753935b14a9e3ffb3b7ae1917, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.138

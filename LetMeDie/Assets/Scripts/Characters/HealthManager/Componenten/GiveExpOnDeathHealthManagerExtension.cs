@@ -12,7 +12,7 @@ public class GiveExpOnDeathHealthManagerExtension : MonoBehaviour
     private HealthManager healthManager;
     [SerializeField] private float dropPercentage = 0.5f;
 
-    private int experienceAmount;
+    [SerializeField] private int experienceAmount;
 
 
 
@@ -22,7 +22,7 @@ public class GiveExpOnDeathHealthManagerExtension : MonoBehaviour
         healthManager = GetComponent<HealthManager>();
         healthManager.OnDeath.AddListener(SpawnDrops);
 
-        BattleLoot.LootRarity rarity = SpellLevelUpUIState.GetRarity(0.65f, 0.25f, 0.08f, 0.18f, 0.02f);
+      /*  BattleLoot.LootRarity rarity = SpellLevelUpUIState.GetRarity(0.65f, 0.25f, 0.08f, 0.18f, 0.02f);
         switch (rarity)
         {
             case BattleLoot.LootRarity.Common: experienceAmount = commonAmount; break;
@@ -31,6 +31,7 @@ public class GiveExpOnDeathHealthManagerExtension : MonoBehaviour
             case BattleLoot.LootRarity.Epic: experienceAmount = epicAmount; break;
             case BattleLoot.LootRarity.Legendary:  experienceAmount = legendaryAmount; break;
         }
+      */
     }
 
     private void SpawnDrops(GameObject arg0)

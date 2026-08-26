@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4128225588069720501}
   - component: {fileID: 4470011697003842251}
   - component: {fileID: 7447595028379268655}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -501,7 +501,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7012280136886802254}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 7186316807689424089}
   - component: {fileID: 8811751308334252997}
   - component: {fileID: 7115298823228415902}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,7 +622,7 @@ GameObject:
   - component: {fileID: 5785037747279018062}
   - component: {fileID: 5000710263853005696}
   - component: {fileID: 7056773348989168963}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 138966955280527239}
   - component: {fileID: 1026246164630476527}
   - component: {fileID: 7080866540970933762}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,7 +792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8950337153914271759}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FillIndikator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -826,7 +826,7 @@ GameObject:
   - component: {fileID: 4274663376258634498}
   - component: {fileID: 6152900648394310941}
   - component: {fileID: 7174529120517578698}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpellShrine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

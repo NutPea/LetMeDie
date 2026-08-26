@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1431378715166588619, guid: 532b674cb6535be4f87f866c00b02a89, type: 3}
+      propertyPath: experienceAmount
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 2125652356466987352, guid: 532b674cb6535be4f87f866c00b02a89, type: 3}
       propertyPath: m_Name
       value: BigEnemy Variant

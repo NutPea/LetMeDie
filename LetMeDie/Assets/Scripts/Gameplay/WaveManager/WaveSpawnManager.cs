@@ -43,10 +43,15 @@ public class WaveSpawnManager : MonoBehaviour
 
     private GameObject player;
 
+    private bool canSpawn = false;
+
+    public void StartSpawning()
+    {
+        canSpawn = true;
+    }
 
     private void Start()
     {
-        Debug.Log(SGameManager.Instance);
 
         player = SGameManager.Instance.PlayerBody;
 
@@ -80,6 +85,11 @@ public class WaveSpawnManager : MonoBehaviour
 
     private void Update()
     {
+        if (!canSpawn)
+        {
+            return;
+        }
+
         UpdateEvents();
 
         UpdateSpawnEvent();

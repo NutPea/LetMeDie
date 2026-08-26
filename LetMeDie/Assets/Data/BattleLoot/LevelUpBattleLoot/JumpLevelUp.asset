@@ -18,4 +18,6 @@ MonoBehaviour:
   tint: {r: 1, g: 1, b: 1, a: 1}
   lootRarity: 0
   showsAsItem: 0
-  jumpPercentage: 0.15
+  temporaryBuffTime: 0
+  CurrentTemporaryBuffTime: 0
+  jumpPercentage: 0.3

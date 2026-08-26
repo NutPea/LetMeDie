@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HugeEnemy Variant Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8991462081678045969, guid: 2bee5d2abc9a8a045a4ac683b464052a, type: 3}
+      propertyPath: experienceAmount
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
