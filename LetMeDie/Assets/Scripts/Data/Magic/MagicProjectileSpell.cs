@@ -14,12 +14,17 @@ public class MagicProjectileSpell : MagicSpell
 
     [SerializeField] private GameObject projectile;
 
+
     public override void Cast(Transform camera)
     {
         base.Cast(camera);
+        SpawnProjectile(camera, camera.transform.position + camera.transform.forward,camera.transform.forward);
+    }
 
+    protected void SpawnProjectile(Transform camera,Vector3 spawnPosition, Vector3 lookDirection)
+    {
         GameObject projectileSpell = Instantiate(projectile, camera.transform.position + camera.transform.forward, Quaternion.identity);
         ProjectileHandler projectileHandler = projectileSpell.GetComponent<ProjectileHandler>();
-        projectileHandler.Init(Damage, 1, camera.transform.forward, TeamFlag.Player);
+        projectileHandler.Init(Damage, 1, lookDirection, TeamFlag.Player);
     }
 }

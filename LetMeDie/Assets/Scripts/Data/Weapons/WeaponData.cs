@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class WeaponData : ItemData
 {
-
+    [SerializeField] private bool attackWithAnimation = false;
+    public bool AttackWithAnimation => attackWithAnimation;
     [SerializeField] protected int minDamageAmount;
     [SerializeField] protected int maxDamageAmount;
     [SerializeField] protected bool canBlock;
@@ -18,7 +19,7 @@ public class WeaponData : ItemData
     public float AttackCooldown => attackCooldown;
     [SerializeField] private List<CombatEffect> combatEffect;
 
-    private List<CombatEffect> instanciatedCombatEffects;
+    private List<CombatEffect> instanciatedCombatEffects = new();
 
     public List<CombatEffect> CombatEffects => instanciatedCombatEffects;
 

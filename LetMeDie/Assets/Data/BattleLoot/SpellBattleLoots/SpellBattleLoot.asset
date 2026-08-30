@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: SpellBattleLoot
   m_EditorClassIdentifier: 
   battleLoots:
+  - {fileID: 11400000, guid: 3fea4bfefdbf0ab4f9e71976ebbe1ece, type: 2}
+  - {fileID: 11400000, guid: 9cc165a999ffbd44ab1847b3ef25105d, type: 2}
   - {fileID: 11400000, guid: 1623b726282a5ae4c8aabbdf2681ffa6, type: 2}
   - {fileID: 11400000, guid: 6d8ccd89c8f30ee4ea5f60764f56472b, type: 2}
+  - {fileID: 11400000, guid: 3344a537004987a4a9c2a1b817674780, type: 2}
+  - {fileID: 11400000, guid: 8d54696e43361fd40a29b3d2429f8800, type: 2}
   - {fileID: 11400000, guid: a27e11af401672b438bac3202899429b, type: 2}
-  availableLoots: []
+  AvailableLoots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

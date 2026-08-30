@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f1ca468c253ef488d43aa63af9af5a, type: 3}
+  m_Name: Dagger
+  m_EditorClassIdentifier: 
+  _guid: Dagger
+  itemName: Dagger
+  description: A Dagger
+  sprite: {fileID: 0}
+  _tint: {r: 1, g: 1, b: 1, a: 1}
+  attackWithAnimation: 0
+  minDamageAmount: 2
+  maxDamageAmount: 5
+  canBlock: 1
+  attackCooldown: 0.25
+  combatEffect: []
+  normalAttackStaggerEffect: {fileID: 11400000, guid: 733e73a51ec1cc046a03c1c59deda357, type: 2}
+  blockAttackStaggerEffect: {fileID: 11400000, guid: 0504c7f13d85b6742affab7a9580d400, type: 2}
+  range: 1
+  attackWidth: 1.5
+  attackHeight: 0.4
+  minStopTime: 0.05
+  maxStopTime: 0.15
+  minTimeScale: 0.2
+  maxTimeScale: 0
+  trailColor: {r: 1, g: 1, b: 1, a: 1}
+  showAttackHitbox: 0

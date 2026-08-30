@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 545c4062f92a69244a61f82ce1793374, type: 3}
+  m_Name: BlackHole
+  m_EditorClassIdentifier: 
+  name: FireBall
+  description: A FireBall
+  icon: {fileID: 21300000, guid: 469ee53dc35b3fe4091ac89246a10648, type: 3}
+  tint: {r: 0.7735849, g: 0.32709637, b: 0.12771447, a: 1}
+  lootRarity: 0
+  weaponData: {fileID: 11400000, guid: c8c05fa31bd9f1d40946e4e0e9f13294, type: 2}

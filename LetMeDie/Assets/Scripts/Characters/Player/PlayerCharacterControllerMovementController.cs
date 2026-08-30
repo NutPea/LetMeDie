@@ -98,6 +98,7 @@ public class PlayerCharacterControllerMovementController : MonoBehaviour
     private float dashCooldownTimer;
 
     private Vector3 dashDirection;
+    private float currentDashSpeed;
 
     // =========================================================
     // KNOCKBACK
@@ -465,12 +466,27 @@ public class PlayerCharacterControllerMovementController : MonoBehaviour
             return false;
 
         dashDirection = GetDashDirection();
-
+        currentDashSpeed = dashSpeed;
         dashTimer = dashDuration;
         dashCooldownTimer = dashCooldown;
 
         return true;
     }
+
+    public void ForceDash(Vector3 dashDirection,float overwriteDashSpeed,float dashDuration)
+    {
+        if (IsGrounded())
+        {
+            this.dashDirection = GetDashDirection();
+        }
+        else
+        {
+            this.dashDirection = dashDirection;
+        }
+        dashTimer = dashDuration;
+        currentDashSpeed = overwriteDashSpeed;
+    }
+
 
     private Vector3 GetDashDirection()
     {
@@ -512,7 +528,7 @@ public class PlayerCharacterControllerMovementController : MonoBehaviour
             return Vector3.zero;
 
         return dashDirection *
-               dashSpeed *
+               currentDashSpeed *
                Time.deltaTime;
     }
 

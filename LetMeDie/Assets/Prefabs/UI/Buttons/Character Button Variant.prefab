@@ -103,5 +103,52 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8984656298384271475, guid: 53a9bb8f12fcf864997376c72c38eb32, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4925644628656639602}
   m_SourcePrefab: {fileID: 100100000, guid: 53a9bb8f12fcf864997376c72c38eb32, type: 3}
+--- !u!1 &1896037620195467811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8984656298384271475, guid: 53a9bb8f12fcf864997376c72c38eb32, type: 3}
+  m_PrefabInstance: {fileID: 7421929331744344656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4925644628656639602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896037620195467811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8faf9392203a774598216defa488d6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterImage: {fileID: 6141111195286144250}
+  OnCharacterSelect:
+    m_PersistentCalls:
+      m_Calls: []
+  selectionButton: {fileID: 8133821999870387496}
+--- !u!114 &6141111195286144250 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3730776540210269866, guid: 53a9bb8f12fcf864997376c72c38eb32, type: 3}
+  m_PrefabInstance: {fileID: 7421929331744344656}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8133821999870387496 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1593950345651072888, guid: 53a9bb8f12fcf864997376c72c38eb32, type: 3}
+  m_PrefabInstance: {fileID: 7421929331744344656}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896037620195467811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

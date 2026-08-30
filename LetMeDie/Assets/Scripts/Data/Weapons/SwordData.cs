@@ -57,6 +57,7 @@ public class SwordData : WeaponData
 
     public override void Attack(Transform camera, float chargeAmount)
     {
+        Debug.Log("Attack!");
         base.Attack(camera, chargeAmount);
         instatiatedNormalAttackStaggerEffect.KnockBackGainPercentage = playerData.KnockBackPercentage;
         instatiatedBlockAttackStaggerEffect.KnockBackGainPercentage = playerData.KnockBackPercentage;

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05805e782fe97c745b52377826b1c854, type: 3}
+  m_Name: StaffSwordAttackStagger
+  m_EditorClassIdentifier: 
+  Offender: {fileID: 0}
+  minStaggerStrength: 0.25
+  maxStaggerStrength: 1
+  staggerTime: 0.5
+  minKnockBackStrength: 1.5
+  maxKnockBackStrength: 3
+  KnockBackGainPercentage: 0
+  knockBackLength: 0.5

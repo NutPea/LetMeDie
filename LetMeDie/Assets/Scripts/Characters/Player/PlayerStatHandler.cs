@@ -13,7 +13,12 @@ public class PlayerStatHandler : MonoBehaviour
         get {
             if( _clonedPlayerData == null)
             {
-                _clonedPlayerData = Instantiate(playerStartData);
+                if(SPlayerDataManager.Instance != null){
+                    _clonedPlayerData = Instantiate(SPlayerDataManager.Instance.CurrentPlayerData);
+                }
+                else{
+                    _clonedPlayerData = Instantiate(playerStartData);
+                }
                 _clonedPlayerData.Init(gameObject);
             }
             return _clonedPlayerData;

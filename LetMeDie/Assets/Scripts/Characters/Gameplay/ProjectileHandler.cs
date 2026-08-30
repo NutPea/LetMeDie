@@ -12,17 +12,22 @@ public class ProjectileHandler : MonoBehaviour
 
     private bool canMove = true;
     public bool CanMove => canMove;
+    [SerializeField] private bool isThrowed;
     private int damage;
+    public int Damage => damage;
     private TeamFlag team;
 
     private float currentChargeAmount;
     public float CurrentChargeAmount => currentChargeAmount;
     [HideInInspector] public UnityEvent OnCollided = new();
+    [HideInInspector] public UnityEvent OnDestroyAfterDurability = new();
     [SerializeField] private bool destroyOnInpact = true;
     [SerializeField] private bool isAOE;
     [SerializeField] private bool isPiercing;
     [SerializeField] private bool stopWhenHit;
     [SerializeField] private float aoeRange = 2f;
+    [SerializeField] private bool hasDurability;
+    [SerializeField] private float durability = 5f;
 
     private void Awake()
     {
@@ -31,17 +36,39 @@ public class ProjectileHandler : MonoBehaviour
 
     public void Init(int damage , float chargeAmount,Vector3 lookDirection,TeamFlag team)
     {
-        Destroy(gameObject,10f);
+        if (hasDurability)
+        {
+            Invoke(nameof(RemoveAfterDurability), durability);
+        }
+        else
+        {
+            Destroy(gameObject,10f);
+        }
         currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, chargeAmount);
         transform.forward = lookDirection;
         canMove = true;
         this.damage = damage;
         this.team = team;
         currentChargeAmount = chargeAmount;
+        if (isThrowed)
+        {
+
+            rb.AddForce(transform.forward * currentSpeed,ForceMode.Impulse);
+        }
+    }
+
+    private void RemoveAfterDurability()
+    {
+        OnDestroyAfterDurability.Invoke();
+        Destroy(gameObject);
     }
 
     private void FixedUpdate()
     {
+        if (isThrowed)
+        {
+            return;
+        }
         if (!canMove) {
             rb.constraints = RigidbodyConstraints.FreezeAll;
             return;
@@ -51,7 +78,11 @@ public class ProjectileHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        OnCollided.Invoke();
+
+        if (isThrowed)
+        {
+            return;
+        }
         GameObject hittedObject = null;
         if (other.gameObject.layer == LayerMask.NameToLayer("Hitable"))
         {
@@ -59,16 +90,26 @@ public class ProjectileHandler : MonoBehaviour
             other.gameObject.GetComponent<HealthManager>().InflictDamage(damage, team, transform);
             if (!isPiercing)
             {
-                Destroy(gameObject);
+                if (!hasDurability)
+                {
+                    Destroy(gameObject);
+                }
             }
             else
             {
-                Destroy(gameObject, 1f);
+                if (!hasDurability)
+                {
+                    Destroy(gameObject, 1f);
+                }
             }
         }
         else if (destroyOnInpact)
         {
-            Destroy(gameObject);
+            if (!hasDurability)
+            {
+                Destroy(gameObject);
+                OnCollided.Invoke();
+            }
         }
         if (isAOE)
         {
@@ -79,7 +120,6 @@ public class ProjectileHandler : MonoBehaviour
                 {
                     continue;
                 }
-                Debug.Log(col.name);
                 col.gameObject.GetComponent<HealthManager>().InflictDamage(damage, team, transform);
             }
         }

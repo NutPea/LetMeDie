@@ -106,6 +106,9 @@ public class PlayerData : HealthData
 
     private enum CharacterClass { None, Warrior,Thief,Mage}
 
+    [SerializeField] private LevelBuffBattleLoot characterBuffBattleLoot;
+    public LevelBuffBattleLoot CharacterBuffBattleLoot => characterBuffBattleLoot;
+
     private List<BuffBattleLoot> buffBattleLoots = new List<BuffBattleLoot>();
     public List<BuffBattleLoot> BuffBattleLoots => buffBattleLoots;
 
@@ -132,7 +135,10 @@ public class PlayerData : HealthData
         if (currentExperience >= nextLevelUpExperience)
         {
             currentLevel++;
-
+            if(CharacterBuffBattleLoot != null)
+            {
+                CharacterBuffBattleLoot.UpdateBuffBattleLoot(currentPlayer, this);
+            }
             nextLevelUpExperience = ExpForNextLevel(currentLevel);
             int experienceDifference = currentExperience - nextLevelUpExperience;
             if (experienceDifference <= 0) {
@@ -279,6 +285,9 @@ public class PlayerData : HealthData
             consumable_3 = Instantiate(consumable_3);
         }
         nextLevelUpExperience = ExpForNextLevel(currentLevel);
+        if (characterBuffBattleLoot != null) { 
+            characterBuffBattleLoot.BuffBattleLootAdded(currentPlayer, this);
+        }
     }
 
     public void GameUpdate()

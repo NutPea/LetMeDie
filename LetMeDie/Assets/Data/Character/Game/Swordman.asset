@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c431279fa1e9c648a17d6baaa29bd0b, type: 3}
+  m_Name: Swordman
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: deeae33315027e045bf104c3f198179d, type: 3}
+  characterName: Swordsman
+  baseHealth: 100
+  team: 1
+  baseInvincibleTime: 0.5
+  baseMovementSpeed: 5
+  baseJumpForce: 5
+  baseStamina: 3
+  baseStaminaReginaration: 5
+  weaponChargeTime: 0.5
+  currentLevel: 1
+  currentExperience: 0
+  ExperiencePercent: 0
+  OnLevelUp:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGoldChange:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExpChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnItemAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStatUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  characterBuffBattleLoot: {fileID: 11400000, guid: c5336a3e3990dc14dbca298ec3afe784, type: 2}
+  tempBuffBattleLoot: []
+  ForceUpdateStats: 0
+  currentEquipedWeapon: {fileID: 11400000, guid: 7fde9af1c120a1b43a4992da366b8def, type: 2}
+  currentMagicSpell_1: {fileID: 0}
+  currentMagicSpell_2: {fileID: 0}
+  currentMagicSpell_3: {fileID: 0}
+  weaponInventory: []
+  consumableInventory: []
+  magicSpellInventory: []
+  consumable_1: {fileID: 0}
+  consumable_2: {fileID: 0}
+  consumable_3: {fileID: 0}

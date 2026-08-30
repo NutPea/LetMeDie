@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33bc2393fe4a1fc4fa442e98c9cde477, type: 3}
+  m_Name: ArcaneBomb
+  m_EditorClassIdentifier: 
+  _guid: ArcaneBomb
+  itemName: ArcaneBomb
+  description: A ArcaneBomb
+  sprite: {fileID: 21300000, guid: 50a435cd062c3f140bbfc7691f413add, type: 3}
+  _tint: {r: 0.7529412, g: 0.101960756, b: 0.44820386, a: 1}
+  attackWithAnimation: 0
+  minDamageAmount: 0
+  maxDamageAmount: 0
+  canBlock: 0
+  attackCooldown: 0.5
+  combatEffect: []
+  spellManaCost: 0
+  OnSpellCast:
+    m_PersistentCalls:
+      m_Calls: []
+  spellInfluences:
+  - {fileID: 11400000, guid: db2ec32a240d80b43828291fb213b247, type: 2}
+  OnSpellAmountUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  baseDamage: 10
+  ExtraDamage: 2
+  projectile: {fileID: 6078790405615796056, guid: 25affc45627362b47a493a127eb86299, type: 3}

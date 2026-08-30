@@ -73,6 +73,10 @@ public class PlayerWeaponController : MonoBehaviour
         currentChargeAmount = chargeAmount;
         currentAttackCooldown = weaponData.AttackCooldown;
         CanAttack = false;
+        if (!weaponData.AttackWithAnimation)
+        {
+            weaponData.Attack(cameraTransform, currentChargeAmount);
+        }
     }
 
     public void AnimationAttack()

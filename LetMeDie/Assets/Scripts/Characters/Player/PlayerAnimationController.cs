@@ -9,6 +9,7 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private Animator movementAnim;
 
     [SerializeField] private Animator swordAnimator;
+    [SerializeField] private Animator fenceAnimator;
     [SerializeField] private AnimationCurve swordAttackAnimationCurve;
     [SerializeField] private Animator bowAnimator;
     [SerializeField] private AnimationCurve bowAttackAnimationCurve;
@@ -116,6 +117,12 @@ public class PlayerAnimationController : MonoBehaviour
     {
         if (weaponData.GetType() == typeof(SwordData) || weaponData.GetType() == typeof(MagicWandData)) {
             currentWeaponAnimator = swordAnimator;
+            currentWeaponAnimationCurve = swordAttackAnimationCurve;
+            hasSingleAttack = false;
+        }
+        else if (weaponData.GetType() == typeof(FencingSwordData))
+        {
+            currentWeaponAnimator = fenceAnimator;
             currentWeaponAnimationCurve = swordAttackAnimationCurve;
             hasSingleAttack = false;
         }
