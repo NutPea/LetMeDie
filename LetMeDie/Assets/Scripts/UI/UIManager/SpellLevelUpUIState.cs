@@ -1,4 +1,5 @@
 using Essentials;
+using Mono.Cecil;
 using NUnit.Framework;
 using System;
 using System.Collections;
@@ -25,6 +26,13 @@ public class SpellLevelUpUIState : UIStateComponent
     [SerializeField] private int legendaryLevelAmount = 20;
 
 
+    [Header("Transition")]
+    [SerializeField] private GameObject levelUpUI;
+    [SerializeField] private float transitionTime = 1f;
+    [SerializeField] private LeanTweenType tweenType = LeanTweenType.easeOutQuad;
+
+    private bool canChooseSomething = false;
+
 
     public override void OnInitUIState()
     {
@@ -44,10 +52,28 @@ public class SpellLevelUpUIState : UIStateComponent
         Time.timeScale = 0.0f;
         SGameManager.Instance.SetCursorVisibility(true, CursorLockMode.None);
         OnSpellLevelUp(playerData.CurrentLevel);
+        canChooseSomething = false;
+        TransitionIn();
     }
 
+    private void TransitionIn()
+    {
+        levelUpUI.transform.localScale = Vector3.zero;
+        LeanTween.scale(levelUpUI, Vector3.one, transitionTime).setEase(tweenType).setOnComplete(Unlock).setIgnoreTimeScale(true);
+    }
+
+    private void Unlock()
+    {
+        canChooseSomething = true;
+    }
     private void SetLoot(BattleLoot battleLoot)
     {
+        if (!canChooseSomething)
+        {
+            return;
+        }
+
+
         if (battleLoot is WeaponBattleLoot weaponBattleLoot)
         {
             playerData.AddItem(weaponBattleLoot.WeaponData);

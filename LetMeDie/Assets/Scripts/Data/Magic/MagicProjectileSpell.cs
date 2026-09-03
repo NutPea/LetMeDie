@@ -9,7 +9,7 @@ public class MagicProjectileSpell : MagicSpell
     [HideInInspector]public int ExtraDamage = 0;
 
     private int CombineDamage => baseDamage + ExtraDamage;
-    public int Damage => CombineDamage + Mathf.CeilToInt((float)CombineDamage * playerData.SpellBaseDamagePercentage);
+    public int Damage => Mathf.CeilToInt((CombineDamage + (float)CombineDamage * playerData.SpellBaseDamagePercentage) * playerData.GetCritModifier());
 
 
     [SerializeField] private GameObject projectile;

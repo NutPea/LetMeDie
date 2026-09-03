@@ -9,6 +9,7 @@ public class BuffBattleLoot : BattleLoot
 
     [Header("Temp")]
     [SerializeField] private float temporaryBuffTime = 0.0f;
+    public float TemporaryBuffTime => temporaryBuffTime;    
     [HideInInspector] public float CurrentTemporaryBuffTime = 0.0f;
     public bool IsTempBuffActiv => CurrentTemporaryBuffTime > 0.0f;
 

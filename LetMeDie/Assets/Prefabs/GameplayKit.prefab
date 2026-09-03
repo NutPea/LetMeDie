@@ -1965,6 +1965,9 @@ MonoBehaviour:
   buffItemTable: {fileID: 11400000, guid: 73fa83fe0832221478177dbd069a5420, type: 2}
   accept: {fileID: 860096956114765831}
   ban: {fileID: 6896749043570425413}
+  levelUpUI: {fileID: 6686314803962909075}
+  transitionTime: 0.6
+  tweenType: 2
 --- !u!1 &1290873565763317973
 GameObject:
   m_ObjectHideFlags: 0
@@ -3216,6 +3219,9 @@ MonoBehaviour:
   rareLevelAmount: 10
   epicLevelAmount: 15
   legendaryLevelAmount: 20
+  levelUpUI: {fileID: 5855001247749238251}
+  transitionTime: 0.6
+  tweenType: 9
 --- !u!1 &2482639248449345402
 GameObject:
   m_ObjectHideFlags: 0
@@ -4901,6 +4907,7 @@ RectTransform:
   - {fileID: 472397734574734231}
   - {fileID: 4639507612401848147}
   - {fileID: 2844058153961126304}
+  - {fileID: 1611113768163936449}
   - {fileID: 3825906685777485385}
   - {fileID: 759149644996891783}
   - {fileID: 7451813112815525726}
@@ -4949,6 +4956,8 @@ MonoBehaviour:
   damageBorderTime: 0.2
   healBorder: {fileID: 3169999823987160171}
   healBorderTime: 0.2
+  rageBorder: {fileID: 8365599258512325489}
+  manaBorder: {fileID: 6942503936974349699}
   battleItemsUIHandler: {fileID: 1305226742874924526}
   goldAmountText: {fileID: 8785047133959804431}
 --- !u!1 &3888824700091011136
@@ -5375,6 +5384,81 @@ RectTransform:
   m_AnchoredPosition: {x: 911, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &4199465152930828290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1611113768163936449}
+  - component: {fileID: 2673922136993757285}
+  - component: {fileID: 8365599258512325489}
+  m_Layer: 5
+  m_Name: RageBorder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1611113768163936449
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199465152930828290}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6069479279246320186}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2673922136993757285
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199465152930828290}
+  m_CullTransparentMesh: 1
+--- !u!114 &8365599258512325489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199465152930828290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.53119606, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 0c3b7439c6b3205408113cf19397e334, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4200346230259593555
 GameObject:
   m_ObjectHideFlags: 0
@@ -9229,6 +9313,9 @@ MonoBehaviour:
   rareLevelAmount: 10
   epicLevelAmount: 15
   legendaryLevelAmount: 20
+  levelUpUI: {fileID: 4365603084650979608}
+  transitionTime: 0.6
+  tweenType: 9
 --- !u!1 &6889968992738853394
 GameObject:
   m_ObjectHideFlags: 0
@@ -11452,7 +11539,7 @@ GameObject:
   - component: {fileID: 7598264560236105150}
   - component: {fileID: 6942503936974349699}
   m_Layer: 5
-  m_Name: LevelUpBorder
+  m_Name: ManaBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11498,7 +11585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9528302, g: 0.85475, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.4747448, b: 0.9529412, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

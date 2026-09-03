@@ -61,12 +61,23 @@ public class PlayerData : HealthData
     public float LifeStealPercentage { get => lifeStealPercentage; set => lifeStealPercentage = value; }
 
     [SerializeField] private float weaponChargeTime = 1.0f;
-
     public float WeaponChargeTime => weaponChargeTime - (Mathf.Lerp(0.0f, (weaponChargeTime / 2), extraAttackSpeedPercent));
 
     private float extraAttackSpeedPercent = 0.0f;
 
     public float ExtraAttackSpeed { get => extraAttackSpeedPercent; set { extraAttackSpeedPercent = value; } }
+
+    private float weaponExtraChargeDamage = 0.0f;
+    public float WeaponExtraChargeDamage { get => weaponExtraChargeDamage; set { weaponExtraChargeDamage = value; } }
+
+    private float critChance = 0.0f;
+
+    public float CritChance { get => critChance; set { critChance = value; } }
+
+    private float extraCritDamage = 0.0f;
+
+    public float ExtraCritDamage { get => extraCritDamage; set { extraCritDamage = value; } }
+
 
 
     [Header("Other")]
@@ -156,6 +167,16 @@ public class PlayerData : HealthData
     private int ExpForNextLevel(int level)
     {
         return Mathf.RoundToInt(100 * Mathf.Pow(level, 1.1f));
+    }
+
+    public float GetCritModifier()
+    {
+        float critPercentage = 0f;
+        if (critPercentage < Random.Range(0.0f, 1.0f)) {
+            return 2 + extraCritDamage;
+        }
+
+        return 1;
     }
 
     public void AddBuffBattleLoot(BuffBattleLoot buff)

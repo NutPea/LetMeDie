@@ -7,10 +7,11 @@ public class BowData : WeaponData
     public override void Attack(Transform camera, float chargeAmount)
     {
         base.Attack( camera, chargeAmount);
-        Debug.Log("Attack");
         GameObject arrow = Instantiate(arrowPrefab,camera.transform.position + camera.transform.forward,Quaternion.identity);
         ProjectileHandler projectileHandler = arrow.GetComponent<ProjectileHandler>();
-        projectileHandler.Init(PlayerData.CalculateChargeDamage(minDamageAmount,maxDamageAmount,chargeAmount),chargeAmount, camera.transform.forward, TeamFlag.Player);
+
+        int calculatedDamage = Mathf.CeilToInt((PlayerData.CalculateChargeDamage(minDamageAmount, maxDamageAmount, chargeAmount) *playerData.WeaponBaseDamagePercentage) * playerData.GetCritModifier());
+        projectileHandler.Init(calculatedDamage ,chargeAmount, camera.transform.forward, TeamFlag.Player);
 
     }
 

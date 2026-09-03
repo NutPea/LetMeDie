@@ -21,7 +21,7 @@ MonoBehaviour:
   baseJumpForce: 5
   baseStamina: 3
   baseStaminaReginaration: 5
-  weaponChargeTime: 0.5
+  weaponChargeTime: 1.5
   currentLevel: 1
   currentExperience: 0
   ExperiencePercent: 0

@@ -1,3 +1,4 @@
+using Essentials;
 using UnityEngine;
 
 public class ManaPowerUp : PowerUp
@@ -7,5 +8,6 @@ public class ManaPowerUp : PowerUp
     protected override void PickUp(GameObject player)
     {
         player.GetComponent<PlayerStatHandler>().PlayerData.RegSpellMana(manaRecoverAmount);
+        SUIManager.Instance.GetUIState("Game").UIStateObject.GetComponent<GameUIStateComponent>().ShowManaBorder(0.5f);
     }
 }

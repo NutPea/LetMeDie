@@ -160,6 +160,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2799956175720929758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2278114780386305734}
+  m_Layer: 6
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2278114780386305734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799956175720929758}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.783, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8336637633549908635}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4391572459125369179
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +211,7 @@ GameObject:
   - component: {fileID: 2247827901959566834}
   - component: {fileID: 4472193178693421507}
   - component: {fileID: 3626362210238760648}
+  - component: {fileID: 4661545814832844687}
   m_Layer: 6
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -200,6 +232,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2278114780386305734}
   - {fileID: 8660564697423011255}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -412,3 +445,21 @@ MonoBehaviour:
   legendaryAmount: 1000
   dropPercentage: 0.5
   experienceAmount: 30
+--- !u!114 &4661545814832844687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4391572459125369179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17ba84c02aba40645b1610c97857e7c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoint: {fileID: 2278114780386305734}
+  powerUps:
+  - {fileID: 144884116559090390, guid: 8fb2ec58188b4cb419c2babec75fb434, type: 3}
+  - {fileID: 1101264113862355380, guid: 7007187379d7ad440a14da511cd59a78, type: 3}
+  - {fileID: 4749011573656240030, guid: c7bc96a12f46ebd41ad7da4cc87e87d4, type: 3}
+  powerUpProperbility: 0.01

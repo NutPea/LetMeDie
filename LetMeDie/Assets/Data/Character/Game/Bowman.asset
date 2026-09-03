@@ -40,7 +40,7 @@ MonoBehaviour:
   OnStatUpdate:
     m_PersistentCalls:
       m_Calls: []
-  characterBuffBattleLoot: {fileID: 11400000, guid: c5336a3e3990dc14dbca298ec3afe784, type: 2}
+  characterBuffBattleLoot: {fileID: 11400000, guid: ec26f8cd5ca21da4484feed7e3ba9dd3, type: 2}
   tempBuffBattleLoot: []
   ForceUpdateStats: 0
   currentEquipedWeapon: {fileID: 11400000, guid: 3481ffe4044a33b4ab4310bf9f49969f, type: 2}

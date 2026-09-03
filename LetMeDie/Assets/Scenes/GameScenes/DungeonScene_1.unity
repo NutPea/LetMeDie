@@ -12535,6 +12535,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8179489688179166215, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
+      propertyPath: shouldShowDamageDumber
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8270920097452838611, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -12691,6 +12695,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8968949255755972715, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
+      propertyPath: playerStartData
+      value: 
+      objectReference: {fileID: 11400000, guid: 630cb557920f75845b86c8a6bd3a7996, type: 2}
     - target: {fileID: 8995824900318198399, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

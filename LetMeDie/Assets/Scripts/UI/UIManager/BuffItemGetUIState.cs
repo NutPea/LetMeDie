@@ -19,6 +19,15 @@ public class BuffItemGetUIState : UIStateComponent
 
     PlayerData playerData;
 
+
+    [Header("Transition")]
+    [SerializeField] private GameObject levelUpUI;
+    [SerializeField] private float transitionTime = 1f;
+    [SerializeField] private LeanTweenType tweenType = LeanTweenType.easeOutQuad;
+
+    private bool canChooseSomething = false;
+
+
     public override void OnInitUIState()
     {
         base.OnInitUIState();
@@ -51,7 +60,18 @@ public class BuffItemGetUIState : UIStateComponent
 
         SGameManager.Instance.SetCursorVisibility(true, CursorLockMode.None);
         Time.timeScale = 0.0f;
+        TransitionIn();
+    }
 
+    private void TransitionIn()
+    {
+        levelUpUI.transform.localScale = Vector3.zero;
+        LeanTween.scale(levelUpUI, Vector3.one, transitionTime).setEase(tweenType).setOnComplete(Unlock).setIgnoreTimeScale(true);
+    }
+
+    private void Unlock()
+    {
+        canChooseSomething = true;
     }
 
     public override void OnExitUIState()

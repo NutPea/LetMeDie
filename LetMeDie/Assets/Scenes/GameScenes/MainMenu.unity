@@ -1453,6 +1453,7 @@ MonoBehaviour:
   playerDatas:
   - {fileID: 11400000, guid: 4cee5b6e0113c434780e5f194f7c8686, type: 2}
   - {fileID: 11400000, guid: 630cb557920f75845b86c8a6bd3a7996, type: 2}
+  - {fileID: 11400000, guid: 973823fd0078db440af30bdc2d2b5011, type: 2}
   characterSelectionButton:
   - {fileID: 2066678689}
   - {fileID: 1491237450}

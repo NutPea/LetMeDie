@@ -1,3 +1,4 @@
+using Essentials;
 using UnityEngine;
 
 public class HealthPowerUp : PowerUp
@@ -10,5 +11,6 @@ public class HealthPowerUp : PowerUp
         PlayerResourceHandler resourceHandler = player.GetComponent<PlayerResourceHandler>();
         float healAmount = resourceHandler.healthData.Health * healPercentageAmount;
         resourceHandler.Heal(Mathf.CeilToInt(healAmount));
+        SUIManager.Instance.GetUIState("Game").UIStateObject.GetComponent<GameUIStateComponent>().ShowHeal();
     }
 }

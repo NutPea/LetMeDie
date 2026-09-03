@@ -23,7 +23,7 @@ MonoBehaviour:
   canBlock: 0
   attackCooldown: 0.5
   combatEffect: []
-  spellManaCost: 0
+  spellManaCost: 15
   OnSpellCast:
     m_PersistentCalls:
       m_Calls: []

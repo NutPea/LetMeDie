@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _guid: Magic Staff
   itemName: Magic Staff
-  description: A Magic Staff
+  description: 'A Magic Staff which regenerations 1 Mana on Hit '
   sprite: {fileID: 21300000, guid: b34b1bc3a491a1a4db88b686d2401200, type: 3}
   _tint: {r: 0.21586864, g: 0.3437877, b: 0.46226418, a: 1}
   attackWithAnimation: 1
   minDamageAmount: 2
-  maxDamageAmount: 7
+  maxDamageAmount: 5
   canBlock: 1
   attackCooldown: 0.5
-  combatEffect: []
+  combatEffect:
+  - {fileID: 11400000, guid: dec818cf10fc46c4b9f9cd4d387550db, type: 2}
   normalAttackStaggerEffect: {fileID: 11400000, guid: 8f19d460e2d758d4db5541a7211fc880, type: 2}
   blockAttackStaggerEffect: {fileID: 11400000, guid: 87420fd8a39bf844abaf24a66d96c0fb, type: 2}
   range: 2

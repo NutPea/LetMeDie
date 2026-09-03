@@ -15,12 +15,11 @@ MonoBehaviour:
   battleLoots:
   - {fileID: 11400000, guid: db81d1a0acb931542bcd95ab3aa9edd1, type: 2}
   - {fileID: 11400000, guid: cf7ef2cb0d350e844940acbd59973f13, type: 2}
-  - {fileID: 11400000, guid: 0e2d269b2683e6c48b94c07a4528f124, type: 2}
+  - {fileID: 11400000, guid: 95f8f13f0069cef4cb3abb1c755fcdca, type: 2}
   - {fileID: 11400000, guid: de4c878a8a9866e4a87faad4af84b29a, type: 2}
   - {fileID: 11400000, guid: 086f25a75d8e70a44a1edf1c7fee045f, type: 2}
   - {fileID: 11400000, guid: 8baa5360ae4fa7d489a541d37455084f, type: 2}
   - {fileID: 11400000, guid: 6d075a55ac214f8469290ed990640c67, type: 2}
   - {fileID: 11400000, guid: d3da3bcfcd9345e4e97669c8d211b1e3, type: 2}
   - {fileID: 11400000, guid: ecb7d7aa8e945714faf17f2eda7b2f67, type: 2}
-  AvailableLoots:
-  - {fileID: 0}
+  AvailableLoots: []

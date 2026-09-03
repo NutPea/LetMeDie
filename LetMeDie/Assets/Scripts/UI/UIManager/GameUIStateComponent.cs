@@ -44,14 +44,17 @@ public class GameUIStateComponent : UIStateComponent
 
     [Header("Borders")]
     [SerializeField] private LeanTweenType borderType;
+    [SerializeField] private float transitionBorderTime = 0.5f;
+
     [SerializeField] private Image levelUpBorder;
-    [SerializeField] private float levelUpBorderTime;
 
     [SerializeField] private Image damageBorder;
-    [SerializeField] private float damageBorderTime;
 
     [SerializeField] private Image healBorder;
-    [SerializeField] private float healBorderTime;
+
+    [SerializeField] private Image rageBorder;
+    [SerializeField] private Image manaBorder;
+
 
 
     [Header("Other")]
@@ -100,7 +103,7 @@ public class GameUIStateComponent : UIStateComponent
         SInputManager.Instance.inputActions.Keyboard.Stats.performed += ChangeToStats;
 
     //  playerStatHandler.PlayerData.OnItemAdded.AddListener(OnItemAccuired);
-        playerStatHandler.PlayerData.OnLevelUp.AddListener(ShowLevelUp);
+       // playerStatHandler.PlayerData.OnLevelUp.AddListener(ShowLevelUp);
 
         itemAccuiredText.gameObject.SetActive(false);
         goldAmountText.gameObject.SetActive(false);
@@ -109,6 +112,8 @@ public class GameUIStateComponent : UIStateComponent
         HideLevelUp();
         HideStamina();
     }
+
+ 
 
     private void HideOpenChest()
     {
@@ -224,10 +229,10 @@ public class GameUIStateComponent : UIStateComponent
     }
 
 
-    private void ShowHeal()
+    public void ShowHeal()
     {
         healBorder.gameObject.SetActive(true);
-        LeanTween.value(healBorder.gameObject, 0, 1, healBorderTime).setOnUpdate((float val) =>
+        LeanTween.value(healBorder.gameObject, 0, 1, transitionBorderTime).setOnUpdate((float val) =>
         {
             Color c = healBorder.color;
             c.a = val;
@@ -237,7 +242,7 @@ public class GameUIStateComponent : UIStateComponent
 
     private void RevertHeal()
     {
-        LeanTween.value(healBorder.gameObject, 1, 0, healBorderTime).setOnUpdate((float val) =>
+        LeanTween.value(healBorder.gameObject, 1, 0, transitionBorderTime).setOnUpdate((float val) =>
         {
             Color c = healBorder.color;
             c.a = val;
@@ -254,7 +259,7 @@ public class GameUIStateComponent : UIStateComponent
     private void ShowDamage()
     {
         damageBorder.gameObject.SetActive(true);
-        LeanTween.value(damageBorder.gameObject, 0, 1, damageBorderTime).setOnUpdate((float val) =>
+        LeanTween.value(damageBorder.gameObject, 0, 1, transitionBorderTime).setOnUpdate((float val) =>
         {
             Color c = damageBorder.color;
             c.a = val;
@@ -264,7 +269,7 @@ public class GameUIStateComponent : UIStateComponent
 
     private void RevertDamage()
     {
-        LeanTween.value(damageBorder.gameObject, 1, 0, damageBorderTime).setOnUpdate((float val) =>
+        LeanTween.value(damageBorder.gameObject, 1, 0, transitionBorderTime).setOnUpdate((float val) =>
         {
             Color c = damageBorder.color;
             c.a = val;
@@ -277,11 +282,45 @@ public class GameUIStateComponent : UIStateComponent
         damageBorder.gameObject.SetActive(false);
     }
 
+    public void ShowManaBorder(float time)
+    {
+        ShowBorder(manaBorder, time);
+    }
+
+    public void ShowRageBorder(float time)
+    {
+        ShowBorder(rageBorder, time);
+    }
+
+    private void ShowBorder(Image border,float showTime)
+    {
+        border.gameObject.SetActive(true);
+        LeanTween.value(border.gameObject, 0, 1, transitionBorderTime).setOnUpdate((float val) =>
+        {
+            Color c = border.color;
+            c.a = val;
+            border.color = c;
+        }).setEase(borderType);
+
+        Debug.Log(showTime);
+        LeanTween.value(border.gameObject, 0, 1, showTime).setOnComplete(() => HideBorder(border));
+    }
+
+    private void HideBorder(Image border)
+    {
+        Debug.Log("Hide");
+        LeanTween.value(levelUpBorder.gameObject, 1, 0, transitionBorderTime).setOnUpdate((float val) =>
+        {
+            Color c = levelUpBorder.color;
+            c.a = val;
+            levelUpBorder.color = c;
+        }).setOnComplete(() => border.gameObject.SetActive(false)).setEase(borderType);
+    }
 
     private void ShowLevelUp(int level)
     {
         levelUpBorder.gameObject.SetActive(true);
-        LeanTween.value(levelUpBorder.gameObject, 0, 1, levelUpBorderTime).setOnUpdate((float val) =>
+        LeanTween.value(levelUpBorder.gameObject, 0, 1, transitionBorderTime).setOnUpdate((float val) =>
         {
             Color c = levelUpBorder.color;
             c.a = val;
@@ -291,7 +330,7 @@ public class GameUIStateComponent : UIStateComponent
 
     private void RevertLevelUp()
     {
-        LeanTween.value(levelUpBorder.gameObject, 1, 0, levelUpBorderTime).setOnUpdate((float val) =>
+        LeanTween.value(levelUpBorder.gameObject, 1, 0, transitionBorderTime).setOnUpdate((float val) =>
         {
             Color c = levelUpBorder.color;
             c.a = val;

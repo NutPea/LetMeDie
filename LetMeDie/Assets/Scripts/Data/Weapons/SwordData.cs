@@ -57,7 +57,6 @@ public class SwordData : WeaponData
 
     public override void Attack(Transform camera, float chargeAmount)
     {
-        Debug.Log("Attack!");
         base.Attack(camera, chargeAmount);
         instatiatedNormalAttackStaggerEffect.KnockBackGainPercentage = playerData.KnockBackPercentage;
         instatiatedBlockAttackStaggerEffect.KnockBackGainPercentage = playerData.KnockBackPercentage;
@@ -69,6 +68,13 @@ public class SwordData : WeaponData
 
         int calculatedDamage = PlayerData.CalculateChargeDamage(minDamageAmount, maxDamageAmount, chargeAmount);
         calculatedDamage += Mathf.CeilToInt((float)calculatedDamage * playerData.WeaponBaseDamagePercentage);
+        if(chargeAmount >= 1)
+        {
+            calculatedDamage += Mathf.CeilToInt((float)calculatedDamage * playerData.WeaponExtraChargeDamage);
+        }
+
+        calculatedDamage = Mathf.CeilToInt((float)calculatedDamage * playerData.GetCritModifier());
+
 
         if (playerWeaponController.PlayerCombatController.IsBlocking)
         {

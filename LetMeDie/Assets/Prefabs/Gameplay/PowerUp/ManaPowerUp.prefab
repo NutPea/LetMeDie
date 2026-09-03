@@ -907,7 +907,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1490
+  m_VersionIndex: 1508
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1056,5 +1056,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74008ae3cecc2e34dbe3446139b08f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 5
+  rotationSpeed: 15
   manaRecoverAmount: 100

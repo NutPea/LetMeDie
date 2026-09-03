@@ -169,6 +169,20 @@ namespace Essentials {
             }
         }
 
+        public UIState GetUIState(string UIStateName)
+        {
+            foreach (UIState state in UIStates)
+            {
+                if (UIStateName == state.UIStateName)
+                {
+                    return state;
+                }
+            }
+
+            Debug.LogError("UIStateNotFound!" + UIStateName);
+            return null;
+        }
+
         private IEnumerator WaitForCamera(float time, UIState prev , UIState curr)
         {
             yield return new WaitForSecondsRealtime(time);

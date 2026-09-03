@@ -18,6 +18,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb1b2ccd2813fc2468ba78a0448246bd, type: 2}
   - {fileID: 11400000, guid: 2f06c32718b78e048986557cf16bf411, type: 2}
   - {fileID: 11400000, guid: 0c91dc99139fd4a4994abe19a15ced26, type: 2}
-  - {fileID: 11400000, guid: 9ecc80abe26d2ce4087e2a69ec489afe, type: 2}
-  - {fileID: 11400000, guid: f6bb6ab19a9dcb1499d8e94be6a5eeb9, type: 2}
-  AvailableLoots: []
+  - {fileID: 11400000, guid: e0a857071c877534da38ab9cb760ad47, type: 2}
+  - {fileID: 11400000, guid: 6b2adc534e6ed8845a8a714621976272, type: 2}
+  - {fileID: 11400000, guid: 8f8fc40da1b66a54a868f25581fff6e7, type: 2}
+  AvailableLoots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
