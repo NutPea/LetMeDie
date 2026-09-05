@@ -13,13 +13,56 @@ MonoBehaviour:
   m_Name: ItemBattleLoot
   m_EditorClassIdentifier: 
   battleLoots:
+  - {fileID: 11400000, guid: 6de029eb99bd9e74ca8a217b5e7219fe, type: 2}
+  - {fileID: 11400000, guid: f42f534c7157fbb4795786aebda2a0d5, type: 2}
+  - {fileID: 11400000, guid: 553be4bca4256b440ae290f05f4f9faf, type: 2}
+  - {fileID: 11400000, guid: a48777386c8a3404da622b5d50fe758d, type: 2}
+  - {fileID: 11400000, guid: afc239a27c4356d4b9384c402af400f0, type: 2}
+  - {fileID: 11400000, guid: 546c12050e31e794e845ea909a83edf0, type: 2}
+  - {fileID: 11400000, guid: f1512c515c4276f48b4b557def283bc9, type: 2}
+  - {fileID: 11400000, guid: 9ac1047ad55403d4da83464ac9840a8a, type: 2}
+  - {fileID: 11400000, guid: 3e91031bd1db4004b97cd6204951b449, type: 2}
+  - {fileID: 11400000, guid: 96423bbefcb08a54d9b268b45a6e1144, type: 2}
+  - {fileID: 11400000, guid: 5e021e1b23414a348a29b300b70cf348, type: 2}
+  - {fileID: 11400000, guid: e2a7735111154e543b74cba9b6a64498, type: 2}
+  - {fileID: 11400000, guid: 045eb174418053849b5ccf128f1c1070, type: 2}
+  - {fileID: 11400000, guid: ce53f9a6084962d44ab83949b6668a07, type: 2}
+  - {fileID: 11400000, guid: 023712d8c4376bc43b6368164808d6f8, type: 2}
+  - {fileID: 11400000, guid: 212e7669b9878c942b0afe41a8bde9af, type: 2}
+  - {fileID: 11400000, guid: 95f8f13f0069cef4cb3abb1c755fcdca, type: 2}
   - {fileID: 11400000, guid: db81d1a0acb931542bcd95ab3aa9edd1, type: 2}
   - {fileID: 11400000, guid: cf7ef2cb0d350e844940acbd59973f13, type: 2}
-  - {fileID: 11400000, guid: 95f8f13f0069cef4cb3abb1c755fcdca, type: 2}
   - {fileID: 11400000, guid: de4c878a8a9866e4a87faad4af84b29a, type: 2}
+  - {fileID: 11400000, guid: 5d500492a9d52fd4797db4782944f1a9, type: 2}
   - {fileID: 11400000, guid: 086f25a75d8e70a44a1edf1c7fee045f, type: 2}
   - {fileID: 11400000, guid: 8baa5360ae4fa7d489a541d37455084f, type: 2}
   - {fileID: 11400000, guid: 6d075a55ac214f8469290ed990640c67, type: 2}
   - {fileID: 11400000, guid: d3da3bcfcd9345e4e97669c8d211b1e3, type: 2}
   - {fileID: 11400000, guid: ecb7d7aa8e945714faf17f2eda7b2f67, type: 2}
-  AvailableLoots: []
+  AvailableLoots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

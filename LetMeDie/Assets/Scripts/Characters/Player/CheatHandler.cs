@@ -1,11 +1,12 @@
 using Essentials;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CheatHandler : MonoBehaviour
 {
     private PlayerStatHandler playerStatHandler;
-
+    [SerializeField] private List<BuffBattleLoot> battleLoots;
 
     void Start()
     {
@@ -15,6 +16,12 @@ public class CheatHandler : MonoBehaviour
         inputs.Cheats.GetSpell.performed += GetSpell;
 
         playerStatHandler = GetComponent<PlayerStatHandler>();
+
+
+        foreach(BuffBattleLoot battleLoot in battleLoots)
+        {
+            playerStatHandler.PlayerData.AddBuffBattleLoot(battleLoot);
+        }
     }
 
     private void LevelUpPlayer(UnityEngine.InputSystem.InputAction.CallbackContext context)

@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1dc134b0920f34485ad68d57a6b28d, type: 3}
-  m_Name: HealthRegLevelUp
+  m_Script: {fileID: 11500000, guid: 3eb920a91162747468cccd12e91e1fc8, type: 3}
+  m_Name: AttackSizeBuff
   m_EditorClassIdentifier: 
-  name: Health Regeneration
-  description: 'Regenerate Health Every Second for : '
-  icon: {fileID: 21300000, guid: 8190de0762cc14844a0e56e4807cbec0, type: 3}
+  name: Monster Blood
+  description: 'Increase the size of Spells and Weapon Attacks by :'
+  icon: {fileID: 0}
   tint: {r: 1, g: 1, b: 1, a: 1}
   lootRarity: 0
-  showsAsItem: 0
+  showsAsItem: 1
   temporaryBuffTime: 0
   CurrentTemporaryBuffTime: 0
-  healthRegAmount: 0.3
+  extraSize: 2

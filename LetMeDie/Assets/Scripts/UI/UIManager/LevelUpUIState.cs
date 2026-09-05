@@ -15,11 +15,6 @@ public class LevelUpUIState : UIStateComponent
     [SerializeField] private BattleLootButton battleLootButton2;
     [SerializeField] private BattleLootButton battleLootButton3;
 
-    [Header("WaveRaritys")]
-    [SerializeField] private int uncommonLevelAmount = 5;
-    [SerializeField] private int rareLevelAmount = 10;
-    [SerializeField] private int epicLevelAmount = 15;
-    [SerializeField] private int legendaryLevelAmount = 20;
 
 
     [Header("Transition")]
@@ -100,22 +95,17 @@ public class LevelUpUIState : UIStateComponent
             playerData.AddBuffBattleLoot(buffBattleLoot);
         }
 
-        battleLootTable.ChooseBattleLoot(battleLoot);
         SUIManager.Instance.ChangeToUIState(SUIManager.GAME_UI_STATENAME);
     }
 
     private void OnLevelUp(int index)
     {
         SUIManager.Instance.ChangeToUIState("LevelUp");
-        float commonPercentage = 0.0f;
-        float uncommonPercentage = 0.0f;
-        float rarePercentage = 0.0f;
-        float epicPercentage = 0.0f;
-        float legendaryPercentage = 0.0f;
 
-        (commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage) = GetDropPercentage(index);
+        BattleLoot.LootRarity battleLoot1Rarity = BattleLootTable.GetRarity(playerData.Luck);
+        BattleLoot.LootRarity battleLoot2Rarity = BattleLootTable.GetRarity(playerData.Luck);
+        BattleLoot.LootRarity battleLoot3Rarity = BattleLootTable.GetRarity(playerData.Luck);
 
-        int possibleTrys = 100;
 
         List<BattleLoot> currentAvailableBattleLoots = new();
         battleLootTable.AvailableLoots.ForEach(battleLoot => { currentAvailableBattleLoots.Add(battleLoot); });
@@ -127,79 +117,21 @@ public class LevelUpUIState : UIStateComponent
         BattleLoot battleLoot3 = currentAvailableBattleLoots[UnityEngine.Random.Range(0, currentAvailableBattleLoots.Count - 1)];
        currentAvailableBattleLoots.Remove(battleLoot3);
 
+        battleLoot1.CalculateValues();
+        battleLoot2.CalculateValues();
+        battleLoot3.CalculateValues();
+
+        battleLoot1.lootRarity = battleLoot1Rarity;
+        battleLoot2.lootRarity = battleLoot2Rarity;
+        battleLoot3.lootRarity = battleLoot3Rarity;
+
+
         battleLootButton1.SetBattleLoot(battleLoot1);
         battleLootButton2.SetBattleLoot(battleLoot2);
         battleLootButton3.SetBattleLoot(battleLoot3);
 
     }
 
-
-    public static BattleLoot.LootRarity GetRarity(float commonPercentage, float uncommonPercentage, float rarePercentage, float epicPercentage, float legendaryPercentage)
-    {
-        float randomValue = UnityEngine.Random.Range(0.0f, 1.0f);
-        if (randomValue <= commonPercentage)
-        {
-            return BattleLoot.LootRarity.Common;
-        }
-        else if (randomValue <= commonPercentage + uncommonPercentage)
-        {
-            return BattleLoot.LootRarity.Uncommen;
-        }
-        else if (randomValue <= commonPercentage + uncommonPercentage + rarePercentage)
-        {
-            return BattleLoot.LootRarity.Rare;
-        }
-        else if (randomValue < commonPercentage + uncommonPercentage + rarePercentage + epicPercentage)
-        {
-            return BattleLoot.LootRarity.Epic;
-        }
-        else
-        {
-            return BattleLoot.LootRarity.Legendary;
-        }
-
-
-    }
-
-    private (float, float, float, float, float) GetDropPercentage(int waveIndex)
-    {
-        if (waveIndex >= legendaryLevelAmount)
-        {
-            return (0.05f, 0.10f, 0.20f, 0.4f, 0.25f);
-        }
-        else if (waveIndex >= epicLevelAmount)
-        {
-            return (0.19f, 0.3f, 0.35f, 0.1f, 0.01f);
-        }
-        else if (waveIndex >= rareLevelAmount)
-        {
-            return (0.55f, 0.3f, 0.15f, 0, 0);
-        }
-        else if (waveIndex >= uncommonLevelAmount)
-        {
-            return (0.75f, 0.25f, 0, 0, 0);
-        }
-        else
-        {
-            return (1, 0, 0, 0, 0);
-        }
-
-
-        return (0, 0, 0, 0, 0);
-    }
-
-    public static (float, float, float, float, float) GetDropPercentage(BattleLoot.LootRarity rarity)
-    {
-        switch (rarity)
-        {
-            case BattleLoot.LootRarity.Common: return (1, 0, 0, 0, 0);
-            case BattleLoot.LootRarity.Uncommen: return (0.75f, 0.25f, 0, 0, 0);
-            case BattleLoot.LootRarity.Rare: return (0.55f, 0.3f, 0.15f, 0, 0);
-            case BattleLoot.LootRarity.Epic: return (0.19f, 0.3f, 0.35f, 0.1f, 0.01f);
-            case BattleLoot.LootRarity.Legendary: return (0.05f, 0.10f, 0.20f, 0.4f, 0.25f);
-        }
-        return (0, 0, 0, 0, 0);
-    }
 
 
 

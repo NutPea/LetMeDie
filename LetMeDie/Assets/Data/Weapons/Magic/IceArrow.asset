@@ -9,29 +9,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33bc2393fe4a1fc4fa442e98c9cde477, type: 3}
+  m_Script: {fileID: 11500000, guid: ba092dbbf01f839409e7870e6ecb9edc, type: 3}
   m_Name: IceArrow
   m_EditorClassIdentifier: 
-  _guid: FireArrow
-  itemName: IceArrow
-  description: NO DESCRIPTION
-  sprite: {fileID: 21300000, guid: 50a435cd062c3f140bbfc7691f413add, type: 3}
-  _tint: {r: 0.101960756, g: 0.6508002, b: 0.7529412, a: 1}
-  minDamageAmount: 0
-  maxDamageAmount: 0
+  _guid: Ice Arrow
+  itemName: Ice Arrow
+  description: A Ice Arrow
+  sprite: {fileID: 0}
+  _tint: {r: 1, g: 1, b: 1, a: 1}
+  attackWithAnimation: 0
+  minDamageAmount: 1
+  maxDamageAmount: 1
   canBlock: 0
-  fullChargeTime: 0.5
   attackCooldown: 0.5
   combatEffect: []
   spellManaCost: 10
   OnSpellCast:
     m_PersistentCalls:
       m_Calls: []
-  spellInfluences:
-  - {fileID: 11400000, guid: db2ec32a240d80b43828291fb213b247, type: 2}
+  spellInfluences: []
   OnSpellAmountUpdate:
     m_PersistentCalls:
       m_Calls: []
-  baseDamage: 25
-  ExtraDamage: 5
+  baseDamage: 5
+  ExtraDamage: 0
   projectile: {fileID: 6903004982847926900, guid: 4f858ed47828c0a4fba66d099f0e7235, type: 3}
+  amountOfProjektiles: 1
+  spreadRadius: {x: 0.2, y: 0.2}
+  spreadIsRandom: 0

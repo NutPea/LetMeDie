@@ -16,11 +16,13 @@ public class SwordData : WeaponData
 
     [Header("Hitbox")]
     [SerializeField] private float range = 2f;
-    public float Range => range;
+    public float Range => range + range * playerData.ExtraAttackSize;
     [SerializeField] private float attackWidth = 2f;
-    public float AttackWidth => attackWidth;
+    public float AttackWidth => attackWidth + attackWidth * playerData.ExtraAttackSize;
 
     [SerializeField] private float attackHeight = 0.4f;
+
+    public float AttackHeight => attackHeight + attackHeight * playerData.ExtraAttackSize;
 
     private Dictionary<Vector3, bool> hitPositions = new();
     private bool hasHit;
@@ -88,7 +90,7 @@ public class SwordData : WeaponData
             }
         }
 
-        if (Physics.Raycast(camera.position, camera.forward, out hit, range, attackLayer)) {
+        if (Physics.Raycast(camera.position, camera.forward, out hit, Range, attackLayer)) {
             hasHit = true;
             bool isEnemyHit = false;
             Vector3 hitPosition = hit.point - camera.forward * 0.2f;
@@ -115,7 +117,7 @@ public class SwordData : WeaponData
              GetHalfBoxExtend(camera),
             camera.forward/2,
             camera.rotation,
-            range,
+            Range,
             attackLayer
         );
 
@@ -195,7 +197,7 @@ public class SwordData : WeaponData
 
     public Vector3 GetHalfBoxExtend(Transform camera)
     {
-        return new Vector3(attackWidth / 2, attackHeight, range/2);
+        return new Vector3(AttackWidth / 2, AttackHeight, Range / 2);
     }
 
     protected int CalculateDamage(float chargeAmount,int strength)

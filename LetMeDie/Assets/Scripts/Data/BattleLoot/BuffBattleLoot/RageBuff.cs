@@ -9,7 +9,6 @@ public class RageBuff : BuffBattleLoot
     {
         this.playerData = data;
         data.ExtraAttackSpeed += extraAttackSpeed;
-        Debug.Log("Add" + data.ExtraAttackSpeed);
         data.WeaponBaseDamagePercentage += extraDamage;
     }
 

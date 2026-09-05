@@ -17,7 +17,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 8190de0762cc14844a0e56e4807cbec0, type: 3}
   tint: {r: 1, g: 1, b: 1, a: 1}
   lootRarity: 0
-  showsAsItem: 1
+  showsAsItem: 0
   temporaryBuffTime: 0
   CurrentTemporaryBuffTime: 0
   critDamageAmount: 0.05

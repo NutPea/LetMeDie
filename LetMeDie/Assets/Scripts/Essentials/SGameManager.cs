@@ -22,8 +22,6 @@ public class SGameManager : MonoBehaviour
     private bool GameHasBeenEnded = false;
     [HideInInspector] public float RemainingGameTime => Mathf.Max(0.0f, GameDuration - ElapsedGameTime);
 
-    
-
 
     [Header("Debug")]
     [SerializeField] private GameObject sphere;
@@ -37,6 +35,14 @@ public class SGameManager : MonoBehaviour
     public UnityEvent<int> OnEnemyKilled = new();
     public UnityEvent<HealthManager> OnBossRegistered = new();
     public UnityEvent OnGameEnded = new();
+
+    [Header("RarityColor")]
+    public Color commonColor;
+    public Color uncommonColor;
+    public Color rareColor;
+    public Color epicColor;
+    public Color legendaryColor;
+
     private void Awake()
     {
         if (Instance == null) {
@@ -77,6 +83,19 @@ public class SGameManager : MonoBehaviour
             dmgCount.ShowDamage(PlayerBody.transform,damage);
         }
 
+    }
+
+    public Color GetRarityColor(BattleLoot.LootRarity rarity)
+    {
+        switch (rarity)
+        {
+            case BattleLoot.LootRarity.Common: return commonColor;
+            case BattleLoot.LootRarity.Uncommen: return uncommonColor;
+            case BattleLoot.LootRarity.Rare: return rareColor;
+            case BattleLoot.LootRarity.Epic: return epicColor;
+            case BattleLoot.LootRarity.Legendary: return legendaryColor;
+        }
+        return commonColor;
     }
 
     public void EnemyDied()

@@ -26,4 +26,9 @@ public class BattleLoot : ScriptableObject
 
     public LootRarity lootRarity;
 
+    public virtual void CalculateValues()
+    {
+        
+    }
+
 }

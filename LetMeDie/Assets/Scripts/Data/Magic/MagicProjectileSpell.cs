@@ -26,5 +26,8 @@ public class MagicProjectileSpell : MagicSpell
         GameObject projectileSpell = Instantiate(projectile, camera.transform.position + camera.transform.forward, Quaternion.identity);
         ProjectileHandler projectileHandler = projectileSpell.GetComponent<ProjectileHandler>();
         projectileHandler.Init(Damage, 1, lookDirection, TeamFlag.Player);
+
+        Vector3 size = projectileSpell.transform.localScale;
+        projectileSpell.transform.localScale = size + size * playerData.ExtraAttackSize;
     }
 }

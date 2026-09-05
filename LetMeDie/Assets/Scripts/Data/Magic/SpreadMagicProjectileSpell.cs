@@ -1,19 +1,22 @@
+using Unity.VisualScripting;
 using UnityEngine;
 [CreateAssetMenu(fileName = "SpreadMagicProjectileSpell", menuName = "Weapons/Magic/SpreadMagicProjectileSpell", order = 1)]
 public class SpreadMagicProjectileSpell : MagicProjectileSpell
 {
     [Header("Spread")]
     [SerializeField] private int amountOfProjektiles = 1;
+    private int AmountOfProjectiles => (amountOfProjektiles + playerData.ExtraAmountOfProjectiles) + Mathf.CeilToInt((amountOfProjektiles + playerData.ExtraAmountOfProjectiles) * playerData.ExtraAmountOfProjectilesPercent);
     [SerializeField] private Vector2 spreadRadius;
     [SerializeField] private bool spreadIsRandom = false;
+    private bool SpreadIsRandom => spreadIsRandom ||  playerData.ForceProjectileSpread;
 
     public override void Cast(Transform camera)
     {
         base.Cast(camera);
        
-        if(amountOfProjektiles > 1)
+        if(AmountOfProjectiles > 1)
         {
-            int amountOfExtraShots = amountOfProjektiles - 1;
+            int amountOfExtraShots = AmountOfProjectiles - 1;
             if (spreadIsRandom)
             {
                 for(int i = 0; i< amountOfExtraShots; i++)
@@ -28,8 +31,6 @@ public class SpreadMagicProjectileSpell : MagicProjectileSpell
                 int rightAmount = Mathf.CeilToInt((float)amountOfExtraShots / 2);
                 int leftAmount = amountOfExtraShots - rightAmount;
 
-                Debug.Log(rightAmount);
-                Debug.Log(leftAmount);
 
                 float rightStep = spreadRadius.x / rightAmount;
                 for (int x = 0; x < rightAmount; x++)

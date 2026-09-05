@@ -11804,6 +11804,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2247182575661076968, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
+      propertyPath: battleLoots.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2247182575661076968, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
+      propertyPath: 'battleLoots.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ce53f9a6084962d44ab83949b6668a07, type: 2}
     - target: {fileID: 2318392816892420167, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
       propertyPath: m_IsActive
       value: 0

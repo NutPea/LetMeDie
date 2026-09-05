@@ -1,4 +1,5 @@
 
+using Mono.Cecil;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -78,12 +79,49 @@ public class PlayerData : HealthData
 
     public float ExtraCritDamage { get => extraCritDamage; set { extraCritDamage = value; } }
 
+    private int luck;
+
+    public int Luck { get => luck; set { luck = value; } }
+
+
+    private float extraAttackSize = 0.0f;
+
+    public float ExtraAttackSize { get => extraAttackSize; set { extraAttackSize = value; } }
+
+    private float evasion = 0.0f;
+
+    public float Evasion { get => evasion; set { evasion = value; } }
+
+    private int extraAmountOfProjectiles = 0;
+
+    public int ExtraAmountOfProjectiles { get => extraAmountOfProjectiles; set { extraAmountOfProjectiles = value; } }
+
+    private float extraAmountOfProjectilesPercent = 0;
+
+    public float ExtraAmountOfProjectilesPercent { get => extraAmountOfProjectilesPercent; set { extraAmountOfProjectilesPercent = value; } }
+
+    private bool forceProjectileSpread = false;
+
+    public bool ForceProjectileSpread { get => forceProjectileSpread; set { forceProjectileSpread = value; } }
+
+    private int extraManaKillAmount = 0;
+
+    public int ExtraManaKillAmount { get => extraManaKillAmount; set { extraManaKillAmount = value; } }
+
+    private int amountOfExtraCasts = 0;
+
+    public int AmountOfExtraCasts { get => amountOfExtraCasts; set { amountOfExtraCasts = value; } }
+
 
 
     [Header("Other")]
 
     private float expGainPercentage = 0.0f;
     public float ExpGainPercentage { get { return expGainPercentage; } set { expGainPercentage = value; } }
+
+    private float expDoubleChance= 0.0f;
+
+    public float ExpDoubleChance { get => expDoubleChance; set { expDoubleChance = value; } }
 
     private float goldPercentage = 0.0f;
     public float GoldPercentage { get { return goldPercentage; } set { goldPercentage = value; } }
@@ -113,6 +151,8 @@ public class PlayerData : HealthData
     public UnityEvent<int> OnGoldChange = new();
     public UnityEvent<float> OnExpChanged = new();
     public UnityEvent<ItemData> OnItemAdded = new();
+    public UnityEvent OnSpellShrineUpgrade = new();
+    public UnityEvent OnCrit = new();
     public UnityEvent OnStatUpdate = new();
 
     private enum CharacterClass { None, Warrior,Thief,Mage}
@@ -142,7 +182,16 @@ public class PlayerData : HealthData
 
     public void AddExperience(int experience)
     {
-        currentExperience += experience + Mathf.CeilToInt((float)experience * expGainPercentage);
+     
+        int amountOfGainExperience = experience + Mathf.CeilToInt((float)experience * expGainPercentage);
+        float doubleingChance = UnityEngine.Random.Range(0.0f, 1.0f);
+        if (doubleingChance < expDoubleChance)
+        {
+            amountOfGainExperience += amountOfGainExperience;
+        }
+
+
+        currentExperience += amountOfGainExperience;
         if (currentExperience >= nextLevelUpExperience)
         {
             currentLevel++;
@@ -152,12 +201,11 @@ public class PlayerData : HealthData
             }
             nextLevelUpExperience = ExpForNextLevel(currentLevel);
             int experienceDifference = currentExperience - nextLevelUpExperience;
-            if (experienceDifference <= 0) {
-                currentExperience = 0;
-            }
-            else {
+            currentExperience = 0;
+            if (experienceDifference > 0) {
                 AddExperience(experienceDifference);
             }
+
             OnLevelUp.Invoke(currentLevel);
         }
         ExperiencePercent = (float)currentExperience / (float)nextLevelUpExperience;
@@ -174,6 +222,7 @@ public class PlayerData : HealthData
         float critPercentage = 0f;
         if (critPercentage < Random.Range(0.0f, 1.0f)) {
             return 2 + extraCritDamage;
+            OnCrit.Invoke();
         }
 
         return 1;

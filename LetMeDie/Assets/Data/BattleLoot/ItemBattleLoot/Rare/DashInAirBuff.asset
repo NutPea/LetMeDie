@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ebe91f07c50c246b86af80b274791e, type: 3}
+  m_Name: DashInAirBuff
+  m_EditorClassIdentifier: 
+  name: Flying Shoes
+  description: Can dash in air
+  icon: {fileID: 0}
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  lootRarity: 2
+  showsAsItem: 1
+  temporaryBuffTime: 0
+  CurrentTemporaryBuffTime: 0

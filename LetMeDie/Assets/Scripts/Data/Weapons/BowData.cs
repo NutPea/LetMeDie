@@ -10,6 +10,9 @@ public class BowData : WeaponData
         GameObject arrow = Instantiate(arrowPrefab,camera.transform.position + camera.transform.forward,Quaternion.identity);
         ProjectileHandler projectileHandler = arrow.GetComponent<ProjectileHandler>();
 
+        Vector3 arrowScale = arrow.transform.localScale;
+        arrow.transform.localScale = arrowScale + arrowScale * playerData.ExtraAttackSize;
+
         int calculatedDamage = Mathf.CeilToInt((PlayerData.CalculateChargeDamage(minDamageAmount, maxDamageAmount, chargeAmount) *playerData.WeaponBaseDamagePercentage) * playerData.GetCritModifier());
         projectileHandler.Init(calculatedDamage ,chargeAmount, camera.transform.forward, TeamFlag.Player);
 

@@ -11879,6 +11879,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2247182575661076968, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
+      propertyPath: battleLoots.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2247182575661076968, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
+      propertyPath: 'battleLoots.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: afc239a27c4356d4b9384c402af400f0, type: 2}
     - target: {fileID: 2293630769969159828, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

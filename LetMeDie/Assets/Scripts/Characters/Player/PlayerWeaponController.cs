@@ -136,4 +136,20 @@ public class PlayerWeaponController : MonoBehaviour
     {
         playerResourceHandler.LifeSteal(amount, PlayerData.LifeStealPercentage);
     }
+
+    private Action castAction;
+
+    internal void CastExtraAttack(Action castAttack, int amountOfExtraCasts)
+    {
+        castAction = castAttack;
+        for(int i = 1; i< amountOfExtraCasts+1; i++)
+        {
+            Invoke(nameof(CastExtraAttack), 0.05f * i+1);
+        }
+    }
+
+    private void CastExtraAttack()
+    {
+        castAction.Invoke();
+    }
 }

@@ -7,11 +7,11 @@ using static PixelCrushers.AnimatorSaver;
 public class PlayerResourceHandler : HealthManager
 {
 
-    private PlayerData data;
+    private PlayerData playerData;
     public int CurrentStamina = 0;
 
     public bool HasEnoughStamina => CurrentStamina > 0;
-    public bool StaminaIsFull => CurrentStamina == data.Stamina;
+    public bool StaminaIsFull => CurrentStamina == playerData.Stamina;
 
     public bool StaminaIsEmpty => CurrentStamina <= 0;
 
@@ -31,9 +31,9 @@ public class PlayerResourceHandler : HealthManager
 
     private void Start()
     {
-        currentRegenerationTime = data.StaminaRegeneration;
+        currentRegenerationTime = playerData.StaminaRegeneration;
         OnDamageBlocked.AddListener(UseStamina);
-        CurrentStamina = data.Stamina;
+        CurrentStamina = playerData.Stamina;
         currentStatRegenerationTime = STAT_REGENERATION_TIME;
         OnDamaged.AddListener(SetInvincible);
     }
@@ -42,7 +42,7 @@ public class PlayerResourceHandler : HealthManager
     {
         isInvincible = true;
         CancelInvoke(nameof(ResetInvincible));
-        Invoke(nameof(ResetInvincible), data.InvincibleTime);
+        Invoke(nameof(ResetInvincible), playerData.InvincibleTime);
     }
 
     private void ResetInvincible()
@@ -58,7 +58,7 @@ public class PlayerResourceHandler : HealthManager
             if (currentRegenerationTime < 0)
             {
                 RegStamina(1);
-                currentRegenerationTime = data.StaminaRegeneration;
+                currentRegenerationTime = playerData.StaminaRegeneration;
             }
             else
             {
@@ -69,23 +69,23 @@ public class PlayerResourceHandler : HealthManager
         if(currentRegenerationTime < 0)
         {
             currentRegenerationTime = STAT_REGENERATION_TIME;
-            if(data.SpellManaRegeneration > 0)
+            if(playerData.SpellManaRegeneration > 0)
             {
-                manaRegValue += data.SpellManaRegeneration;
+                manaRegValue += playerData.SpellManaRegeneration;
                 if(manaRegValue > 1)
                 {
                     int toManaRegValue = Mathf.CeilToInt(manaRegValue);
                     manaRegValue -= toManaRegValue;
                     for (int i = 0; i < toManaRegValue; i++) {
-                        data.RegSpellMana();
+                        playerData.RegSpellMana();
                     }
                 }
 
             }
 
-            if(data.HealthRegRate > 0)
+            if(playerData.HealthRegRate > 0)
             {
-                healthRegValue += data.HealthRegRate;
+                healthRegValue += playerData.HealthRegRate;
                 if(healthRegValue > 1)
                 {
                     int toHealReg = Mathf.CeilToInt(healthRegValue);
@@ -100,10 +100,20 @@ public class PlayerResourceHandler : HealthManager
         }
     }
 
+    public override void InflictDamage(int damage, TeamFlag team, Transform hitSource)
+    {
+        float evasionPercentage = UnityEngine.Random.Range(0.0f, 1.0f);
+        if(evasionPercentage < playerData.Evasion)
+        {
+            return;
+        }
+        base.InflictDamage(damage, team, hitSource);
+    }
+
     public void SetData(PlayerData playerData)
     {
         this.healthData = playerData;
-        data = playerData;
+        this.playerData = playerData;
         currentHealth = healthData.Health;
         OnHealthUpdate.Invoke();
     }
@@ -123,9 +133,9 @@ public class PlayerResourceHandler : HealthManager
     {
         CurrentStamina += amount;
 
-        if (CurrentStamina > data.Stamina)
+        if (CurrentStamina > playerData.Stamina)
         {
-            CurrentStamina = data.Stamina;
+            CurrentStamina = playerData.Stamina;
         }
         if(CurrentStamina > 0)
         {
@@ -138,7 +148,7 @@ public class PlayerResourceHandler : HealthManager
 
     public void FullManaReg()
     {
-        CurrentStamina = data.Stamina;
+        CurrentStamina = playerData.Stamina;
     }
 
     public override void Recover()

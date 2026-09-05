@@ -108,6 +108,7 @@ public class SpellLevelUpUIState : UIStateComponent
 
         battleLootTable.ChooseBattleLoot(battleLoot);
         SUIManager.Instance.ChangeToUIState(SUIManager.GAME_UI_STATENAME);
+        playerData.OnSpellShrineUpgrade.Invoke();
     }
 
     private void OnSpellLevelUp(int index)

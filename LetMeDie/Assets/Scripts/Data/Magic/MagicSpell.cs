@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,6 +19,7 @@ public class MagicSpell : WeaponData
     private List<InfluenceData> copiedSpellInfluences = new();
 
     [HideInInspector] public UnityEvent<int,int> OnSpellAmountUpdate = new();
+    private Transform mainCamera;
 
     public override void Equip(PlayerWeaponController playerWeaponController)
     {
@@ -31,18 +33,30 @@ public class MagicSpell : WeaponData
             copiedSpellInfluences.Add(data);
         }
         currentSpellMana = SpellManaCost;
+
+        
     }
 
     public override void Attack(Transform camera, float chargeAmount)
     {
         base.Attack(camera, chargeAmount);
-        
+        mainCamera = camera;
         if (SpellIsReady) {
-            Cast(camera);
-            OnSpellCast.Invoke(this);
+            CastAttack();
+
             currentSpellMana = 0;
             OnSpellAmountUpdate.Invoke(currentSpellMana, SpellManaCost);
+
+
+            playerWeaponController.CastExtraAttack(() => CastAttack(), playerData.AmountOfExtraCasts);
+
         }
+    }
+
+    private void CastAttack()
+    {
+        Cast(mainCamera);
+        OnSpellCast.Invoke(this);
     }
 
     public virtual void Cast(Transform camera)
@@ -61,7 +75,7 @@ public class MagicSpell : WeaponData
 
     public void AddMana()
     {
-        currentSpellMana++;
+        currentSpellMana += playerData.ExtraManaKillAmount + 1;
         if (currentSpellMana > SpellManaCost) {
             currentSpellMana = SpellManaCost;
         }

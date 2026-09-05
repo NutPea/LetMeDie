@@ -24,6 +24,11 @@ public class PlayerCharacterControllerMovementController : MonoBehaviour
     public UnityEvent OnStartJump = new UnityEvent();
     public UnityEvent OnLandAfterJump = new UnityEvent();
 
+
+    [SerializeField] private float timeUntilStandingStill = 1f;
+    private float currentTimeUntilStandingStill = 0f;
+    public UnityEvent OnStandingStill = new UnityEvent();
+
     private bool wasGrounded;
     private bool wasJumping;
 
@@ -94,6 +99,9 @@ public class PlayerCharacterControllerMovementController : MonoBehaviour
     [SerializeField] private float dashDuration = 0.15f;
     [SerializeField] private float dashCooldown = 0.5f;
 
+    private bool needsToBeGroundedToDash = true;
+    public bool NeedsToBeGroundedToDash { set => needsToBeGroundedToDash = value; }
+
     private float dashTimer;
     private float dashCooldownTimer;
 
@@ -117,6 +125,7 @@ public class PlayerCharacterControllerMovementController : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        currentTimeUntilStandingStill = timeUntilStandingStill;
     }
 
     private void Start()
@@ -185,6 +194,24 @@ public class PlayerCharacterControllerMovementController : MonoBehaviour
 
         UpdateGroundedState();
         UpdateFallingState();
+
+        if(playerInputVector == Vector2.zero)
+        {
+            if(currentTimeUntilStandingStill < 0)
+            {
+                OnStandingStill.Invoke();
+            }
+            else
+            {
+                currentTimeUntilStandingStill -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            currentTimeUntilStandingStill = timeUntilStandingStill;
+        }
+        
+
     }
 
     // =========================================================
@@ -454,8 +481,10 @@ public class PlayerCharacterControllerMovementController : MonoBehaviour
     public bool TryDash()
     {
         // Dash only works on the ground.
-        if (!characterController.isGrounded)
-            return false;
+        if (needsToBeGroundedToDash) {
+            if (!characterController.isGrounded)
+                return false; 
+        } 
 
         // Still on cooldown.
         if (dashCooldownTimer > 0f)

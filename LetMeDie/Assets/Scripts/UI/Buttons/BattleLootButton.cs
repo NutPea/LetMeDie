@@ -13,11 +13,6 @@ public class BattleLootButton : MonoBehaviour
 
 
     [SerializeField] private Image rarityColor;
-    [SerializeField] private Color commonColor;
-    [SerializeField] private Color uncommonColor;
-    [SerializeField] private Color rareColor;
-    [SerializeField] private Color epicColor;
-    [SerializeField] private Color legendaryColor;
 
     private BattleLoot currentBattleLoot;
 
@@ -28,16 +23,7 @@ public class BattleLootButton : MonoBehaviour
 
     public void SetBattleLoot(BattleLoot battleLoot)
     {
-        
-        switch (battleLoot.lootRarity)
-        {
-            case BattleLoot.LootRarity.Common: rarityColor.color = commonColor; break;
-            case BattleLoot.LootRarity.Uncommen: rarityColor.color = uncommonColor; break;
-            case BattleLoot.LootRarity.Rare: rarityColor.color = rareColor; break;
-            case BattleLoot.LootRarity.Epic: rarityColor.color = rareColor; break;
-            case BattleLoot.LootRarity.Legendary: rarityColor.color = legendaryColor; break;
-        }
-        
+        rarityColor.color = SGameManager.Instance.GetRarityColor(battleLoot.lootRarity);
         head.text = battleLoot.Name;
         iconImage.sprite = battleLoot.Icon;
         iconImage.color = battleLoot.Tint;

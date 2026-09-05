@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -55,7 +56,7 @@ public class HealthManager : MonoBehaviour
 
     }
 
-    public void InflictDamage(int damage,TeamFlag team,Transform hitSource)
+    public virtual void InflictDamage(int damage,TeamFlag team,Transform hitSource)
     {
         if (isInvincible)
         {
@@ -139,6 +140,6 @@ public class HealthManager : MonoBehaviour
         OnDeath.Invoke(gameObject);
         OnDamaged.Invoke(true, 10, transform);
     }
-    
+
 
 }

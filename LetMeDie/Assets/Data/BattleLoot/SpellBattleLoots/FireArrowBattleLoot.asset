@@ -17,4 +17,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 50a435cd062c3f140bbfc7691f413add, type: 3}
   tint: {r: 1, g: 0.13163528, b: 0, a: 1}
   lootRarity: 0
-  weaponData: {fileID: 11400000, guid: 1ddf2413c66ed3d42ab867e425afa688, type: 2}
+  weaponData: {fileID: 11400000, guid: 80d81ff5f9fa91a48a851e2a01fe0051, type: 2}

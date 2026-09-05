@@ -21,6 +21,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e0a857071c877534da38ab9cb760ad47, type: 2}
   - {fileID: 11400000, guid: 6b2adc534e6ed8845a8a714621976272, type: 2}
   - {fileID: 11400000, guid: 8f8fc40da1b66a54a868f25581fff6e7, type: 2}
+  - {fileID: 11400000, guid: 7be5c409d4067ba4b8f4403b19b18951, type: 2}
+  - {fileID: 11400000, guid: a66c36fceb8798e4384b8086d292eb62, type: 2}
   AvailableLoots:
   - {fileID: 0}
   - {fileID: 0}
