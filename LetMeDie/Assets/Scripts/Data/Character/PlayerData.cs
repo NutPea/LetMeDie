@@ -1,5 +1,4 @@
 
-using Mono.Cecil;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -62,18 +61,19 @@ public class PlayerData : HealthData
     public float LifeStealPercentage { get => lifeStealPercentage; set => lifeStealPercentage = value; }
 
     [SerializeField] private float weaponChargeTime = 1.0f;
-    public float WeaponChargeTime => weaponChargeTime - (Mathf.Lerp(0.0f, (weaponChargeTime / 2), extraAttackSpeedPercent));
+    public float WeaponChargeTime => weaponChargeTime - (Mathf.Lerp(0.0f, (weaponChargeTime / 2), extraChargeSpeedPercentage));
 
-    private float extraAttackSpeedPercent = 0.0f;
+    private float extraChargeSpeedPercentage = 0.0f;
 
-    public float ExtraAttackSpeed { get => extraAttackSpeedPercent; set { extraAttackSpeedPercent = value; } }
+    public float ExtraChargeSpeedPercentage { get => extraChargeSpeedPercentage; set { extraChargeSpeedPercentage = value; } }
 
     private float weaponExtraChargeDamage = 0.0f;
     public float WeaponExtraChargeDamage { get => weaponExtraChargeDamage; set { weaponExtraChargeDamage = value; } }
 
     private float critChance = 0.0f;
 
-    public float CritChance { get => critChance; set { critChance = value; } }
+    public float CritChance { get => critChance; set {
+            critChance = value; } }
 
     private float extraCritDamage = 0.0f;
 
@@ -96,7 +96,7 @@ public class PlayerData : HealthData
 
     public int ExtraAmountOfProjectiles { get => extraAmountOfProjectiles; set { extraAmountOfProjectiles = value; } }
 
-    private float extraAmountOfProjectilesPercent = 0;
+    private float extraAmountOfProjectilesPercent = 1;
 
     public float ExtraAmountOfProjectilesPercent { get => extraAmountOfProjectilesPercent; set { extraAmountOfProjectilesPercent = value; } }
 
@@ -220,9 +220,10 @@ public class PlayerData : HealthData
     public float GetCritModifier()
     {
         float critPercentage = 0f;
-        if (critPercentage < Random.Range(0.0f, 1.0f)) {
-            return 2 + extraCritDamage;
+        if (critPercentage > Random.Range(0.0f, 1.0f)) {
+            Debug.Log(critPercentage);
             OnCrit.Invoke();
+            return 2 + extraCritDamage;
         }
 
         return 1;
@@ -230,9 +231,8 @@ public class PlayerData : HealthData
 
     public void AddBuffBattleLoot(BuffBattleLoot buff)
     {
-        BuffBattleLoot copiedBuff = Instantiate(buff);
-        BuffBattleLoots.Add(copiedBuff);
-        copiedBuff.BuffBattleLootAdded(currentPlayer, this);
+        BuffBattleLoots.Add(buff);
+        buff.BuffBattleLootAdded(currentPlayer, this);
         OnStatUpdate.Invoke();
     }
 

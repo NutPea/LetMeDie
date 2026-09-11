@@ -40,6 +40,7 @@ public class PlayerCombatController : MonoBehaviour
     private bool CanUseCombat => !SGameManager.IsPaused;
 
     private bool attackCooldownTrigger;
+    private float chargeSpeedPercentageValue = 0;
 
     private void Awake()
     {
@@ -58,6 +59,13 @@ public class PlayerCombatController : MonoBehaviour
         inputActions.Keyboard.Block.canceled += EndBlock;
 
         startFOV = SCameraShake.Instance.CurrentlyUsedCamera.Lens.FieldOfView;
+        chargeSpeedPercentageValue = playerStatHandler.PlayerData.ExtraChargeSpeedPercentage;
+        playerStatHandler.PlayerData.OnStatUpdate.AddListener(StatUpdate);
+    }
+
+    private void StatUpdate()
+    {
+        chargeSpeedPercentageValue = playerStatHandler.PlayerData.ExtraChargeSpeedPercentage;
     }
 
     private void EndBlock(UnityEngine.InputSystem.InputAction.CallbackContext context)
@@ -167,10 +175,11 @@ public class PlayerCombatController : MonoBehaviour
             return;
         }
 
-        currentChargeAmount += Time.deltaTime;
+        float TimeUpdate = Time.deltaTime;
+        currentChargeAmount += TimeUpdate + TimeUpdate * chargeSpeedPercentageValue;
         OnCharge.Invoke(CurrentChargePercentage);
         if (CanChangeFOVOnCharge){
-            SCameraShake.Instance.ChangeFOV(Mathf.Lerp(startFOV, minFOV, fovAnimationCurve.Evaluate(currentChargeAmount)));
+            SCameraShake.Instance.ChangeFOV(Mathf.Lerp(startFOV, minFOV, fovAnimationCurve.Evaluate(CurrentChargePercentage)));
         }
     }
 

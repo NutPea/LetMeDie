@@ -8,6 +8,14 @@ public class ManaRedBattleLoot : BuffBattleLoot
 
     public override string Description => description + " " + ManaReductionValue * 100f + "%";
 
+    public override void CalculateValues(PlayerData playerData)
+    {
+        base.CalculateValues(playerData);
+        beforeUpgradeValue = CalculateString(playerData.SpellManaReduction);
+        afterUpgradeValue = CalculateString(playerData.SpellManaReduction + ManaReductionValue);
+    }
+
+
     public override void BuffBattleLootAdded(GameObject player, PlayerData data)
     {
         base.BuffBattleLootAdded(player, data);

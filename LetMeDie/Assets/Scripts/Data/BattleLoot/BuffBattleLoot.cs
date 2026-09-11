@@ -31,15 +31,21 @@ public class BuffBattleLoot : BattleLoot
     [SerializeField] private float minLegendaryRarityModRange = 1.5f;
     [SerializeField] private float maxLegendaryRarityModRange = 2.0f;
 
+    protected string beforeUpgradeValue;
+    public virtual string BeforeUpgradeValue => beforeUpgradeValue;
+
+    protected string afterUpgradeValue;
+    public virtual string AfterUpgradeValue => afterUpgradeValue;
+
     public void StartTempBuff()
     {
         CurrentTemporaryBuffTime = temporaryBuffTime;
     }
 
-    public override void CalculateValues()
+    public override void CalculateValues(PlayerData playerData)
     {
-        base.CalculateValues();
         CurrentRarityModifier = RarityModifier();
+        base.CalculateValues(playerData);
     }
 
     public virtual void BuffBattleLootAdded(GameObject player , PlayerData data)
@@ -63,6 +69,16 @@ public class BuffBattleLoot : BattleLoot
             case LootRarity.Legendary: return Random.Range(minLegendaryRarityModRange, maxLegendaryRarityModRange);
         }
         return 0f;
+    }
+
+    protected string CalculateString(float value)
+    {
+        return (value*100).ToString("F1") + " %";
+    }
+
+    protected string CalculateString(int value)
+    {
+        return value.ToString();
     }
 
 }

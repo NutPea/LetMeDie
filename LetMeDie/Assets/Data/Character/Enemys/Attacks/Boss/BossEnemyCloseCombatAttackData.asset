@@ -23,3 +23,5 @@ MonoBehaviour:
   attackMoveAmount: 10
   lookAtPlayerSpeed: 15
   attackStopDistance: 3
+  checkForMaxDistance: 1
+  maxDistance: 20

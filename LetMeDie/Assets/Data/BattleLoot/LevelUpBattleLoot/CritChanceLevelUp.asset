@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d9f57bdab387740a0f7e7ead4b83ae, type: 3}
   m_Name: CritChanceLevelUp
   m_EditorClassIdentifier: 
-  name: CritChanceLevelUp
+  name: Crit Chance Upgrade
   description: 'Increase CritChance by :'
   icon: {fileID: 21300000, guid: 8190de0762cc14844a0e56e4807cbec0, type: 3}
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -20,4 +20,14 @@ MonoBehaviour:
   showsAsItem: 0
   temporaryBuffTime: 0
   CurrentTemporaryBuffTime: 0
+  minCommonRarityModRange: 0
+  maxCommonRarityModRange: 0.1
+  minUncommonRarityModRange: 0.2
+  maxUncommonRarityModRange: 0.3
+  minRareRarityModRange: 0.3
+  maxRareRarityModRange: 0.5
+  minEpicRarityModRange: 0.5
+  maxEpicRarityModRange: 1
+  minLegendaryRarityModRange: 1.5
+  maxLegendaryRarityModRange: 2
   critChanceAmount: 0.05

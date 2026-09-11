@@ -27,7 +27,8 @@ MonoBehaviour:
   OnSpellCast:
     m_PersistentCalls:
       m_Calls: []
-  spellInfluences: []
+  spellInfluences:
+  - {fileID: 11400000, guid: 67a65ff00d945e445ac75e5a1be0a41f, type: 2}
   OnSpellAmountUpdate:
     m_PersistentCalls:
       m_Calls: []

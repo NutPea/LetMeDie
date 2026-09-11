@@ -3,8 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = " EvasionBuff", menuName = "BattleLoot/Buff/EvasionBuffBattleLoot", order = 1)]
 public class EvasionBuffBattleLoot : BuffBattleLoot
 {
-    [SerializeField] private float evasionPercentage = 0.2f;
 
+    [Header("Stats")]
+    [SerializeField] private float evasionPercentage = 0.2f;
+    private float EvasionPercentage => evasionPercentage + (evasionPercentage * CurrentRarityModifier);
     public override string Description => description + (evasionPercentage * 100) +"%";
 
 
@@ -13,5 +15,13 @@ public class EvasionBuffBattleLoot : BuffBattleLoot
         base.BuffBattleLootAdded(player, data);
         data.Evasion += evasionPercentage;
 
+    }
+
+
+    public override void CalculateValues(PlayerData playerData)
+    {
+        base.CalculateValues(playerData);
+        beforeUpgradeValue = CalculateString(playerData.Evasion);
+        afterUpgradeValue = CalculateString(playerData.Evasion + EvasionPercentage);
     }
 }

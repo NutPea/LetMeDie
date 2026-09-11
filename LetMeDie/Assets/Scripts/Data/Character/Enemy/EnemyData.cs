@@ -10,13 +10,17 @@ public class EnemyData : HealthData
     [SerializeField] private float movementSpeed = 5f;
     public float MovementSpeed => movementSpeed;
 
+    public override int Health => baseHealth + Mathf.CeilToInt(SGameManager.Instance.RemainingTimePercentage * TimeHealthBonus);
+
+    [SerializeField] private int TimeHealthBonus = 100; 
 
     [SerializeField] private float accelerationSpeed = 1f;
 
     [Header("Combat")]
     [SerializeField] private int damage;
-    public int Damage => damage;
+    public int Damage => damage + Mathf.CeilToInt(SGameManager.Instance.RemainingTimePercentage * TimeDamageBonus);
 
+    [SerializeField] private int TimeDamageBonus = 10;
 
     [SerializeField] private float attackDistance = 1f;
     public float AttackDistance => attackDistance;

@@ -23,15 +23,16 @@ MonoBehaviour:
   canBlock: 0
   attackCooldown: 0.5
   combatEffect: []
-  spellManaCost: 40
+  spellManaCost: 50
   OnSpellCast:
     m_PersistentCalls:
       m_Calls: []
   spellInfluences:
   - {fileID: 11400000, guid: db2ec32a240d80b43828291fb213b247, type: 2}
+  - {fileID: 11400000, guid: 303973ee84202e24a84788f88c6ae59a, type: 2}
+  - {fileID: 11400000, guid: 67a65ff00d945e445ac75e5a1be0a41f, type: 2}
   OnSpellAmountUpdate:
     m_PersistentCalls:
       m_Calls: []
   baseDamage: 25
-  ExtraDamage: 10
   projectile: {fileID: 1318007824017872539, guid: cdb8cca3c99ad4d469d2e49a9eb3507a, type: 3}

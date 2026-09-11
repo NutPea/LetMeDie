@@ -16,6 +16,7 @@ public class PlayerChestHandler : MonoBehaviour
     private PlayerStatHandler playerStatHandler;
 
     private int amountOfOpenChests = 0;
+    private bool chestIsFree;
 
     private void Start()
     {
@@ -35,6 +36,14 @@ public class PlayerChestHandler : MonoBehaviour
         {
             return;
         }
+
+        if (chestIsFree)
+        {
+            chestIsFree = false;
+            SUIManager.Instance.ChangeToUIState("GetItem");
+            Destroy(currentChestHandler.gameObject);
+            return;
+        }
         int price = GetChestPrice(amountOfOpenChests);
 
         if (playerStatHandler.PlayerData.HasEnoughGold(price)) { 
@@ -45,11 +54,13 @@ public class PlayerChestHandler : MonoBehaviour
         }
     }
 
+
     internal void CanNotOpenChest(ChestHandler chestHandler)
     {
         currentChestHandler = null;
         canOpenChest = false;
         OnCanNotOpenChest.Invoke();
+        chestIsFree = false;
     }
 
     private int GetChestPrice(int openedChests)
@@ -66,5 +77,15 @@ public class PlayerChestHandler : MonoBehaviour
         canOpenChest = true;
         OnCanOpenChest.Invoke(GetChestPrice(amountOfOpenChests));
     }
+
+
+    internal void CanOpenFreeCest(ChestHandler chestHandler)
+    {
+        currentChestHandler = chestHandler;
+        canOpenChest = true;
+        chestIsFree = true;
+        OnCanOpenChest.Invoke(0);
+    }
+
 
 }

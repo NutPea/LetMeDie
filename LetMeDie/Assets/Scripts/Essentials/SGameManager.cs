@@ -21,6 +21,7 @@ public class SGameManager : MonoBehaviour
 
     private bool GameHasBeenEnded = false;
     [HideInInspector] public float RemainingGameTime => Mathf.Max(0.0f, GameDuration - ElapsedGameTime);
+    [HideInInspector] public float RemainingTimePercentage => 1 - RemainingGameTime / GameDuration;
 
 
     [Header("Debug")]
@@ -106,6 +107,11 @@ public class SGameManager : MonoBehaviour
 
     private void Update()
     {
+        if (GameHasBeenEnded)
+        {
+            return;
+        }
+
         ElapsedGameTime += Time.deltaTime;
         if (!IsGameTime)
         {
@@ -114,6 +120,16 @@ public class SGameManager : MonoBehaviour
                 OnGameEnded.Invoke();
                 GameHasBeenEnded = true;
             }
+        }
+    }
+
+    public void EndGame()
+    {
+        ElapsedGameTime = GameDuration;
+        if (!GameHasBeenEnded)
+        {
+            OnGameEnded.Invoke();
+            GameHasBeenEnded = true;
         }
     }
 

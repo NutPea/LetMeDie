@@ -20,4 +20,14 @@ MonoBehaviour:
   showsAsItem: 0
   temporaryBuffTime: 0
   CurrentTemporaryBuffTime: 0
-  luckBuff: 0.1
+  minCommonRarityModRange: 0
+  maxCommonRarityModRange: 0.1
+  minUncommonRarityModRange: 0.2
+  maxUncommonRarityModRange: 0.3
+  minRareRarityModRange: 0.3
+  maxRareRarityModRange: 0.5
+  minEpicRarityModRange: 0.5
+  maxEpicRarityModRange: 1
+  minLegendaryRarityModRange: 1.5
+  maxLegendaryRarityModRange: 2
+  luckBuff: 1

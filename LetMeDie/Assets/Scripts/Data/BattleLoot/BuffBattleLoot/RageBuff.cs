@@ -8,13 +8,13 @@ public class RageBuff : BuffBattleLoot
     public override void BuffBattleLootAdded(GameObject player, PlayerData data)
     {
         this.playerData = data;
-        data.ExtraAttackSpeed += extraAttackSpeed;
+        data.ExtraChargeSpeedPercentage += extraAttackSpeed;
         data.WeaponBaseDamagePercentage += extraDamage;
     }
 
     public override void BuffBattleLootRemoved(GameObject player, PlayerData data)
     {
-        data.ExtraAttackSpeed -= extraAttackSpeed;
+        data.ExtraChargeSpeedPercentage -= extraAttackSpeed;
         data.WeaponBaseDamagePercentage -= extraDamage;
     }
 

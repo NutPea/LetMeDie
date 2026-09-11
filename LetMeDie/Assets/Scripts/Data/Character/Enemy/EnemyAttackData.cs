@@ -18,6 +18,8 @@ public class EnemyAttackData : ScriptableObject
 
     protected EnemyData currentEnemyData;
 
+
+
     [Header("DEBUG")]
     [SerializeField] protected bool ShowDebug;
 

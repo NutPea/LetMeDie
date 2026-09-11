@@ -76,6 +76,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7482923699456837068, guid: 532b674cb6535be4f87f866c00b02a89, type: 3}
+      propertyPath: m_Height
+      value: 5.0290747
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482923699456837068, guid: 532b674cb6535be4f87f866c00b02a89, type: 3}
+      propertyPath: m_Radius
+      value: 1.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482923699456837068, guid: 532b674cb6535be4f87f866c00b02a89, type: 3}
+      propertyPath: m_Center.y
+      value: 2.5732265
+      objectReference: {fileID: 0}
     - target: {fileID: 8115477658349382874, guid: 532b674cb6535be4f87f866c00b02a89, type: 3}
       propertyPath: enemyData
       value: 

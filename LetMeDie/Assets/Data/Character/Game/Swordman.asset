@@ -21,7 +21,7 @@ MonoBehaviour:
   baseJumpForce: 5
   baseStamina: 3
   baseStaminaReginaration: 5
-  weaponChargeTime: 1.5
+  weaponChargeTime: 1.25
   currentLevel: 1
   currentExperience: 0
   ExperiencePercent: 0
@@ -35,6 +35,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnItemAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSpellShrineUpgrade:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrit:
     m_PersistentCalls:
       m_Calls: []
   OnStatUpdate:

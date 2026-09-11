@@ -129,7 +129,7 @@ public class SpellLevelUpUIState : UIStateComponent
         if (playerData.CurrentMagicSpell_1 != null) {
 
             SpellInflluenceBattleLoot spellInflluenceBattleLoot = ScriptableObject.CreateInstance<SpellInflluenceBattleLoot>();
-            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_1, GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
+            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_1, playerData);
             battleLoot1 = spellInflluenceBattleLoot;
         }
         else
@@ -142,7 +142,7 @@ public class SpellLevelUpUIState : UIStateComponent
         if (playerData.CurrentMagicSpell_2 != null)
         {
             SpellInflluenceBattleLoot spellInflluenceBattleLoot = ScriptableObject.CreateInstance<SpellInflluenceBattleLoot>();
-            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_2, GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
+            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_2, playerData);
             battleLoot2 = spellInflluenceBattleLoot;
 
         }
@@ -156,7 +156,7 @@ public class SpellLevelUpUIState : UIStateComponent
         if (playerData.CurrentMagicSpell_3 != null)
         {
             SpellInflluenceBattleLoot spellInflluenceBattleLoot = ScriptableObject.CreateInstance<SpellInflluenceBattleLoot>();
-            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_3, GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
+            spellInflluenceBattleLoot.SetSpell(playerData.CurrentMagicSpell_3, playerData);
             battleLoot3 = spellInflluenceBattleLoot;
 
         }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d33a21274f1204dbcac1e509d9f454, type: 3}
   m_Name: CritDamageLevelUp
   m_EditorClassIdentifier: 
-  name: CritDamageLevelUp
+  name: Crit Damage Upgrade
   description: 'Increase CritDamage by :'
   icon: {fileID: 21300000, guid: 8190de0762cc14844a0e56e4807cbec0, type: 3}
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -20,4 +20,14 @@ MonoBehaviour:
   showsAsItem: 0
   temporaryBuffTime: 0
   CurrentTemporaryBuffTime: 0
+  minCommonRarityModRange: 0
+  maxCommonRarityModRange: 0.1
+  minUncommonRarityModRange: 0.2
+  maxUncommonRarityModRange: 0.3
+  minRareRarityModRange: 0.3
+  maxRareRarityModRange: 0.5
+  minEpicRarityModRange: 0.5
+  maxEpicRarityModRange: 1
+  minLegendaryRarityModRange: 1.5
+  maxLegendaryRarityModRange: 2
   critDamageAmount: 0.05

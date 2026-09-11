@@ -5,10 +5,23 @@ public class SpreadMagicProjectileSpell : MagicProjectileSpell
 {
     [Header("Spread")]
     [SerializeField] private int amountOfProjektiles = 1;
-    private int AmountOfProjectiles => (amountOfProjektiles + playerData.ExtraAmountOfProjectiles) + Mathf.CeilToInt((amountOfProjektiles + playerData.ExtraAmountOfProjectiles) * playerData.ExtraAmountOfProjectilesPercent);
+
+
+    private int extraAmountOfProjectile = 0;
+    public int ExtraAmountOfProjectiles { get => extraAmountOfProjectile; set {
+            extraAmountOfProjectile = value; } }
+
+    private int baseAmountOfProjectiles => amountOfProjektiles + playerData.ExtraAmountOfProjectiles + extraAmountOfProjectile;
+    private int AmountOfProjectiles => baseAmountOfProjectiles + Mathf.CeilToInt(baseAmountOfProjectiles * playerData.ExtraAmountOfProjectilesPercent);
     [SerializeField] private Vector2 spreadRadius;
     [SerializeField] private bool spreadIsRandom = false;
     private bool SpreadIsRandom => spreadIsRandom ||  playerData.ForceProjectileSpread;
+
+    public override void Equip(PlayerWeaponController playerWeaponController)
+    {
+        base.Equip(playerWeaponController);
+        extraAmountOfProjectile = 0;
+    }
 
     public override void Cast(Transform camera)
     {

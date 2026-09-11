@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 70141d51621e24facbca9196bbde84b4, type: 3}
   characterName: Bossus Maximus
-  baseHealth: 750
+  baseHealth: 1000
   team: 2
   movementSpeed: 3
+  TimeHealthBonus: 0
   accelerationSpeed: 1
   damage: 10
+  TimeDamageBonus: 0
   attackDistance: 1
   attackCooldown: 1
   attackMask:

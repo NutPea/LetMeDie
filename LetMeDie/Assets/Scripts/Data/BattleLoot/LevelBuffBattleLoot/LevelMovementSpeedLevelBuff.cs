@@ -17,4 +17,10 @@ public class LevelMovementSpeedLevelBuff : LevelBuffBattleLoot
         lastLevelUpMovementAmount = levelUpMovementAmount;
 
     }
+
+    public override void ResetLevelBuff(GameObject player, PlayerData data)
+    {
+        lastLevelUpMovementAmount = 0;
+    }
+
 }

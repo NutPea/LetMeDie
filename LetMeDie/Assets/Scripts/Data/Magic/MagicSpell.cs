@@ -9,6 +9,9 @@ public class MagicSpell : WeaponData
     [SerializeField] private int spellManaCost = 10;
     public int SpellManaCost => spellManaCost - Mathf.CeilToInt((float)spellManaCost * playerData.SpellManaReduction);
 
+    private int extraManaRegOnKill = 0;
+    public int ExtraManaRegOnKill { get => extraManaRegOnKill; set => extraManaRegOnKill = value; }
+
     private int currentSpellMana = 0;
     private bool SpellIsReady => currentSpellMana >= SpellManaCost;
 
@@ -33,8 +36,8 @@ public class MagicSpell : WeaponData
             copiedSpellInfluences.Add(data);
         }
         currentSpellMana = SpellManaCost;
+        extraManaRegOnKill = 0;
 
-        
     }
 
     public override void Attack(Transform camera, float chargeAmount)
@@ -75,7 +78,7 @@ public class MagicSpell : WeaponData
 
     public void AddMana()
     {
-        currentSpellMana += playerData.ExtraManaKillAmount + 1;
+        currentSpellMana += playerData.ExtraManaKillAmount + 1 + ExtraManaRegOnKill;
         if (currentSpellMana > SpellManaCost) {
             currentSpellMana = SpellManaCost;
         }

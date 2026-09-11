@@ -117,13 +117,13 @@ public class LevelUpUIState : UIStateComponent
         BattleLoot battleLoot3 = currentAvailableBattleLoots[UnityEngine.Random.Range(0, currentAvailableBattleLoots.Count - 1)];
        currentAvailableBattleLoots.Remove(battleLoot3);
 
-        battleLoot1.CalculateValues();
-        battleLoot2.CalculateValues();
-        battleLoot3.CalculateValues();
-
         battleLoot1.lootRarity = battleLoot1Rarity;
         battleLoot2.lootRarity = battleLoot2Rarity;
         battleLoot3.lootRarity = battleLoot3Rarity;
+
+        battleLoot1.CalculateValues(playerData);
+        battleLoot2.CalculateValues(playerData);
+        battleLoot3.CalculateValues(playerData);
 
 
         battleLootButton1.SetBattleLoot(battleLoot1);

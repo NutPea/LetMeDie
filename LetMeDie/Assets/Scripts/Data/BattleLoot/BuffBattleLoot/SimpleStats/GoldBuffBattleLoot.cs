@@ -7,7 +7,7 @@ using static PixelCrushers.AnimatorSaver;
 public class GoldBuffBattleLoot : BuffBattleLoot
 {
     [SerializeField] private float goldPercentage = 0.15f;
-
+    private float GoldPercentage => goldPercentage + (goldPercentage * CurrentRarityModifier);
     public override string Description => description + " " + goldPercentage * 100f + "%";
 
     public override void BuffBattleLootAdded(GameObject player, PlayerData data)
@@ -22,4 +22,12 @@ public class GoldBuffBattleLoot : BuffBattleLoot
         base.BuffBattleLootAdded(player, data);
         playerData.GoldPercentage -= goldPercentage;
     }
+
+    public override void CalculateValues(PlayerData playerData)
+    {
+        base.CalculateValues(playerData);
+        beforeUpgradeValue = CalculateString(playerData.GoldPercentage);
+        afterUpgradeValue = CalculateString(playerData.GoldPercentage + GoldPercentage);
+    }
+
 }

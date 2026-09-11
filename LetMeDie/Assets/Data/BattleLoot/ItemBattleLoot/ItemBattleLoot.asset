@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleLoots:
   - {fileID: 11400000, guid: 6de029eb99bd9e74ca8a217b5e7219fe, type: 2}
-  - {fileID: 11400000, guid: f42f534c7157fbb4795786aebda2a0d5, type: 2}
   - {fileID: 11400000, guid: 553be4bca4256b440ae290f05f4f9faf, type: 2}
   - {fileID: 11400000, guid: a48777386c8a3404da622b5d50fe758d, type: 2}
   - {fileID: 11400000, guid: afc239a27c4356d4b9384c402af400f0, type: 2}
@@ -40,27 +39,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d3da3bcfcd9345e4e97669c8d211b1e3, type: 2}
   - {fileID: 11400000, guid: ecb7d7aa8e945714faf17f2eda7b2f67, type: 2}
   AvailableLoots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

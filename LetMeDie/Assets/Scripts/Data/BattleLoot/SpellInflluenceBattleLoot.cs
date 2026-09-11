@@ -25,16 +25,10 @@ public class SpellInflluenceBattleLoot : BattleLoot
   
 
 
-    public void SetSpell(MagicSpell magicSpell,LootRarity lootRarity)
+    public void SetSpell(MagicSpell magicSpell,PlayerData playerData)
     {
-        this.lootRarity = lootRarity;
         spell = magicSpell;
-        float commonPercentage = 0.0f;
-        float uncommonPercentage = 0.0f;
-        float rarePercentage = 0.0f;
-        float epicPercentage = 0.0f;
-        float legendaryPercentage = 0.0f;
-        (commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage) = SpellLevelUpUIState.GetDropPercentage(lootRarity);
+        lootRarity = BattleLootTable.GetRarity(playerData.Luck);
 
         int amountOfUpgrades = AmountOfUpgrades(lootRarity);
         if (amountOfUpgrades > magicSpell.SpellInfluences.Count) {
@@ -47,7 +41,7 @@ public class SpellInflluenceBattleLoot : BattleLoot
             for (int i = 0; i < amountOfUpgrades; i++) {
                 InfluenceData data = availableDatas[UnityEngine.Random.Range(0, availableDatas.Count)];
                 spellInfluences.Add(data);
-                data.CalculateSpellUpgrade(magicSpell, SpellLevelUpUIState.GetRarity(commonPercentage, uncommonPercentage, rarePercentage, epicPercentage, legendaryPercentage));
+                data.CalculateSpellUpgrade(magicSpell, lootRarity);
                 availableDatas.Remove(data);
             }
         }

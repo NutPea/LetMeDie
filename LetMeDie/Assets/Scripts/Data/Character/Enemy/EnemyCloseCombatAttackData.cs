@@ -13,6 +13,9 @@ public class EnemyCloseCombatAttackData : EnemyAttackData
     [SerializeField] private float lookAtPlayerSpeed = 180f;
     [SerializeField] private float attackStopDistance = 2.2f;
 
+    [SerializeField] private bool checkForMaxDistance = false;
+    [SerializeField] private float maxDistance = 10f;
+
     private Rigidbody rb;
     private Collider collider;
     private bool hasAttacked;
@@ -23,6 +26,7 @@ public class EnemyCloseCombatAttackData : EnemyAttackData
         base.Init(enemy, enemyData);
         rb = enemy.GetComponent<Rigidbody>();
         collider = rb.GetComponent<Collider>();
+
     }
 
 
@@ -37,6 +41,17 @@ public class EnemyCloseCombatAttackData : EnemyAttackData
     public override void AttackUpdate(BaseEnemyCombat baseEnemyCombat, Transform Player)
     {
         base.AttackUpdate(baseEnemyCombat, Player);
+        float playerDistance = Vector3.Distance(Player.transform.position, baseEnemyCombat.transform.position);
+        if (checkForMaxDistance)
+        {
+            if (currentEnemyData.EnemyAttackDatas.Count > 1) {
+                if(playerDistance > maxDistance)
+                {
+                    baseEnemyCombat.PickAttack();
+                }
+            }
+        }
+
 
         if (lookAtPlayer){
             LookAtPlayer(baseEnemyCombat.transform, Player.transform, lookAtPlayerSpeed);
@@ -48,7 +63,6 @@ public class EnemyCloseCombatAttackData : EnemyAttackData
         }
 
 
-        float playerDistance = Vector3.Distance(Player.transform.position, baseEnemyCombat.transform.position);
 
         if (playerDistance < attackStopDistance)
         {

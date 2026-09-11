@@ -22,6 +22,7 @@ public class BaseEnemyController : MonoBehaviour
     [SerializeField] private Animator animator;
     public Animator Animator => animator;
     private HealthManager healthManager;
+    public HealthManager HealthManager => healthManager;
 
     [HideInInspector] public UnityEvent OnAggro = new();
     private bool isAggro;

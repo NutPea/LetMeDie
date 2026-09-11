@@ -37,10 +37,16 @@ MonoBehaviour:
   OnItemAdded:
     m_PersistentCalls:
       m_Calls: []
+  OnSpellShrineUpgrade:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrit:
+    m_PersistentCalls:
+      m_Calls: []
   OnStatUpdate:
     m_PersistentCalls:
       m_Calls: []
-  characterBuffBattleLoot: {fileID: 11400000, guid: ec26f8cd5ca21da4484feed7e3ba9dd3, type: 2}
+  characterBuffBattleLoot: {fileID: 11400000, guid: ba21e34213568044bb7d96dfa5bf042d, type: 2}
   tempBuffBattleLoot: []
   ForceUpdateStats: 0
   currentEquipedWeapon: {fileID: 11400000, guid: 3481ffe4044a33b4ab4310bf9f49969f, type: 2}

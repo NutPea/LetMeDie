@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85d8212042f19c44a58a9c37f20d14e, type: 3}
   m_Name: BaseDamage
   m_EditorClassIdentifier: 
-  description: Damage
+  description: 'Extra Damage:'
   commonUpgradePercentage: 0.2
   uncommonUpgradePercentage: 0.3
   rareUpgradePercentage: 0.5

@@ -1919,7 +1919,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 78f7102f4d4463148bf6fd1ffb594202, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 6038b3985849ac94980dbc46db1fdec2, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &423057147
 Transform:
@@ -3430,6 +3430,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &734662711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 734662712}
+  m_Layer: 0
+  m_Name: SpawnBoss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &734662712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734662711}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 18.599869, y: 16.250734, z: 3.8468933}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1754473021}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &735644587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9781,10 +9812,15 @@ MonoBehaviour:
   amountOfPots: 100
   chestParentTransform: {fileID: 1650994174}
   chestPrefab: {fileID: 2097867507660102017, guid: e7f0bad25fbded44899c86f23d70cd4a, type: 3}
-  amountOfChests: 30
+  amountOfChests: 20
+  freeChestPrefab: {fileID: 4083988544798244450, guid: 1d041ee2fb64a6e44acf6adcabf43f0a, type: 3}
+  amountOfFreeChests: 5
   shrineParentTransform: {fileID: 460912394}
   shrinePrefab: {fileID: 9073779469675299377, guid: 8f75e53acf1a3c34fae9003ba159e7f6, type: 3}
-  amountOfShrines: 20
+  amountOfShrines: 15
+  bossCallTransform: {fileID: 734662712}
+  bossCallPrefab: {fileID: 624023899326448706, guid: 0a35a1c17d7a3da49b7392ee087af741, type: 3}
+  amountOfBoss: 1
 --- !u!4 &1754473021
 Transform:
   m_ObjectHideFlags: 0
@@ -9802,6 +9838,7 @@ Transform:
   - {fileID: 2121123913}
   - {fileID: 460912394}
   - {fileID: 1554182946}
+  - {fileID: 734662712}
   - {fileID: 1650994174}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12706,7 +12743,7 @@ PrefabInstance:
     - target: {fileID: 8968949255755972715, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
       propertyPath: playerStartData
       value: 
-      objectReference: {fileID: 11400000, guid: 630cb557920f75845b86c8a6bd3a7996, type: 2}
+      objectReference: {fileID: 11400000, guid: 4cee5b6e0113c434780e5f194f7c8686, type: 2}
     - target: {fileID: 8995824900318198399, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

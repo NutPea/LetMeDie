@@ -42,7 +42,7 @@ public class BaseEnemyCombat : MonoBehaviour
     }
 
 
-    private void PickAttack()
+    public void PickAttack()
     {
         if (currentEnemyAttackData != null) {
             currentEnemyAttackData.AttackFinished(this);

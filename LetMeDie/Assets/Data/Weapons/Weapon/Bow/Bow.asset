@@ -24,3 +24,5 @@ MonoBehaviour:
   attackCooldown: 0.5
   combatEffect: []
   arrowPrefab: {fileID: 1965758273558424397, guid: 1868fa05849f2fc49934a01d22d261f8, type: 3}
+  canSpawnMorePrefabs: 1
+  spreadRadius: 0.1

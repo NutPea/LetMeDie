@@ -6,14 +6,29 @@ public class MagicProjectileSpell : MagicSpell
     [SerializeField] private int baseDamage = 5;
     public int BaseDamage => baseDamage;
 
-    [HideInInspector]public int ExtraDamage = 0;
+    private int extraDamage;
+    public int ExtraDamage { get => extraDamage; set => extraDamage = value; } 
 
-    private int CombineDamage => baseDamage + ExtraDamage;
+    private float extraSize = 0;
+    public float ExtraSize
+    {
+        get => extraSize; set
+        {
+            extraSize = value;
+        }
+    }
+
     public int Damage => Mathf.CeilToInt((CombineDamage + (float)CombineDamage * playerData.SpellBaseDamagePercentage) * playerData.GetCritModifier());
 
-
     [SerializeField] private GameObject projectile;
+    private int CombineDamage => baseDamage + ExtraDamage;
 
+    public override void Equip(PlayerWeaponController playerWeaponController)
+    {
+        base.Equip(playerWeaponController);
+        extraDamage = 0;
+        extraSize = 0;
+    }
 
     public override void Cast(Transform camera)
     {
@@ -28,6 +43,6 @@ public class MagicProjectileSpell : MagicSpell
         projectileHandler.Init(Damage, 1, lookDirection, TeamFlag.Player);
 
         Vector3 size = projectileSpell.transform.localScale;
-        projectileSpell.transform.localScale = size + size * playerData.ExtraAttackSize;
+        projectileSpell.transform.localScale = size + (size * (playerData.ExtraAttackSize + ExtraSize));
     }
 }

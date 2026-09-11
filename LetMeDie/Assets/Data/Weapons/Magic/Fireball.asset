@@ -17,21 +17,22 @@ MonoBehaviour:
   description: NO DESCRIPTION
   sprite: {fileID: 21300000, guid: 469ee53dc35b3fe4091ac89246a10648, type: 3}
   _tint: {r: 0.8018868, g: 0.19472241, b: 0.10969208, a: 1}
+  attackWithAnimation: 0
   minDamageAmount: 0
   maxDamageAmount: 0
   canBlock: 0
-  fullChargeTime: 0.5
   attackCooldown: 0.5
   combatEffect: []
-  spellManaCost: 50
+  spellManaCost: 70
   OnSpellCast:
     m_PersistentCalls:
       m_Calls: []
   spellInfluences:
   - {fileID: 11400000, guid: db2ec32a240d80b43828291fb213b247, type: 2}
+  - {fileID: 11400000, guid: 303973ee84202e24a84788f88c6ae59a, type: 2}
+  - {fileID: 11400000, guid: 67a65ff00d945e445ac75e5a1be0a41f, type: 2}
   OnSpellAmountUpdate:
     m_PersistentCalls:
       m_Calls: []
   baseDamage: 50
-  ExtraDamage: 10
   projectile: {fileID: 3730081872900235946, guid: 5e8893bbcaf19264985372a7497f7a09, type: 3}

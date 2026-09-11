@@ -23,9 +23,17 @@ public class LevelStartHandler : MonoBehaviour
     [SerializeField] private GameObject chestPrefab;
     [SerializeField] private int amountOfChests = 30;
 
+    [SerializeField] private GameObject freeChestPrefab;
+    [SerializeField] private int amountOfFreeChests = 30;
+
     [SerializeField] private Transform shrineParentTransform;
     [SerializeField] private GameObject shrinePrefab;
     [SerializeField] private int amountOfShrines = 20;
+
+
+    [SerializeField] private Transform bossCallTransform;
+    [SerializeField] private GameObject bossCallPrefab;
+    [SerializeField] private int amountOfBoss = 1;
 
     bool isInPipeline;
     bool navMeshIsFinishedBaking;
@@ -110,11 +118,20 @@ public class LevelStartHandler : MonoBehaviour
             chest.transform.position = FindRandomPosition();
         }
 
+        for (int i = 0; i < amountOfFreeChests; i++)
+        {
+            GameObject chest = Instantiate(freeChestPrefab, chestParentTransform);
+            chest.transform.position = FindRandomPosition();
+        }
+
         for (int i = 0; i < amountOfShrines; i++)
         {
             GameObject shrine = Instantiate(shrinePrefab,shrineParentTransform);
             shrine.transform.position = FindRandomPosition();
         }
+
+        GameObject bossSpawn = Instantiate(bossCallPrefab,bossCallTransform);
+        bossSpawn.transform.position = FindRandomPosition();
 
     }
 
