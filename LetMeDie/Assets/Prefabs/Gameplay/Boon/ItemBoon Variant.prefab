@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemBoon Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8658961249913140291, guid: ce9ad42be511a5049ad02dc480dd5f68, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
