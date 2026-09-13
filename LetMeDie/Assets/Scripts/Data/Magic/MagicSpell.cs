@@ -13,6 +13,7 @@ public class MagicSpell : WeaponData
     public int ExtraManaRegOnKill { get => extraManaRegOnKill; set => extraManaRegOnKill = value; }
 
     private int currentSpellMana = 0;
+    public int CurrentSpellMana => currentSpellMana;
     private bool SpellIsReady => currentSpellMana >= SpellManaCost;
 
     protected PlayerResourceHandler playerResourceHandler;

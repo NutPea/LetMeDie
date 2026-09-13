@@ -7,7 +7,7 @@ public class BattleItemsUIHandler : MonoBehaviour
 {
     [SerializeField] private List<BattleItemUI> battleItemUI = new();
 
-    private void Start()
+    private void Awake()
     {
         battleItemUI.ForEach((n) => n.gameObject.SetActive(false));
     }

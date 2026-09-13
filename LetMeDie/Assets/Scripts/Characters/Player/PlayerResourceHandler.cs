@@ -29,13 +29,16 @@ public class PlayerResourceHandler : HealthManager
     private float lifeStealAmount;
 
 
-    private void Start()
+    protected override void Start()
     {
         currentRegenerationTime = playerData.StaminaRegeneration;
         OnDamageBlocked.AddListener(UseStamina);
         CurrentStamina = playerData.Stamina;
         currentStatRegenerationTime = STAT_REGENERATION_TIME;
         OnDamaged.AddListener(SetInvincible);
+
+        healthData.InitHealth();
+
     }
 
     private void SetInvincible(bool arg0, int arg1, Transform arg2)
@@ -114,7 +117,7 @@ public class PlayerResourceHandler : HealthManager
     {
         this.healthData = playerData;
         this.playerData = playerData;
-        currentHealth = healthData.Health;
+        healthData.InitHealth();
         OnHealthUpdate.Invoke();
     }
 

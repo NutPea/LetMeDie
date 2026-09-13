@@ -55,10 +55,10 @@ public class ItemUIHandler : MonoBehaviour
         }else if(currentItemData is MagicSpell magic)
         {
             HandleMagicSpell(magic);
+            ShowSpellUpdate(magic.CurrentSpellMana, magic.SpellManaCost);
         }
 
         image.gameObject.SetActive(true);
-
     }
 
     private void HandleMagicSpell(MagicSpell magic)

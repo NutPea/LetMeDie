@@ -22,7 +22,7 @@ public class BossHealthUI : MonoBehaviour
         bossHealth.OnDeath.AddListener(Death);
         bossName.text = bossHealth.healthData.Name;
         healthBackground.SetActive(true);
-        healthBar.SetValue(bossHealth.currentHealth, bossHealth.healthData.Health);
+        healthBar.SetValue(bossHealth.healthData.CurrentHealth, bossHealth.healthData.Health);
     }
 
     private void Death(GameObject arg0)
@@ -32,6 +32,6 @@ public class BossHealthUI : MonoBehaviour
 
     private void UpdateHealth(bool arg0, int arg1, Transform arg2)
     {
-        healthBar.SetValue(bossHealth.currentHealth, bossHealth.healthData.Health);
+        healthBar.SetValue(bossHealth.healthData.CurrentHealth, bossHealth.healthData.Health);
     }
 }

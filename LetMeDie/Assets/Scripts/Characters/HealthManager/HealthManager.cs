@@ -14,7 +14,6 @@ public class HealthManager : MonoBehaviour
 {
 
     public HealthData healthData;
-    public int currentHealth;
 
     public CalculateDamageEvent OnDamaged;
     [HideInInspector] public UnityEvent OnHeal = new UnityEvent();
@@ -22,8 +21,8 @@ public class HealthManager : MonoBehaviour
     [HideInInspector]public UnityEvent<GameObject> OnDeath = new();
     [HideInInspector] public UnityEvent OnHealthUpdate = new UnityEvent();
 
-    public bool IsFullHealth => currentHealth >= healthData.Health;
-    public float CurrentPercentageHealth => (float) currentHealth / (float) healthData.Health;
+    public bool IsFullHealth => healthData.CurrentHealth >= healthData.Health;
+    public float CurrentPercentageHealth => (float)healthData.CurrentHealth / (float) healthData.Health;
 
     [HideInInspector] public bool CanBlock = true;
     [HideInInspector] public bool IsBlocked = false;
@@ -36,9 +35,9 @@ public class HealthManager : MonoBehaviour
         OnDamaged = new CalculateDamageEvent();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
-        currentHealth = healthData.Health;
+        healthData.InitHealth();
     }
 
 
@@ -76,8 +75,8 @@ public class HealthManager : MonoBehaviour
 
         if(team != healthData.team)
         {
-            if (currentHealth <= 0) return;
-            currentHealth -= appliedDamage;
+            if (healthData.CurrentHealth <= 0) return;
+            healthData.CurrentHealth -= appliedDamage;
             if (SGameManager.Instance.ShouldShowDamageDumber)
             {
                 if(healthData.team != TeamFlag.Player)
@@ -86,9 +85,9 @@ public class HealthManager : MonoBehaviour
                 }
             }
 
-            if(currentHealth <= 0)
+            if(healthData.CurrentHealth <= 0)
             {
-                currentHealth = 0;
+                healthData.CurrentHealth = 0;
                 OnDeath.Invoke(gameObject);
                 isDead = true;
                 OnDamaged.Invoke(true, appliedDamage, hitSource);
@@ -111,17 +110,17 @@ public class HealthManager : MonoBehaviour
             return;
         }
 
-        currentHealth += amount;
-        if(currentHealth >= healthData.Health)
+        healthData.CurrentHealth += amount;
+        if(healthData.CurrentHealth >= healthData.Health)
         {
-            currentHealth = healthData.Health;
+            healthData.CurrentHealth = healthData.Health;
         }
         OnHeal.Invoke();
     }
 
     public void FullHeal()
     {
-        currentHealth = healthData.Health;
+        healthData.CurrentHealth = healthData.Health;
         OnHeal.Invoke();
     }
 
@@ -134,9 +133,9 @@ public class HealthManager : MonoBehaviour
 
     public void Kill()
     {
-        if (currentHealth <= 0) return;
-        currentHealth -= 100000;
-        currentHealth = 0;
+        if (healthData.CurrentHealth <= 0) return;
+        healthData.CurrentHealth -= 100000;
+        healthData.CurrentHealth = 0;
         OnDeath.Invoke(gameObject);
         OnDamaged.Invoke(true, 10, transform);
     }

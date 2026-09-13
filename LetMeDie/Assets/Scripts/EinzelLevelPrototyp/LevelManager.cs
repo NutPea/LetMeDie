@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
+
+
     [Header("Level")]
     [SerializeField] private LevelData levelData;
-
-    [SerializeField] private List<Transform> spawnPoints;
 
     [Header("Spawn Settings")]
     [SerializeField] private Transform defaultSpawnParent;
@@ -25,7 +26,7 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Wird ausgelöst, wenn alle Gegner des Levels getötet wurden.
     /// </summary>
-    public event Action OnLevelCompleted;
+    [HideInInspector]public UnityEvent OnLevelCompleted;
 
     /// <summary>
     /// Anzahl aktuell lebender Gegner.
@@ -35,24 +36,24 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Anzahl Gegner, die noch gespawnt werden müssen.
     /// </summary>
-    public int RemainingEnemiesToSpawn => remainingEnemiesToSpawn;
 
     [SerializeField] private float radius = 50f;
 
     private void Awake()
     {
         RegisterExistingEnemies();
-
-        if (levelData != null)
-        {
-            remainingEnemiesToSpawn = levelData.TotalEnemiesToSpawn;
-        }
     }
 
-    private void Start()
+    public void StartHandlingEnemies()
     {
+        foreach(GameObject prefab in levelData.StartEnemyPrefabs)
+        {
+            SpawnEnemy(prefab);
+        }
         CheckLevelCompleted();
+        remainingEnemiesToSpawn = levelData.TotalEnemiesToSpawn;
     }
+
 
     private void OnDestroy()
     {
@@ -180,9 +181,21 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        bool flowControl = SpawnEnemy(enemyPrefab);
+        if (!flowControl)
+        {
+            return;
+        }
+        remainingEnemiesToSpawn--;
+        if(enemyPrefab.TryGetComponent(out BaseEnemyController enemyController))
+        {
+            enemyController.SetAggro();
+        }
+    }
 
+    private bool SpawnEnemy(GameObject enemyPrefab)
+    {
         Vector3 position = FindRandomPosition();
-
 
         GameObject enemyObject = Instantiate(
             enemyPrefab,
@@ -191,10 +204,10 @@ public class LevelManager : MonoBehaviour
             defaultSpawnParent
         );
 
-        BaseEnemyController enemy =
+        BaseEnemyController spawnedEnemy =
             enemyObject.GetComponent<BaseEnemyController>();
 
-        if (enemy == null)
+        if (spawnedEnemy == null)
         {
             Debug.LogError(
                 $"Das Prefab {enemyPrefab.name} besitzt keinen BaseEnemyController.",
@@ -202,12 +215,12 @@ public class LevelManager : MonoBehaviour
             );
 
             Destroy(enemyObject);
-            return;
+            return false;
         }
 
-        remainingEnemiesToSpawn--;
 
-        RegisterEnemy(enemy);
+        RegisterEnemy(spawnedEnemy);
+        return true;
     }
 
     private Vector3 FindRandomPosition()
@@ -228,15 +241,6 @@ public class LevelManager : MonoBehaviour
         return finalPosition;
     }
 
-    public Transform GetRandomSpawnPoint()
-    {
-        if (spawnPoints == null || spawnPoints.Count == 0)
-            return null;
-
-        return spawnPoints[
-            UnityEngine.Random.Range(0, spawnPoints.Count)
-        ];
-    }
 
     #endregion
 
@@ -258,7 +262,6 @@ public class LevelManager : MonoBehaviour
         levelCompleted = true;
 
         Debug.Log("Level abgeschlossen!");
-
         OnLevelCompleted?.Invoke();
     }
 

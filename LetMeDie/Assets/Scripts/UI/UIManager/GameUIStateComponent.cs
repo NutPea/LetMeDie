@@ -83,7 +83,7 @@ public class GameUIStateComponent : UIStateComponent
 
         playerCombatController.OnEndCharge.AddListener(EndChargeValue);
 
-        healthBarHandler.SetValue(playerResourceHandler.currentHealth, playerResourceHandler.healthData.Health);
+        healthBarHandler.SetValue(playerResourceHandler.healthData.CurrentHealth, playerResourceHandler.healthData.Health);
         staminaBarHandler.SetValue(playerResourceHandler.CurrentStamina, playerStatHandler.PlayerData.Stamina);
        // expBarHandler.SetValue(playerStatHandler.PlayerData.CurrentExperience, playerStatHandler.PlayerData.NextLevelUpExperience);
 
@@ -220,6 +220,8 @@ public class GameUIStateComponent : UIStateComponent
 
         UpdateStamina(0);
         goldAmountText.gameObject.SetActive(false);
+
+        StatUpdate();
     }
 
     public override void OnExitUIState()
@@ -308,7 +310,6 @@ public class GameUIStateComponent : UIStateComponent
 
     private void HideBorder(Image border)
     {
-        Debug.Log("Hide");
         LeanTween.value(levelUpBorder.gameObject, 1, 0, transitionBorderTime).setOnUpdate((float val) =>
         {
             Color c = levelUpBorder.color;
@@ -360,12 +361,12 @@ public class GameUIStateComponent : UIStateComponent
     }
     private void ShowHealth()
     {
-        healthBarHandler.SetValue(playerResourceHandler.currentHealth , playerResourceHandler.healthData.Health);
+        healthBarHandler.SetValue(playerResourceHandler.healthData.CurrentHealth, playerResourceHandler.healthData.Health);
     }
 
     private void UpdateHealth()
     {
-        healthBarHandler.SetValue(playerResourceHandler.currentHealth, playerResourceHandler.healthData.Health);
+        healthBarHandler.SetValue(playerResourceHandler.healthData.CurrentHealth, playerResourceHandler.healthData.Health);
     }
 
     private void ShowExp(float arg0)

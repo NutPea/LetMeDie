@@ -11,17 +11,38 @@ public class PlayerStatHandler : MonoBehaviour
     public PlayerData PlayerData
     {
         get {
+
             if( _clonedPlayerData == null)
             {
                 if(SPlayerDataManager.Instance != null){
-                    _clonedPlayerData = Instantiate(SPlayerDataManager.Instance.CurrentPlayerData);
+                    if (SPlayerDataManager.Instance.CurrentPlayerData != null) {
+                        _clonedPlayerData = SPlayerDataManager.Instance.CurrentPlayerData;
+                    }
+                    else
+                    {
+                        _clonedPlayerData = Instantiate(playerStartData);
+                        SPlayerDataManager.Instance.CurrentPlayerData = _clonedPlayerData;
+                        _clonedPlayerData.Init(gameObject);
+                    }
+                  
                 }
                 else{
                     _clonedPlayerData = Instantiate(playerStartData);
+                    _clonedPlayerData.Init(gameObject);
                 }
-                _clonedPlayerData.Init(gameObject);
+               
             }
-            return _clonedPlayerData;
+
+            if (SPlayerDataManager.Instance != null)
+            {
+
+                return SPlayerDataManager.Instance.CurrentPlayerData;
+            }
+            else
+            {
+                return _clonedPlayerData;
+            }
+
         }
     }
 
@@ -93,4 +114,5 @@ public class PlayerStatHandler : MonoBehaviour
     {
         OnStatUpdate.Invoke(_clonedPlayerData);
     }
+
 }

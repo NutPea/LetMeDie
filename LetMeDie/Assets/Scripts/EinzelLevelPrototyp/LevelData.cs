@@ -7,8 +7,14 @@ using UnityEngine;
 )]
 public class LevelData : ScriptableObject
 {
+
+
+
     [Header("Enemy Settings")]
+    [SerializeField] private List<GameObject> startEnemyPrefabs;
+    public List<GameObject> StartEnemyPrefabs => startEnemyPrefabs;
     [SerializeField] private List<GameObject> enemyPrefabs;
+
 
     [SerializeField] private int totalEnemiesToSpawn = 10;
 

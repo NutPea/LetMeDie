@@ -26,7 +26,7 @@ public class EnemyBarUIHandler : MonoBehaviour
         CancelInvoke(nameof(HideEverything));
         enemyHealthParent.SetActive(true);
         text.text = enemyHealth.healthData.Name;
-        barUIHandler.SetValue(enemyHealth.currentHealth,enemyHealth.healthData.Health);
+        barUIHandler.SetValue(enemyHealth.healthData.CurrentHealth,enemyHealth.healthData.Health);
         Invoke(nameof(HideEverything),timeUntilRemove);
     }
 

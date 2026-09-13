@@ -1,4 +1,6 @@
 
+using Language.Lua;
+using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
@@ -42,6 +44,7 @@ namespace Essentials
                 Instance = this;
                 transform.parent = null;
                 DontDestroyOnLoad(gameObject);
+                transitionImage.gameObject.SetActive(false);
             }
             else
             {
@@ -76,10 +79,18 @@ namespace Essentials
 
         public void HideTransitionImage()
         {
-            if (transitionImage)
+            transitionImage.gameObject.SetActive(true);
+            Color c = transitionImage.color;
+            c.a = 1;
+            transitionImage.color = c;
+            
+            LeanTween.value(gameObject, 1, 0, transitionTime).setOnUpdate((float val) =>
             {
-                transitionImage.gameObject.SetActive(false);
-            }
+                Color c = transitionImage.color;
+                c.a = val;
+                transitionImage.color = c;
+            }).setEase(tweenType).setIgnoreTimeScale(true).setOnComplete(() => transitionImage.gameObject.SetActive(false));
+            
         }
 
         private int maxIterations = 3;
@@ -105,7 +116,7 @@ namespace Essentials
                 return -1;
             }
 
-            Debug.LogError($"You cant load the Scene Name : {sceneName} + You will load into the MainMenu");
+            Debug.LogError($"You cant load the Scene Name : # {sceneName} # + You will load into the MainMenu");
             return GetSceneIndexByName("MainMenu");
         }
 
