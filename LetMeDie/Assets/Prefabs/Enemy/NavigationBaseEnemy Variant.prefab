@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ff7d750481d664d9e9ae6980132e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroRange: 25
+  aggroRange: 100
   aggroAngle: 180
   checkTime: 1
 --- !u!95 &8587024997055941163 stripped

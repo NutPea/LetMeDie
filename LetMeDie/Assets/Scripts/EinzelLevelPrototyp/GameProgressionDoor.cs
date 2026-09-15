@@ -14,14 +14,18 @@ public class GameProgressionDoor : MonoBehaviour, IInteractable
 
     public void Init(SGameProgressionManager.RewardTyp typ)
     {
+        animator = GetComponent<Animator>();
         rewardTyp = typ;
         if (!forceInteractable)
         {
             col = GetComponent<Collider>();
             col.enabled = false;
         }
+        else
+        {
+            animator.SetTrigger("Open");
+        }
         lootImage.gameObject.SetActive(false);
-        animator = GetComponent<Animator>();
     }
 
     internal void ShowDoors()

@@ -5206,12 +5206,17 @@ MonoBehaviour:
   levelBoonIcon: {fileID: 21300000, guid: 18ae7924be6feb74787d833e76e06525, type: 3}
   itemBoonIcon: {fileID: 21300000, guid: 359f3581d8ec374429290997450cc025, type: 3}
   easyLevelNames:
-  - DungeonScene_1
+  - DungeonScene 1
+  - DungeonScene 2
+  - DungeonScene 4
   middleLevelNames:
-  - DungeonScene_1
+  - DungeonScene 3
+  - DungeonScene 5
+  - DungeonScene 6
   hardLevelNames:
-  - DungeonScene_1
-  bossLevelName: DungeonScene_1
+  - DungeonScene 7
+  - DungeonScene 8
+  bossLevelName: DungeonBoss
 --- !u!1 &3919406631435004747
 GameObject:
   m_ObjectHideFlags: 0
@@ -7427,7 +7432,7 @@ Transform:
   m_GameObject: {fileID: 5838973340296998681}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.74909, y: -0.75299996, z: -34.840847}
+  m_LocalPosition: {x: -5.50909, y: 1.7170001, z: -8.900849}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13193,7 +13198,7 @@ PrefabInstance:
       objectReference: {fileID: 327355903467958166}
     - target: {fileID: 6995140842759711601, guid: 334fa99deb2efa942bf0613c2d56c51a, type: 3}
       propertyPath: dashSpeed
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7118689154537688937, guid: 334fa99deb2efa942bf0613c2d56c51a, type: 3}
       propertyPath: baseMovementSpeed

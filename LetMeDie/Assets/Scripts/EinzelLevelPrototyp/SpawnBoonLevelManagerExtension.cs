@@ -52,12 +52,20 @@ public class SpawnBoonLevelManagerExtension : MonoBehaviour
 
     private void SpawnBoon()
     {
-        GameObject boon = Instantiate(SGameProgressionManager.Instance.GetBoonPrefab());
-        boon.transform.position = boonSpawnPoint.position;
+        GameObject potentialBoon = SGameProgressionManager.Instance.GetBoonPrefab();
 
-        if(boon.TryGetComponent(out BaseBoonPowerUp baseBoonPowerUp))
+        if (potentialBoon != null) {
+            GameObject boon = Instantiate(SGameProgressionManager.Instance.GetBoonPrefab());
+            boon.transform.position = boonSpawnPoint.position;
+
+            if(boon.TryGetComponent(out BaseBoonPowerUp baseBoonPowerUp))
+            {
+                baseBoonPowerUp.OnPickUp.AddListener(OpenPossibleDoors);
+            }
+        }
+        else
         {
-            baseBoonPowerUp.OnPickUp.AddListener(OpenPossibleDoors);
+            OpenPossibleDoors();
         }
     }
 

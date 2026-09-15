@@ -16,10 +16,11 @@ MonoBehaviour:
   characterName: Base Enemy
   baseHealth: 40
   team: 2
-  movementSpeed: 5
+  movementSpeed: 4
+  TimeHealthBonus: 100
   accelerationSpeed: 1
   damage: 5
-  attackStopDistance: 3
+  TimeDamageBonus: 10
   attackDistance: 1
   attackCooldown: 1
   attackMask:

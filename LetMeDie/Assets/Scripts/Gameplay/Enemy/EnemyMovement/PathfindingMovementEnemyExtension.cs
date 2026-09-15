@@ -14,6 +14,7 @@ public class PathfindingMovementEnemyExtension : BaseEnemyMovement
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         startConstrain = rb.constraints;
+        agent.speed = BaseEnemyController.EnemyData.MovementSpeed;
     }
 
     protected override void StopEverything(GameObject died)

@@ -191,6 +191,11 @@ public class LevelManager : MonoBehaviour
         {
             enemyController.SetAggro();
         }
+
+        if (enemyPrefab.TryGetComponent(out BaseEnemyMovement movementController))
+        {
+            movementController.OnAggro();
+        }
     }
 
     private bool SpawnEnemy(GameObject enemyPrefab)

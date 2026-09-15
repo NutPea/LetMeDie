@@ -1347,7 +1347,7 @@ PrefabInstance:
     - target: {fileID: 8968949255755972715, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
       propertyPath: playerStartData
       value: 
-      objectReference: {fileID: 11400000, guid: c9f8478f6fe34e747af7b821f8603412, type: 2}
+      objectReference: {fileID: 11400000, guid: 4cee5b6e0113c434780e5f194f7c8686, type: 2}
     - target: {fileID: 8995824900318198399, guid: 7aad1fd02ca39254bb9ffba544606b89, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 656fcc159082f5f43aea87d6fe07b665, type: 3}
-  m_Name: StandartLevelData
+  m_Name: MiddleLevelData
   m_EditorClassIdentifier: 
   startEnemyPrefabs:
   - {fileID: 9017063001835564163, guid: 97be9bb31077bb34183f540d316ba9ca, type: 3}
@@ -19,9 +19,9 @@ MonoBehaviour:
   - {fileID: 9017063001835564163, guid: 97be9bb31077bb34183f540d316ba9ca, type: 3}
   - {fileID: 9017063001835564163, guid: 97be9bb31077bb34183f540d316ba9ca, type: 3}
   - {fileID: 9017063001835564163, guid: 97be9bb31077bb34183f540d316ba9ca, type: 3}
-  - {fileID: 9017063001835564163, guid: 97be9bb31077bb34183f540d316ba9ca, type: 3}
-  - {fileID: 9017063001835564163, guid: 97be9bb31077bb34183f540d316ba9ca, type: 3}
+  - {fileID: 8244549170928589954, guid: 2bee5d2abc9a8a045a4ac683b464052a, type: 3}
+  - {fileID: 8244549170928589954, guid: 2bee5d2abc9a8a045a4ac683b464052a, type: 3}
   enemyPrefabs:
   - {fileID: 9017063001835564163, guid: 97be9bb31077bb34183f540d316ba9ca, type: 3}
   - {fileID: 8244549170928589954, guid: 2bee5d2abc9a8a045a4ac683b464052a, type: 3}
-  totalEnemiesToSpawn: 10
+  totalEnemiesToSpawn: 15

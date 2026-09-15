@@ -17,11 +17,11 @@ MonoBehaviour:
   baseHealth: 100
   team: 1
   baseInvincibleTime: 0.5
-  baseMovementSpeed: 5
-  baseJumpForce: 5
+  baseMovementSpeed: 8
+  baseJumpForce: 7
   baseStamina: 3
   baseStaminaReginaration: 5
-  weaponChargeTime: 1.25
+  weaponChargeTime: 1
   currentLevel: 1
   currentExperience: 0
   ExperiencePercent: 0

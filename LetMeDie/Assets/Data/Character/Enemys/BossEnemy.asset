@@ -16,7 +16,7 @@ MonoBehaviour:
   characterName: Bossus Maximus
   baseHealth: 1000
   team: 2
-  movementSpeed: 3
+  movementSpeed: 5
   TimeHealthBonus: 0
   accelerationSpeed: 1
   damage: 10
