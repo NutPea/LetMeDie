@@ -92,7 +92,7 @@ public class PlayerStatHandler : MonoBehaviour
             _clonedPlayerData = Instantiate(playerStartData);
             _clonedPlayerData.Init(gameObject);
         }
-        SGameManager.Instance.OnEnemyKilled.AddListener(UpdateSpells);
+        SGameProgressionManager.Instance.OnEnemyKilled.AddListener(UpdateSpells);
     }
 
     private void UpdateSpells(int enemy)

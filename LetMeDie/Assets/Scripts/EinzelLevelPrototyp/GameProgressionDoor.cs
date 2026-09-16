@@ -1,3 +1,4 @@
+using Essentials;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ public class GameProgressionDoor : MonoBehaviour, IInteractable
     [SerializeField] private bool forceInteractable;
     private Collider col;
     private Animator animator;
+    [SerializeField] private bool isEndDoor;
+    [SerializeField] private Sprite goBackSprite;
 
     public void Init(SGameProgressionManager.RewardTyp typ)
     {
@@ -30,14 +33,33 @@ public class GameProgressionDoor : MonoBehaviour, IInteractable
 
     internal void ShowDoors()
     {
-        lootImage.sprite = SGameProgressionManager.Instance.GetBoonIcon(rewardTyp);
-        lootImage.gameObject.SetActive(true);
+        if (isEndDoor) {
+            lootImage.sprite = goBackSprite;
+            lootImage.gameObject.SetActive(true);
+        }
+        else
+        {
+
+            if(rewardTyp == SGameProgressionManager.RewardTyp.None)
+            {
+                lootImage.sprite = SGameProgressionManager.Instance.GetBoonIcon(rewardTyp);
+                lootImage.gameObject.SetActive(true);
+            }    
+
+        }
         col.enabled = true;
         animator.SetTrigger("Open");
     }
 
     public void OnInteract(Transform player)
     {
-        SGameProgressionManager.Instance.LoadNextRoom(rewardTyp);
+        if (isEndDoor)
+        {
+            SUIManager.Instance.ChangeToUIState("GameEnd");
+        }
+        else
+        {
+            SGameProgressionManager.Instance.LoadNextRoom(rewardTyp);
+        }
     }
 }

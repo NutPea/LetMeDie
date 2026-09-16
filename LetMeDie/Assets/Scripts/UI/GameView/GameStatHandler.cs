@@ -13,7 +13,7 @@ public class GameStatHandler : MonoBehaviour
     private PlayerStatHandler playerStatHandler;
     private void Start()
     {
-        SGameManager.Instance.OnEnemyKilled.AddListener(KilledEnemiesUpdate);
+        SGameProgressionManager.Instance.OnEnemyKilled.AddListener(KilledEnemiesUpdate);
         playerStatHandler = SGameManager.Instance.PlayerBody.GetComponent<PlayerStatHandler>();
         playerStatHandler.PlayerData.OnLevelUp.AddListener(ShowLevelUp);
         playerStatHandler.PlayerData.OnExpChanged.AddListener(ExpChange);

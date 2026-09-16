@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SGameProgressionManager : MonoBehaviour
 {
@@ -50,6 +51,9 @@ public class SGameProgressionManager : MonoBehaviour
     [SerializeField] private string bossLevelName = "";
 
 
+    private int killedEnemies = 0;
+    public int KilledEnemies => killedEnemies;
+    public UnityEvent<int> OnEnemyKilled = new();
 
 
     public GameObject GetBoonPrefab()
@@ -81,6 +85,12 @@ public class SGameProgressionManager : MonoBehaviour
         SLoadManager.Instance.LoadScene(GetNextLevel());
     }
 
+
+    public void EnemyDied()
+    {
+        killedEnemies++;
+        OnEnemyKilled.Invoke(killedEnemies);
+    }
     private string GetNextLevel()
     {
         if (Progression <= 2)

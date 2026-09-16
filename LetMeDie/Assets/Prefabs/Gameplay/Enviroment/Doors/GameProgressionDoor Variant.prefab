@@ -120,6 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootImage: {fileID: 6920571885935360310}
   forceInteractable: 0
+  isEndDoor: 0
+  goBackSprite: {fileID: 21300000, guid: 23dc4f9bfdcb0984995e1a58909e85d2, type: 3}
 --- !u!95 &6800315227242743244
 Animator:
   serializedVersion: 7

@@ -15,7 +15,7 @@ public class HPGainByKillBuffBattleLoot : BuffBattleLoot
     public override void BuffBattleLootAdded(GameObject player, PlayerData data)
     {
         base.BuffBattleLootAdded(player, data);
-        SGameManager.Instance.OnEnemyKilled.AddListener(OnEnemyKilled);
+        SGameProgressionManager.Instance.OnEnemyKilled.AddListener(OnEnemyKilled);
     }
 
     private void OnEnemyKilled(int arg0)
@@ -42,7 +42,7 @@ public class HPGainByKillBuffBattleLoot : BuffBattleLoot
 
     public override void BuffBattleLootRemoved(GameObject player, PlayerData data)
     {
-        SGameManager.Instance.OnEnemyKilled.RemoveListener(OnEnemyKilled);
+        SGameProgressionManager.Instance.OnEnemyKilled.RemoveListener(OnEnemyKilled);
     }
 
   

@@ -37,7 +37,7 @@ public class BaseEnemyController : MonoBehaviour
 
     private void OnDeath(GameObject death)
     {
-        SGameManager.Instance.EnemyDied();
+        SGameProgressionManager.Instance.EnemyDied();
     }
 
     private void Start()

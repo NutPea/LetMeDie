@@ -32,8 +32,6 @@ public class SGameManager : MonoBehaviour
     public bool ShouldShowDamageDumber => shouldShowDamageDumber;
     [SerializeField] private GameObject dmgNumber;
 
-    private int killedEnemies = 0;
-    public UnityEvent<int> OnEnemyKilled = new();
     public UnityEvent<HealthManager> OnBossRegistered = new();
     public UnityEvent OnGameEnded = new();
 
@@ -99,11 +97,6 @@ public class SGameManager : MonoBehaviour
         return commonColor;
     }
 
-    public void EnemyDied()
-    {
-        killedEnemies++;
-        OnEnemyKilled.Invoke(killedEnemies);
-    }
 
     private void Update()
     {
