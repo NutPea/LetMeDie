@@ -11,7 +11,7 @@ public class SpellInflluenceBattleLoot : BattleLoot
 
         get {
             string influenceDescription = "";
-            foreach(InfluenceData influenceData in spellInfluences)
+            foreach(SpellInfluenceData influenceData in spellInfluences)
             {
                 influenceDescription += influenceData.UpgradeText();
             }       
@@ -21,7 +21,7 @@ public class SpellInflluenceBattleLoot : BattleLoot
     public override Sprite Icon => spell.Sprite;
     public override Color Tint => spell.Tint;
 
-    private List<InfluenceData> spellInfluences = new();
+    private List<SpellInfluenceData> spellInfluences = new();
   
 
 
@@ -36,10 +36,10 @@ public class SpellInflluenceBattleLoot : BattleLoot
         }
         else
         {
-            List<InfluenceData> availableDatas = new(); 
+            List<SpellInfluenceData> availableDatas = new(); 
             magicSpell.SpellInfluences.ForEach((data) => availableDatas.Add(data));
             for (int i = 0; i < amountOfUpgrades; i++) {
-                InfluenceData data = availableDatas[UnityEngine.Random.Range(0, availableDatas.Count)];
+                SpellInfluenceData data = availableDatas[UnityEngine.Random.Range(0, availableDatas.Count)];
                 spellInfluences.Add(data);
                 data.CalculateSpellUpgrade(magicSpell, lootRarity);
                 availableDatas.Remove(data);
@@ -49,7 +49,7 @@ public class SpellInflluenceBattleLoot : BattleLoot
 
     public void UpgradeSpell()
     {
-        foreach(InfluenceData data in spellInfluences)
+        foreach(SpellInfluenceData data in spellInfluences)
         {
             data.UpgradeSpell(spell);
         }

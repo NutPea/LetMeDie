@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Data", menuName = "Influence/Size", order = 1)]
-public class SizeInfluence : InfluenceData
+public class SizeInfluence : SpellInfluenceData
 {
     float beforeSizeValue = 0;
     float afterSizeValue = 0;

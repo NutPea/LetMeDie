@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InfluenceData : ScriptableObject
+public class SpellInfluenceData : ScriptableObject
 {
 
     [SerializeField] private string description;

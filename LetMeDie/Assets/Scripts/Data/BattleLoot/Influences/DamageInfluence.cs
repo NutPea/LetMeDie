@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Data", menuName = "Influence/Damage", order = 1)]
-public class DamageInfluence : InfluenceData
+public class DamageInfluence : SpellInfluenceData
 {
     int beforeDamageValue = 0;
     int afterDamageValue = 0;

@@ -1,6 +1,6 @@
 using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "Influence/Mana", order = 1)]
-public class ManaInfluence : InfluenceData
+public class ManaInfluence : SpellInfluenceData
 {
     int beforeManaValue = 0;
     int afterManaValue = 0;

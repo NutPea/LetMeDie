@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "Influence/Projectile", order = 1)]
-public class ProjektilInfluence : InfluenceData
+public class ProjektilInfluence : SpellInfluenceData
 {
     int beforeProjectileValue = 0;
     int afterProjectileValue = 0;

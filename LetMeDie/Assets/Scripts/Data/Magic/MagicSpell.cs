@@ -18,9 +18,9 @@ public class MagicSpell : WeaponData
 
     protected PlayerResourceHandler playerResourceHandler;
     public UnityEvent<MagicSpell> OnSpellCast = new();
-    [SerializeField] private List<InfluenceData> spellInfluences = new();
-    public List<InfluenceData> SpellInfluences => copiedSpellInfluences;
-    private List<InfluenceData> copiedSpellInfluences = new();
+    [SerializeField] private List<SpellInfluenceData> spellInfluences = new();
+    public List<SpellInfluenceData> SpellInfluences => copiedSpellInfluences;
+    private List<SpellInfluenceData> copiedSpellInfluences = new();
 
     [HideInInspector] public UnityEvent<int,int> OnSpellAmountUpdate = new();
     private Transform mainCamera;
@@ -30,9 +30,9 @@ public class MagicSpell : WeaponData
         base.Equip(playerWeaponController);
         playerResourceHandler = playerWeaponController.GetComponent<PlayerResourceHandler>();
         copiedSpellInfluences.Clear();
-        foreach (InfluenceData influenceData in spellInfluences)
+        foreach (SpellInfluenceData influenceData in spellInfluences)
         {
-            InfluenceData data = Instantiate(influenceData);
+            SpellInfluenceData data = Instantiate(influenceData);
             data.Init(playerWeaponController, this);
             copiedSpellInfluences.Add(data);
         }
